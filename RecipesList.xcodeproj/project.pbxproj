@@ -8,24 +8,108 @@
 
 /* Begin PBXBuildFile section */
 		1A61E95626A00B80007AF003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95526A00B80007AF003 /* AppDelegate.swift */; };
-		1A61E95826A00B80007AF003 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95726A00B80007AF003 /* SceneDelegate.swift */; };
-		1A61E95A26A00B80007AF003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95926A00B80007AF003 /* ViewController.swift */; };
-		1A61E95D26A00B80007AF003 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A61E95B26A00B80007AF003 /* Main.storyboard */; };
-		1A61E96026A00B80007AF003 /* RecipesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95E26A00B80007AF003 /* RecipesList.xcdatamodeld */; };
+		1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */; };
+		1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A61E95B26A00B80007AF003 /* RecepiesListViewController.storyboard */; };
+		1A61E96026A00B80007AF003 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95E26A00B80007AF003 /* CoreDataStorage.xcdatamodeld */; };
 		1A61E96226A00B82007AF003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A61E96126A00B82007AF003 /* Assets.xcassets */; };
 		1A61E96526A00B82007AF003 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A61E96326A00B82007AF003 /* LaunchScreen.storyboard */; };
+		1A61E97826A01F0B007AF003 /* RecepiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E97726A01F0B007AF003 /* RecepiesListViewModel.swift */; };
+		1A61E97B26A01F9B007AF003 /* RecepiesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E97A26A01F9B007AF003 /* RecepiesListTableViewController.swift */; };
+		1A61E98126A02E23007AF003 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */; };
+		1A61E98426A0309A007AF003 /* RecepiesSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */; };
+		1A61E98726A03414007AF003 /* SearchRecepiesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */; };
+		1A61E98A26A03506007AF003 /* Recept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98926A03506007AF003 /* Recept.swift */; };
+		1A61E98D26A038C9007AF003 /* RecepiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */; };
+		1A61E98F26A039AE007AF003 /* ReceptQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98E26A039AE007AF003 /* ReceptQuery.swift */; };
+		1A61E99326A03AB7007AF003 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E99226A03AB7007AF003 /* Cancellable.swift */; };
+		1A61E99626A03B36007AF003 /* RecepiesQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E99526A03B36007AF003 /* RecepiesQueriesRepository.swift */; };
+		1A61E99926A03FEF007AF003 /* DefaultRecepiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E99826A03FEF007AF003 /* DefaultRecepiesRepository.swift */; };
+		1A61E99C26A040B3007AF003 /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E99B26A040B3007AF003 /* DataTransferService.swift */; };
+		1A61E99E26A04177007AF003 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E99D26A04177007AF003 /* NetworkService.swift */; };
+		1A61E9A226A04894007AF003 /* RecepiesResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9A126A04894007AF003 /* RecepiesResponseStorage.swift */; };
+		1A61E9A526A04907007AF003 /* RecepiesQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9A426A04907007AF003 /* RecepiesQueriesStorage.swift */; };
+		1A61E9A826A04B06007AF003 /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9A726A04B06007AF003 /* RepositoryTask.swift */; };
+		1A61E9AC26A04F23007AF003 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9AB26A04F23007AF003 /* Endpoint.swift */; };
+		1A61E9B026A050A8007AF003 /* RecepiesRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9AF26A050A8007AF003 /* RecepiesRequestDTO+Mapping.swift */; };
+		1A61E9B226A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9B126A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift */; };
+		1A61E9B426A056E0007AF003 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9B326A056E0007AF003 /* NetworkConfig.swift */; };
+		1A61E9B626A057E1007AF003 /* DefaultRecepiesQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9B526A057E1007AF003 /* DefaultRecepiesQueriesRepository.swift */; };
+		1A61E9B826A05DD1007AF003 /* CoreDataRecepiesQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9B726A05DD1007AF003 /* CoreDataRecepiesQueriesStorage.swift */; };
+		1A61E9BB26A05F5F007AF003 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9BA26A05F5F007AF003 /* CoreDataStorage.swift */; };
+		1A61E9BE26A061FD007AF003 /* ReceptQueryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9BD26A061FD007AF003 /* ReceptQueryEntity.swift */; };
+		1A61E9C026A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9BF26A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift */; };
+		1A61E9C226A06B23007AF003 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9C126A06B23007AF003 /* APIEndpoints.swift */; };
+		1A61E9C526A07041007AF003 /* RecepiesResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9C426A07041007AF003 /* RecepiesResponseEntity+Mapping.swift */; };
+		1A61E9C926A1BBD3007AF003 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9C826A1BBD3007AF003 /* AppDIContainer.swift */; };
+		1A61E9CB26A1BC0E007AF003 /* AppConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9CA26A1BC0E007AF003 /* AppConfigurations.swift */; };
+		1A61E9CD26A1BD93007AF003 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9CC26A1BD92007AF003 /* AppAppearance.swift */; };
+		1A61E9CF26A1BE3B007AF003 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9CE26A1BE3B007AF003 /* AppFlowCoordinator.swift */; };
+		1A61E9D226A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9D126A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift */; };
+		1A61E9D526A564DC007AF003 /* UIViewController+AddBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9D426A564DC007AF003 /* UIViewController+AddBehaviors.swift */; };
+		1A61E9D826A5687D007AF003 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9D726A5687D007AF003 /* BackButtonEmptyTitleNavigationBarBehavior.swift */; };
+		1A61E9DB26A568DC007AF003 /* BlackStyleNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9DA26A568DC007AF003 /* BlackStyleNavigationBarBehavior.swift */; };
+		1A61E9DD26A56A48007AF003 /* RecepiesListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9DC26A56A48007AF003 /* RecepiesListItemViewModel.swift */; };
+		1A61E9DF26A56A86007AF003 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9DE26A56A86007AF003 /* Observable.swift */; };
+		1A61E9E226A56F3B007AF003 /* RecepiesListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9E126A56F3B007AF003 /* RecepiesListItemCell.swift */; };
+		1A61E9E426A57761007AF003 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9E326A57761007AF003 /* LoadingView.swift */; };
+		1A61E9E626A579EA007AF003 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9E526A579EA007AF003 /* Alertable.swift */; };
+		1ACEA57B26A58C7400D6C35E /* DataTransferError+ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA57A26A58C7400D6C35E /* DataTransferError+ConnectionError.swift */; };
+		1ACEA57D26A58C9700D6C35E /* ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA57C26A58C9700D6C35E /* ConnectionError.swift */; };
+		1ACEA57F26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA57E26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1A61E95226A00B80007AF003 /* RecipesList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A61E95526A00B80007AF003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A61E95726A00B80007AF003 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1A61E95926A00B80007AF003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1A61E95C26A00B80007AF003 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListViewController.swift; sourceTree = "<group>"; };
+		1A61E95C26A00B80007AF003 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RecepiesListViewController.storyboard; sourceTree = "<group>"; };
 		1A61E95F26A00B80007AF003 /* RecipesList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipesList.xcdatamodel; sourceTree = "<group>"; };
 		1A61E96126A00B82007AF003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A61E96426A00B82007AF003 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A61E96626A00B82007AF003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A61E97726A01F0B007AF003 /* RecepiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListViewModel.swift; sourceTree = "<group>"; };
+		1A61E97A26A01F9B007AF003 /* RecepiesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListTableViewController.swift; sourceTree = "<group>"; };
+		1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
+		1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesSceneDIContainer.swift; sourceTree = "<group>"; };
+		1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecepiesUseCase.swift; sourceTree = "<group>"; };
+		1A61E98926A03506007AF003 /* Recept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recept.swift; sourceTree = "<group>"; };
+		1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesRepository.swift; sourceTree = "<group>"; };
+		1A61E98E26A039AE007AF003 /* ReceptQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptQuery.swift; sourceTree = "<group>"; };
+		1A61E99226A03AB7007AF003 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		1A61E99526A03B36007AF003 /* RecepiesQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesQueriesRepository.swift; sourceTree = "<group>"; };
+		1A61E99826A03FEF007AF003 /* DefaultRecepiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecepiesRepository.swift; sourceTree = "<group>"; };
+		1A61E99B26A040B3007AF003 /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		1A61E99D26A04177007AF003 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1A61E9A126A04894007AF003 /* RecepiesResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesResponseStorage.swift; sourceTree = "<group>"; };
+		1A61E9A426A04907007AF003 /* RecepiesQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesQueriesStorage.swift; sourceTree = "<group>"; };
+		1A61E9A726A04B06007AF003 /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
+		1A61E9AB26A04F23007AF003 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		1A61E9AF26A050A8007AF003 /* RecepiesRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecepiesRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		1A61E9B126A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecepiesResponseDTO + Mapping.swift"; sourceTree = "<group>"; };
+		1A61E9B326A056E0007AF003 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		1A61E9B526A057E1007AF003 /* DefaultRecepiesQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecepiesQueriesRepository.swift; sourceTree = "<group>"; };
+		1A61E9B726A05DD1007AF003 /* CoreDataRecepiesQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRecepiesQueriesStorage.swift; sourceTree = "<group>"; };
+		1A61E9BA26A05F5F007AF003 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		1A61E9BD26A061FD007AF003 /* ReceptQueryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptQueryEntity.swift; sourceTree = "<group>"; };
+		1A61E9BF26A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRecepiesResponseStorage.swift; sourceTree = "<group>"; };
+		1A61E9C126A06B23007AF003 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		1A61E9C426A07041007AF003 /* RecepiesResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecepiesResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
+		1A61E9C826A1BBD3007AF003 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		1A61E9CA26A1BC0E007AF003 /* AppConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurations.swift; sourceTree = "<group>"; };
+		1A61E9CC26A1BD92007AF003 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
+		1A61E9CE26A1BE3B007AF003 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		1A61E9D126A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesSearchFlowCoordinator.swift; sourceTree = "<group>"; };
+		1A61E9D426A564DC007AF003 /* UIViewController+AddBehaviors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+AddBehaviors.swift"; sourceTree = "<group>"; };
+		1A61E9D726A5687D007AF003 /* BackButtonEmptyTitleNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonEmptyTitleNavigationBarBehavior.swift; sourceTree = "<group>"; };
+		1A61E9DA26A568DC007AF003 /* BlackStyleNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackStyleNavigationBarBehavior.swift; sourceTree = "<group>"; };
+		1A61E9DC26A56A48007AF003 /* RecepiesListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListItemViewModel.swift; sourceTree = "<group>"; };
+		1A61E9DE26A56A86007AF003 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		1A61E9E126A56F3B007AF003 /* RecepiesListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListItemCell.swift; sourceTree = "<group>"; };
+		1A61E9E326A57761007AF003 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		1A61E9E526A579EA007AF003 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
+		1ACEA57A26A58C7400D6C35E /* DataTransferError+ConnectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataTransferError+ConnectionError.swift"; sourceTree = "<group>"; };
+		1ACEA57C26A58C9700D6C35E /* ConnectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionError.swift; sourceTree = "<group>"; };
+		1ACEA57E26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +142,338 @@
 		1A61E95426A00B80007AF003 /* RecipesList */ = {
 			isa = PBXGroup;
 			children = (
+				1A61E96C26A00B8C007AF003 /* Application */,
+				1A61E96D26A00B99007AF003 /* Presentation */,
+				1A61E97026A00BB2007AF003 /* Infrastructure */,
+				1A61E96F26A00BAC007AF003 /* Data */,
+				1A61E96E26A00BA5007AF003 /* Domain */,
+				1A61E99126A03AA0007AF003 /* Common */,
+				1A61E97126A00C0D007AF003 /* Resources */,
+			);
+			path = RecipesList;
+			sourceTree = "<group>";
+		};
+		1A61E96C26A00B8C007AF003 /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				1A61E95526A00B80007AF003 /* AppDelegate.swift */,
-				1A61E95726A00B80007AF003 /* SceneDelegate.swift */,
-				1A61E95926A00B80007AF003 /* ViewController.swift */,
-				1A61E95B26A00B80007AF003 /* Main.storyboard */,
+				1A61E9CC26A1BD92007AF003 /* AppAppearance.swift */,
+				1A61E9CA26A1BC0E007AF003 /* AppConfigurations.swift */,
+				1A61E9CE26A1BE3B007AF003 /* AppFlowCoordinator.swift */,
+				1A61E98226A03071007AF003 /* DIContainer */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		1A61E96D26A00B99007AF003 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E97326A00D13007AF003 /* RecepiesScene */,
+				1A61E97E26A02DCF007AF003 /* Utils */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		1A61E96E26A00BA5007AF003 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E99426A03B07007AF003 /* Interfaces */,
+				1A61E98826A034F7007AF003 /* Entities */,
+				1A61E98526A033E3007AF003 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		1A61E96F26A00BAC007AF003 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9AD26A0506B007AF003 /* Network */,
+				1A61E99F26A04859007AF003 /* PersistentStorages */,
+				1A61E99726A03FD3007AF003 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		1A61E97026A00BB2007AF003 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E99A26A0409E007AF003 /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		1A61E97126A00C0D007AF003 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				1A61E96126A00B82007AF003 /* Assets.xcassets */,
 				1A61E96326A00B82007AF003 /* LaunchScreen.storyboard */,
 				1A61E96626A00B82007AF003 /* Info.plist */,
-				1A61E95E26A00B80007AF003 /* RecipesList.xcdatamodeld */,
 			);
-			path = RecipesList;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1A61E97226A00CD5007AF003 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9BA26A05F5F007AF003 /* CoreDataStorage.swift */,
+				1A61E95E26A00B80007AF003 /* CoreDataStorage.xcdatamodeld */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		1A61E97326A00D13007AF003 /* RecepiesScene */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9D026A1BF1B007AF003 /* Flows */,
+				1A61E97426A00D53007AF003 /* RecepiesList */,
+				1A61E9D626A5686A007AF003 /* Behavoirs */,
+			);
+			path = RecepiesScene;
+			sourceTree = "<group>";
+		};
+		1A61E97426A00D53007AF003 /* RecepiesList */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E97626A00D82007AF003 /* ViewModel */,
+				1A61E97526A00D7C007AF003 /* View */,
+			);
+			path = RecepiesList;
+			sourceTree = "<group>";
+		};
+		1A61E97526A00D7C007AF003 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */,
+				1A61E95B26A00B80007AF003 /* RecepiesListViewController.storyboard */,
+				1A61E97926A01F73007AF003 /* RecepiesTableViewController */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1A61E97626A00D82007AF003 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E97726A01F0B007AF003 /* RecepiesListViewModel.swift */,
+				1A61E9DC26A56A48007AF003 /* RecepiesListItemViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1A61E97926A01F73007AF003 /* RecepiesTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E97A26A01F9B007AF003 /* RecepiesListTableViewController.swift */,
+				1A61E9E026A56F05007AF003 /* Cells */,
+			);
+			path = RecepiesTableViewController;
+			sourceTree = "<group>";
+		};
+		1A61E97E26A02DCF007AF003 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9D326A564B7007AF003 /* Extensions */,
+				1A61E97F26A02E03007AF003 /* Protocols */,
+				1A61E9DE26A56A86007AF003 /* Observable.swift */,
+				1A61E9E326A57761007AF003 /* LoadingView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1A61E97F26A02E03007AF003 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */,
+				1A61E9E526A579EA007AF003 /* Alertable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		1A61E98226A03071007AF003 /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9C826A1BBD3007AF003 /* AppDIContainer.swift */,
+				1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */,
+			);
+			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		1A61E98526A033E3007AF003 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		1A61E98826A034F7007AF003 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E98926A03506007AF003 /* Recept.swift */,
+				1A61E98E26A039AE007AF003 /* ReceptQuery.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		1A61E98B26A038B3007AF003 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */,
+				1A61E99526A03B36007AF003 /* RecepiesQueriesRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1A61E99126A03AA0007AF003 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E99226A03AB7007AF003 /* Cancellable.swift */,
+				1ACEA57C26A58C9700D6C35E /* ConnectionError.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1A61E99426A03B07007AF003 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E98B26A038B3007AF003 /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		1A61E99726A03FD3007AF003 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E99826A03FEF007AF003 /* DefaultRecepiesRepository.swift */,
+				1A61E9B526A057E1007AF003 /* DefaultRecepiesQueriesRepository.swift */,
+				1A61E9A626A04AEE007AF003 /* Utils */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1A61E99A26A0409E007AF003 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E99B26A040B3007AF003 /* DataTransferService.swift */,
+				1A61E99D26A04177007AF003 /* NetworkService.swift */,
+				1A61E9AB26A04F23007AF003 /* Endpoint.swift */,
+				1A61E9B326A056E0007AF003 /* NetworkConfig.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1A61E99F26A04859007AF003 /* PersistentStorages */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9A026A0486C007AF003 /* RecepiesResponseStorage */,
+				1A61E9A326A048E8007AF003 /* RecepiesQueriesStorage */,
+				1A61E97226A00CD5007AF003 /* CoreDataStorage */,
+			);
+			path = PersistentStorages;
+			sourceTree = "<group>";
+		};
+		1A61E9A026A0486C007AF003 /* RecepiesResponseStorage */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9A126A04894007AF003 /* RecepiesResponseStorage.swift */,
+				1A61E9BF26A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift */,
+				1A61E9C326A0701C007AF003 /* EntityMapping */,
+			);
+			path = RecepiesResponseStorage;
+			sourceTree = "<group>";
+		};
+		1A61E9A326A048E8007AF003 /* RecepiesQueriesStorage */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9A426A04907007AF003 /* RecepiesQueriesStorage.swift */,
+				1A61E9B926A05ED1007AF003 /* CoreDataStorage */,
+			);
+			path = RecepiesQueriesStorage;
+			sourceTree = "<group>";
+		};
+		1A61E9A626A04AEE007AF003 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9A726A04B06007AF003 /* RepositoryTask.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1A61E9AD26A0506B007AF003 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9C126A06B23007AF003 /* APIEndpoints.swift */,
+				1A61E9AE26A05088007AF003 /* DataMapping */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1A61E9AE26A05088007AF003 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9AF26A050A8007AF003 /* RecepiesRequestDTO+Mapping.swift */,
+				1A61E9B126A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		1A61E9B926A05ED1007AF003 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9B726A05DD1007AF003 /* CoreDataRecepiesQueriesStorage.swift */,
+				1A61E9BC26A061E0007AF003 /* EntityMaping */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		1A61E9BC26A061E0007AF003 /* EntityMaping */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9BD26A061FD007AF003 /* ReceptQueryEntity.swift */,
+			);
+			path = EntityMaping;
+			sourceTree = "<group>";
+		};
+		1A61E9C326A0701C007AF003 /* EntityMapping */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9C426A07041007AF003 /* RecepiesResponseEntity+Mapping.swift */,
+			);
+			path = EntityMapping;
+			sourceTree = "<group>";
+		};
+		1A61E9D026A1BF1B007AF003 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9D126A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		1A61E9D326A564B7007AF003 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9D426A564DC007AF003 /* UIViewController+AddBehaviors.swift */,
+				1ACEA57A26A58C7400D6C35E /* DataTransferError+ConnectionError.swift */,
+				1ACEA57E26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1A61E9D626A5686A007AF003 /* Behavoirs */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9D726A5687D007AF003 /* BackButtonEmptyTitleNavigationBarBehavior.swift */,
+				1A61E9DA26A568DC007AF003 /* BlackStyleNavigationBarBehavior.swift */,
+			);
+			path = Behavoirs;
+			sourceTree = "<group>";
+		};
+		1A61E9E026A56F05007AF003 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1A61E9E126A56F3B007AF003 /* RecepiesListItemCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,7 +535,7 @@
 			files = (
 				1A61E96526A00B82007AF003 /* LaunchScreen.storyboard in Resources */,
 				1A61E96226A00B82007AF003 /* Assets.xcassets in Resources */,
-				1A61E95D26A00B80007AF003 /* Main.storyboard in Resources */,
+				1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,22 +546,64 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A61E95A26A00B80007AF003 /* ViewController.swift in Sources */,
+				1A61E9C926A1BBD3007AF003 /* AppDIContainer.swift in Sources */,
+				1A61E9B226A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift in Sources */,
+				1A61E9D526A564DC007AF003 /* UIViewController+AddBehaviors.swift in Sources */,
+				1A61E9C526A07041007AF003 /* RecepiesResponseEntity+Mapping.swift in Sources */,
+				1A61E9C026A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift in Sources */,
+				1A61E9E426A57761007AF003 /* LoadingView.swift in Sources */,
+				1A61E9D226A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift in Sources */,
+				1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */,
+				1A61E9CD26A1BD93007AF003 /* AppAppearance.swift in Sources */,
+				1A61E97826A01F0B007AF003 /* RecepiesListViewModel.swift in Sources */,
+				1A61E9BB26A05F5F007AF003 /* CoreDataStorage.swift in Sources */,
+				1A61E9B626A057E1007AF003 /* DefaultRecepiesQueriesRepository.swift in Sources */,
+				1A61E99326A03AB7007AF003 /* Cancellable.swift in Sources */,
+				1A61E9B826A05DD1007AF003 /* CoreDataRecepiesQueriesStorage.swift in Sources */,
+				1A61E9E626A579EA007AF003 /* Alertable.swift in Sources */,
+				1A61E99926A03FEF007AF003 /* DefaultRecepiesRepository.swift in Sources */,
+				1A61E99C26A040B3007AF003 /* DataTransferService.swift in Sources */,
+				1A61E99E26A04177007AF003 /* NetworkService.swift in Sources */,
+				1ACEA57D26A58C9700D6C35E /* ConnectionError.swift in Sources */,
+				1A61E9DF26A56A86007AF003 /* Observable.swift in Sources */,
+				1A61E9D826A5687D007AF003 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */,
+				1A61E9DB26A568DC007AF003 /* BlackStyleNavigationBarBehavior.swift in Sources */,
+				1A61E9A826A04B06007AF003 /* RepositoryTask.swift in Sources */,
+				1A61E9AC26A04F23007AF003 /* Endpoint.swift in Sources */,
+				1A61E9A226A04894007AF003 /* RecepiesResponseStorage.swift in Sources */,
+				1A61E9CF26A1BE3B007AF003 /* AppFlowCoordinator.swift in Sources */,
 				1A61E95626A00B80007AF003 /* AppDelegate.swift in Sources */,
-				1A61E95826A00B80007AF003 /* SceneDelegate.swift in Sources */,
-				1A61E96026A00B80007AF003 /* RecipesList.xcdatamodeld in Sources */,
+				1A61E9E226A56F3B007AF003 /* RecepiesListItemCell.swift in Sources */,
+				1A61E9C226A06B23007AF003 /* APIEndpoints.swift in Sources */,
+				1A61E97B26A01F9B007AF003 /* RecepiesListTableViewController.swift in Sources */,
+				1A61E98726A03414007AF003 /* SearchRecepiesUseCase.swift in Sources */,
+				1A61E99626A03B36007AF003 /* RecepiesQueriesRepository.swift in Sources */,
+				1A61E9B426A056E0007AF003 /* NetworkConfig.swift in Sources */,
+				1ACEA57B26A58C7400D6C35E /* DataTransferError+ConnectionError.swift in Sources */,
+				1A61E9CB26A1BC0E007AF003 /* AppConfigurations.swift in Sources */,
+				1A61E98F26A039AE007AF003 /* ReceptQuery.swift in Sources */,
+				1A61E98126A02E23007AF003 /* StoryboardInstantiable.swift in Sources */,
+				1A61E9B026A050A8007AF003 /* RecepiesRequestDTO+Mapping.swift in Sources */,
+				1A61E96026A00B80007AF003 /* CoreDataStorage.xcdatamodeld in Sources */,
+				1A61E98D26A038C9007AF003 /* RecepiesRepository.swift in Sources */,
+				1A61E9BE26A061FD007AF003 /* ReceptQueryEntity.swift in Sources */,
+				1ACEA57F26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift in Sources */,
+				1A61E98A26A03506007AF003 /* Recept.swift in Sources */,
+				1A61E9A526A04907007AF003 /* RecepiesQueriesStorage.swift in Sources */,
+				1A61E9DD26A56A48007AF003 /* RecepiesListItemViewModel.swift in Sources */,
+				1A61E98426A0309A007AF003 /* RecepiesSceneDIContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1A61E95B26A00B80007AF003 /* Main.storyboard */ = {
+		1A61E95B26A00B80007AF003 /* RecepiesListViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				1A61E95C26A00B80007AF003 /* Base */,
 			);
-			name = Main.storyboard;
+			name = RecepiesListViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		1A61E96326A00B82007AF003 /* LaunchScreen.storyboard */ = {
@@ -288,11 +736,13 @@
 		1A61E96A26A00B82007AF003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				API_BASE_URL = "https://api.spoonacular.com/";
+				API_KEY = aa3344048a3f4311a314f4720ef4750b;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UA8S3764J;
-				INFOPLIST_FILE = RecipesList/Info.plist;
+				INFOPLIST_FILE = RecipesList/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,11 +757,13 @@
 		1A61E96B26A00B82007AF003 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				API_BASE_URL = "https://api.spoonacular.com/";
+				API_KEY = aa3344048a3f4311a314f4720ef4750b;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UA8S3764J;
-				INFOPLIST_FILE = RecipesList/Info.plist;
+				INFOPLIST_FILE = RecipesList/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -347,13 +799,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		1A61E95E26A00B80007AF003 /* RecipesList.xcdatamodeld */ = {
+		1A61E95E26A00B80007AF003 /* CoreDataStorage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				1A61E95F26A00B80007AF003 /* RecipesList.xcdatamodel */,
 			);
 			currentVersion = 1A61E95F26A00B80007AF003 /* RecipesList.xcdatamodel */;
-			path = RecipesList.xcdatamodeld;
+			path = CoreDataStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
