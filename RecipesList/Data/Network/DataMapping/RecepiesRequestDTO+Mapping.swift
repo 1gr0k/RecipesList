@@ -9,5 +9,6 @@ import Foundation
 
 struct RecepiesRequestDTO: Encodable {
     let query: String
-    let page: Int
+    let offset: Int
+    let number: Int
 }

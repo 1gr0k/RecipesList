@@ -28,10 +28,6 @@ extension RecepiesResponseDTO.ReceptDTO {
         let entity: ReceptResponseEntity = .init(context: context)
         entity.id = Int64(id)
         entity.title = title
-//        entity.genre = genre?.rawValue
-//        entity.posterPath = posterPath
-//        entity.overview = overview
-//        entity.releaseDate = releaseDate
         return entity
     }
 }

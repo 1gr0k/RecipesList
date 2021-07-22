@@ -17,15 +17,17 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
     @IBOutlet private var testLabel: UILabel!
     
     private var viewModel: RecepiesListViewModel!
+    private var dishImagesRepository: DishImagesRepository?
     
     private var recepiesTabelViewController: RecepiesListTableViewController?
     private var searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
     
-    static func create(with viewModel: RecepiesListViewModel) -> RecepiesListViewController {
+    static func create(with viewModel: RecepiesListViewModel, dishImagesRepository: DishImagesRepository?) -> RecepiesListViewController {
         let view = RecepiesListViewController.instantiateViewController()
         view.viewModel = viewModel
+        view.dishImagesRepository = dishImagesRepository
         return view
     }
     
@@ -54,6 +56,7 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
             let destinationVC = segue.destination as? RecepiesListTableViewController {
             recepiesTabelViewController = destinationVC
             recepiesTabelViewController?.viewModel = viewModel
+            recepiesTabelViewController?.dishImageRepository = dishImagesRepository
         }
     }
     
@@ -119,9 +122,6 @@ extension RecepiesListViewController {
         searchController.searchBar.autoresizingMask = [.flexibleWidth]
         searchBarContainer.addSubview(searchController.searchBar)
         definesPresentationContext = true
-//        if #available(iOS 13.0, *) {
-//            searchController.searchBar.searchTextField.accessibilityIdentifier = AccessibilityIdentifier.searchField
-//        }
     }
 }
 

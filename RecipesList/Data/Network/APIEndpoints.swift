@@ -14,4 +14,12 @@ struct APIEndpoints {
                         method: .get,
                         queryParametersEncodable: recepiesRequestDTO)
     }
+    
+    static func getDishImage(path: String) -> Endpoint<Data> {
+        
+        return Endpoint(path: "recipeImages/\(path)-312x231.jpg",
+                        method: .get,
+                        responseDecoder: RawDataResponseDecoder())
+            
+    }
 }

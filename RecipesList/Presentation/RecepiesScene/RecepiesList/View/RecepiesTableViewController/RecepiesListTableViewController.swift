@@ -11,6 +11,7 @@ class RecepiesListTableViewController: UITableViewController {
     
     var viewModel: RecepiesListViewModel!
     
+    var dishImageRepository: DishImagesRepository?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     override func viewDidLoad() {
@@ -53,7 +54,7 @@ extension RecepiesListTableViewController {
             return UITableViewCell()
         }
         
-        cell.fill(with: viewModel.items.value[indexPath.row])
+        cell.fill(with: viewModel.items.value[indexPath.row], dishImageRepository: dishImageRepository)
         
         if indexPath.row == viewModel.items.value.count - 1 {
             viewModel.didLoadNextPage()

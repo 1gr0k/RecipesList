@@ -21,7 +21,7 @@ final class CoreDataRecepiesResponseStorage {
         let request: NSFetchRequest = RecepiesRequestEntity.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@ AND %K = %d",
                                         #keyPath(RecepiesRequestEntity.query), requestDto.query,
-                                        #keyPath(RecepiesRequestEntity.page), requestDto.page)
+                                        #keyPath(RecepiesRequestEntity.offset), requestDto.offset)
         return request
     }
     

@@ -9,7 +9,7 @@ import Foundation
 
 protocol RecepiesRepository {
     @discardableResult
-    func fetchRecepiesList(query: ReceptQuery, page: Int,
+    func fetchRecepiesList(query: ReceptQuery, offset: Int, number: Int,
                            cached: @escaping (RecepiesPage) -> Void,
                            completion: @escaping (Result<RecepiesPage, Error>) -> Void) -> Cancellable?
 }

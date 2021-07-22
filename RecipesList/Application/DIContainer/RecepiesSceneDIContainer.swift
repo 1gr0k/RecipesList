@@ -12,7 +12,7 @@ final class RecepiesSceneDIContainer {
     
     struct Dependencies{
         let apiDataTransferService: DataTransferService
-//        let imageDataTransferService: DataTransferService
+        let imageDataTransferService: DataTransferService
     }
     
     private let dependencies: Dependencies
@@ -39,37 +39,19 @@ final class RecepiesSceneDIContainer {
         return DefaultRecepiesQueriesRepository(dataTransferService: dependencies.apiDataTransferService, recepiesQueriesPersistentStorage: recepiesQueriesStorage)
     }
     
+    func makeDishImagesRepository() -> DishImagesRepository {
+        return DefaultDishImagesRepository(dataTransferService: dependencies.imageDataTransferService)
+    }
+    
     
     //MARK: - Movies List
     func makeRecepiesListViewController(actions: RecepiesListViewModelActions) -> RecepiesListViewController {
-        return RecepiesListViewController.create(with: makeRecepiesListViewModel(actions: actions))
+        return RecepiesListViewController.create(with: makeRecepiesListViewModel(actions: actions), dishImagesRepository: makeDishImagesRepository())
     }
     
     func makeRecepiesListViewModel(actions: RecepiesListViewModelActions) -> RecepiesListViewModel {
         return DefaultRecepiesListViewModel(searchReceptUseCase: makeSearchRecepiesUseCase(), actions: actions)
     }
-    
-    //MARK: - Movies Queries Suggestions List
-    
-//    func makeRecepiesQueriesSuggestionsListViewController(didSelect: @escaping RecepiesQueryListViewModelDidSelectAction) -> UIViewController {
-//        if #available(iOS 13.0, *) { // SwiftUI
-//            let view = MoviesQueryListView(viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect))
-//            return UIHostingController(rootView: view)
-//        } else { // UIKit
-//            return MoviesQueriesTableViewController.create(with: makeMoviesQueryListViewModel(didSelect: didSelect))
-//        }
-//    }
-//    
-//    func makeRecepiesQueryListViewModel(didSelect: @escaping RecepiesQueryListViewModelDidSelectAction) -> RecepiesQueryListViewModel {
-//        return DefaultRecepiesQueryListViewModel(numberOfQueriesToShow: 10,
-//                                               fetchRecentReceptQueriesUseCaseFactory: makeFetchRecentReceptQueriesUseCase,
-//                                               didSelect: didSelect)
-//    }
-//
-//    @available(iOS 13.0, *)
-//    func makeRecepiesQueryListViewModelWrapper(didSelect: @escaping RecepiesQueryListViewModelDidSelectAction) -> RecepiesQueryListViewModelWrapper {
-//        return MRecepiesQueryListViewModelWrapper(viewModel: makeRecepiesQueryListViewModel(didSelect: didSelect))
-//    }
     
     // MARK: - Flow Coordinators
     func makeRecepiesSearchFlowCoordinator(navigationController: UINavigationController) -> RecepiesSearchFlowCoordinator {

@@ -18,7 +18,6 @@
 		1A61E98126A02E23007AF003 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */; };
 		1A61E98426A0309A007AF003 /* RecepiesSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */; };
 		1A61E98726A03414007AF003 /* SearchRecepiesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */; };
-		1A61E98A26A03506007AF003 /* Recept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98926A03506007AF003 /* Recept.swift */; };
 		1A61E98D26A038C9007AF003 /* RecepiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */; };
 		1A61E98F26A039AE007AF003 /* ReceptQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98E26A039AE007AF003 /* ReceptQuery.swift */; };
 		1A61E99326A03AB7007AF003 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E99226A03AB7007AF003 /* Cancellable.swift */; };
@@ -56,6 +55,11 @@
 		1ACEA57B26A58C7400D6C35E /* DataTransferError+ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA57A26A58C7400D6C35E /* DataTransferError+ConnectionError.swift */; };
 		1ACEA57D26A58C9700D6C35E /* ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA57C26A58C9700D6C35E /* ConnectionError.swift */; };
 		1ACEA57F26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA57E26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift */; };
+		1ACEA58526A6FDAC00D6C35E /* Recept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58426A6FDAC00D6C35E /* Recept.swift */; };
+		1ACEA58726A8298800D6C35E /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58626A8298800D6C35E /* UIImageView+ImageSizeAfterAspectFit.swift */; };
+		1ACEA58926A829D200D6C35E /* CGSize+ScaledSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58826A829D200D6C35E /* CGSize+ScaledSize.swift */; };
+		1ACEA58B26A8344300D6C35E /* dishImagesPepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58A26A8344300D6C35E /* dishImagesPepository.swift */; };
+		1ACEA58D26A8348200D6C35E /* DefaultDishImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58C26A8348200D6C35E /* DefaultDishImagesRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +76,6 @@
 		1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesSceneDIContainer.swift; sourceTree = "<group>"; };
 		1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecepiesUseCase.swift; sourceTree = "<group>"; };
-		1A61E98926A03506007AF003 /* Recept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recept.swift; sourceTree = "<group>"; };
 		1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesRepository.swift; sourceTree = "<group>"; };
 		1A61E98E26A039AE007AF003 /* ReceptQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptQuery.swift; sourceTree = "<group>"; };
 		1A61E99226A03AB7007AF003 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
@@ -110,6 +113,11 @@
 		1ACEA57A26A58C7400D6C35E /* DataTransferError+ConnectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataTransferError+ConnectionError.swift"; sourceTree = "<group>"; };
 		1ACEA57C26A58C9700D6C35E /* ConnectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionError.swift; sourceTree = "<group>"; };
 		1ACEA57E26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
+		1ACEA58426A6FDAC00D6C35E /* Recept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recept.swift; sourceTree = "<group>"; };
+		1ACEA58626A8298800D6C35E /* UIImageView+ImageSizeAfterAspectFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageSizeAfterAspectFit.swift"; sourceTree = "<group>"; };
+		1ACEA58826A829D200D6C35E /* CGSize+ScaledSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+ScaledSize.swift"; sourceTree = "<group>"; };
+		1ACEA58A26A8344300D6C35E /* dishImagesPepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dishImagesPepository.swift; sourceTree = "<group>"; };
+		1ACEA58C26A8348200D6C35E /* DefaultDishImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDishImagesRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,8 +316,8 @@
 		1A61E98826A034F7007AF003 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				1A61E98926A03506007AF003 /* Recept.swift */,
 				1A61E98E26A039AE007AF003 /* ReceptQuery.swift */,
+				1ACEA58426A6FDAC00D6C35E /* Recept.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -319,6 +327,7 @@
 			children = (
 				1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */,
 				1A61E99526A03B36007AF003 /* RecepiesQueriesRepository.swift */,
+				1ACEA58A26A8344300D6C35E /* dishImagesPepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -345,6 +354,7 @@
 			children = (
 				1A61E99826A03FEF007AF003 /* DefaultRecepiesRepository.swift */,
 				1A61E9B526A057E1007AF003 /* DefaultRecepiesQueriesRepository.swift */,
+				1ACEA58C26A8348200D6C35E /* DefaultDishImagesRepository.swift */,
 				1A61E9A626A04AEE007AF003 /* Utils */,
 			);
 			path = Repositories;
@@ -455,6 +465,8 @@
 				1A61E9D426A564DC007AF003 /* UIViewController+AddBehaviors.swift */,
 				1ACEA57A26A58C7400D6C35E /* DataTransferError+ConnectionError.swift */,
 				1ACEA57E26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift */,
+				1ACEA58626A8298800D6C35E /* UIImageView+ImageSizeAfterAspectFit.swift */,
+				1ACEA58826A829D200D6C35E /* CGSize+ScaledSize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -547,10 +559,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A61E9C926A1BBD3007AF003 /* AppDIContainer.swift in Sources */,
+				1ACEA58726A8298800D6C35E /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
 				1A61E9B226A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift in Sources */,
 				1A61E9D526A564DC007AF003 /* UIViewController+AddBehaviors.swift in Sources */,
 				1A61E9C526A07041007AF003 /* RecepiesResponseEntity+Mapping.swift in Sources */,
 				1A61E9C026A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift in Sources */,
+				1ACEA58B26A8344300D6C35E /* dishImagesPepository.swift in Sources */,
 				1A61E9E426A57761007AF003 /* LoadingView.swift in Sources */,
 				1A61E9D226A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift in Sources */,
 				1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */,
@@ -570,6 +584,7 @@
 				1A61E9DB26A568DC007AF003 /* BlackStyleNavigationBarBehavior.swift in Sources */,
 				1A61E9A826A04B06007AF003 /* RepositoryTask.swift in Sources */,
 				1A61E9AC26A04F23007AF003 /* Endpoint.swift in Sources */,
+				1ACEA58926A829D200D6C35E /* CGSize+ScaledSize.swift in Sources */,
 				1A61E9A226A04894007AF003 /* RecepiesResponseStorage.swift in Sources */,
 				1A61E9CF26A1BE3B007AF003 /* AppFlowCoordinator.swift in Sources */,
 				1A61E95626A00B80007AF003 /* AppDelegate.swift in Sources */,
@@ -579,7 +594,9 @@
 				1A61E98726A03414007AF003 /* SearchRecepiesUseCase.swift in Sources */,
 				1A61E99626A03B36007AF003 /* RecepiesQueriesRepository.swift in Sources */,
 				1A61E9B426A056E0007AF003 /* NetworkConfig.swift in Sources */,
+				1ACEA58D26A8348200D6C35E /* DefaultDishImagesRepository.swift in Sources */,
 				1ACEA57B26A58C7400D6C35E /* DataTransferError+ConnectionError.swift in Sources */,
+				1ACEA58526A6FDAC00D6C35E /* Recept.swift in Sources */,
 				1A61E9CB26A1BC0E007AF003 /* AppConfigurations.swift in Sources */,
 				1A61E98F26A039AE007AF003 /* ReceptQuery.swift in Sources */,
 				1A61E98126A02E23007AF003 /* StoryboardInstantiable.swift in Sources */,
@@ -588,7 +605,6 @@
 				1A61E98D26A038C9007AF003 /* RecepiesRepository.swift in Sources */,
 				1A61E9BE26A061FD007AF003 /* ReceptQueryEntity.swift in Sources */,
 				1ACEA57F26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift in Sources */,
-				1A61E98A26A03506007AF003 /* Recept.swift in Sources */,
 				1A61E9A526A04907007AF003 /* RecepiesQueriesStorage.swift in Sources */,
 				1A61E9DD26A56A48007AF003 /* RecepiesListItemViewModel.swift in Sources */,
 				1A61E98426A0309A007AF003 /* RecepiesSceneDIContainer.swift in Sources */,
@@ -742,6 +758,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UA8S3764J;
+				IMAGE_BASE_URL = "https://spoonacular.com/";
 				INFOPLIST_FILE = RecipesList/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -763,6 +780,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3UA8S3764J;
+				IMAGE_BASE_URL = "https://spoonacular.com/";
 				INFOPLIST_FILE = RecipesList/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

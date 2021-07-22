@@ -18,12 +18,14 @@ final class DefaultRecepiesRepository {
 }
 
 extension DefaultRecepiesRepository: RecepiesRepository {
+    
     func fetchRecepiesList(query: ReceptQuery,
-                           page: Int,
+                           offset: Int,
+                           number: Int,
                            cached: @escaping (RecepiesPage) -> Void,
                            completion: @escaping (Result<RecepiesPage, Error>) -> Void) -> Cancellable? {
         
-        let requestDTO = RecepiesRequestDTO(query: query.query, page: page)
+        let requestDTO = RecepiesRequestDTO(query: query.query, offset: offset, number: number)
         let task = RepositoryTask()
         
         cache.getResponse(for: requestDTO) { result in

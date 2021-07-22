@@ -9,8 +9,6 @@ import UIKit
 
 protocol RecepiesSearchFlowCoordinatorDependencies  {
     func makeRecepiesListViewController(actions: RecepiesListViewModelActions) -> RecepiesListViewController
-//    func makeRecepiesDetailsViewController(Recept: Recept) -> UIViewController
-//    func makeRecepiesQueriesSuggestionsListViewController(didSelect: @escaping RecepiesQueryListViewModelDidSelectAction) -> UIViewController
 }
 
 final class RecepiesSearchFlowCoordinator {
@@ -28,8 +26,6 @@ final class RecepiesSearchFlowCoordinator {
     }
     
     func start() {
-        // Note: here we keep strong reference with actions, this way this flow do not need to be strong referenced
-        //let actions = RecepiesListViewModelActions(showReceptDetails: showReceptDetails)
         
         let vc = dependencies.makeRecepiesListViewController(actions: RecepiesListViewModelActions(showReceptDetails: { test in
             print("test")
@@ -37,26 +33,4 @@ final class RecepiesSearchFlowCoordinator {
         navigationController?.pushViewController(vc, animated: false)
         recepiesListVC = vc
     }
-
-//    private func showReceptDetails(Recept: Recept) {
-//        let vc = dependencies.makeRecepiesDetailsViewController(Recept: Recept)
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
-
-//    private func showReceptQueriesSuggestions(didSelect: @escaping (ReceptQuery) -> Void) {
-//        guard let recepiesListViewController = recepiesListVC, recepiesQueriesSuggestionsVC == nil,
-//            let container = recepiesListViewController.suggestionsListContainer else { return }
-//
-//        let vc = dependencies.makeRecepiesQueriesSuggestionsListViewController(didSelect: didSelect)
-//
-//        RecepiesListViewController.add(child: vc, container: container)
-//        RecepiesQueriesSuggestionsVC = vc
-//        container.isHidden = false
-//    }
-//
-//    private func closeReceptQueriesSuggestions() {
-//        RecepiesQueriesSuggestionsVC?.remove()
-//        RecepiesQueriesSuggestionsVC = nil
-//        RecepiesListVC?.suggestionsListContainer.isHidden = true
-//    }
 }

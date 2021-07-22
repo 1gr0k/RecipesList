@@ -28,16 +28,17 @@ final class DefaultSearchRecepiesUseCase: SearchRecepiesUseCase {
     func execute(requestValue: SearchRecepiesUseCaseRequestValue,
                  cached: @escaping (RecepiesPage) -> Void,
                  completion: @escaping (Result<RecepiesPage, Error>) -> Void) -> Cancellable? {
-
+        
         return recipiesRepository.fetchRecepiesList(query: requestValue.query,
-                                                page: requestValue.page,
-                                                cached: cached,
-                                                completion: { result in
-
+                                                    offset: requestValue.offset,
+                                                    number: requestValue.number,
+                                                    cached: cached,
+                                                    completion: { result in
+            
             if case .success = result {
                 self.recepiesQueriesRepository.saveRecentQuery(query: requestValue.query) { _ in }
             }
-
+            
             completion(result)
         })
     }
@@ -47,5 +48,11 @@ final class DefaultSearchRecepiesUseCase: SearchRecepiesUseCase {
 
 struct SearchRecepiesUseCaseRequestValue {
     let query: ReceptQuery
-    let page: Int
+    let offset: Int
+    let number: Int = 10
+    
+    init(query: ReceptQuery, page: Int) {
+        self.query = query
+        self.offset = page*10
+    }
 }

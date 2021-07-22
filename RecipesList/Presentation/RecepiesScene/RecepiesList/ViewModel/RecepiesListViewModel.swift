@@ -9,8 +9,6 @@ import Foundation
 
 struct RecepiesListViewModelActions {
     let showReceptDetails: (Recept) -> Void
-//    let showMovieQueriesSuggestions: (@escaping (_ didSelect: ReceptQuery) -> Void) -> Void
-//    let closeMovieQueriesSuggestions: () -> Void
 }
 
 enum RecepiesListViewModelLoading {
@@ -26,6 +24,7 @@ protocol RecepiesListViewModelInput {
     func showQueriesSuggestions()
     func closeQueriesSuggestions()
     func didSelectItem(at index: Int)
+    
 }
 
 protocol RecepiesListViewModelOutput {
@@ -49,8 +48,13 @@ final class DefaultRecepiesListViewModel: RecepiesListViewModel{
     var currentPage: Int = 0
     var totalPageCount: Int = 1
     
-    var hasMorePages: Bool { currentPage < totalPageCount }
-    var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
+    var hasMorePages: Bool {
+                                            print("hasMorePages: \(currentPage < totalPageCount)")
+                                            return currentPage < totalPageCount
+    }
+    var nextPage: Int {
+        print("nextPage: \(hasMorePages ? currentPage + 1 : currentPage)")
+        return hasMorePages ? currentPage + 1 : currentPage }
     
     private var pages: [RecepiesPage] = []
     private var recepiesLoadTask: Cancellable? { willSet {recepiesLoadTask?.cancel() } }
@@ -130,7 +134,7 @@ extension DefaultRecepiesListViewModel {
     
     func didLoadNextPage() {
         guard hasMorePages, loading.value == .none else { return }
-        //load(receptQuery: .init(query: query.value), loading: .nextPage)
+        load(receptQuery: .init(query: query.value), loading: .nextPage)
     }
     
     func didSearch(query: String) {
@@ -143,16 +147,17 @@ extension DefaultRecepiesListViewModel {
     }
 
     func showQueriesSuggestions() {
-//        actions?.showReceptQueriesSuggestions(update(receptQuery:))
+
     }
 
     func closeQueriesSuggestions() {
-//        actions?.closeReceptQueriesSuggestions()
+
     }
 
     func didSelectItem(at index: Int) {
         actions?.showReceptDetails(pages.recepies[index])
     }
+    
 }
 
 //MARK: Private
