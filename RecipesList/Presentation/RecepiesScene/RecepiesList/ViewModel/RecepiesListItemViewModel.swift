@@ -15,10 +15,10 @@ struct RecepiesListItemViewModel: Equatable {
 
 extension RecepiesListItemViewModel {
     
-    init(recept: Recept) {
+    init(recept: Recipe) {
         self.title = recept.title ?? ""
         self.image = recept.id
-        self.id = recept.id ?? ""
+        self.id = recept.id
         
     }
 }

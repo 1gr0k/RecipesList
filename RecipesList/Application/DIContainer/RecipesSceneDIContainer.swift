@@ -19,7 +19,7 @@ final class RecipesSceneDIContainer {
     
     //MARK: - Persistent Storage
     lazy var recepiesQueriesStorage: RecepiesQueriesStorage = CoreDataRecepiesQueriesStorage(maxStorageLimit: 10)
-    lazy var recepiesResponseCache: RecepiesResponseStorage = CoreDataRecepiesResponseStorage()
+    lazy var recepiesResponseCache: RecipesResponseStorage = CoreDataRecepiesResponseStorage()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -50,7 +50,16 @@ final class RecipesSceneDIContainer {
     }
     
     func makeRecepiesListViewModel(actions: RecepiesListViewModelActions) -> RecepiesListViewModel {
-        return DefaultRecepiesListViewModel(searchReceptUseCase: makeSearchRecepiesUseCase(), actions: actions)
+        return DefaultRecipesListViewModel(searchReceptUseCase: makeSearchRecepiesUseCase(), actions: actions)
+    }
+    
+    //MARK: - Recipe Details
+    func makeRecipeDetailsViewController(recipe: Recipe) -> UIViewController {
+        return RecipeDetailsViewController.create(with: makeRecipeDetailsViewModel(recipe: recipe), dishImagesRepository: makeDishImagesRepository())
+    }
+    
+    func makeRecipeDetailsViewModel(recipe: Recipe) -> RecipeDetailsViewModel {
+        return DefaultRecipeDetailsViewModel(recipe: recipe, recepiesRepository: makeRecepiesRepository())
     }
     
     //MARK: - Main TabBar

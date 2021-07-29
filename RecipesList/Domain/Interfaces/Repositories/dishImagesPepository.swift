@@ -9,4 +9,6 @@ import Foundation
 
 protocol DishImagesRepository {
     func fetchImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable?
+    func fetchIngredientImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable?
+    func fetchDetailImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable?
 }

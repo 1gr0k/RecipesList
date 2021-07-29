@@ -7,9 +7,7 @@
 
 import Foundation
 
-import Foundation
-
-struct Recept: Equatable, Identifiable {
+struct Recipe: Equatable, Identifiable {
     typealias Identifier = String
     let id: Identifier
     let title: String?
@@ -19,5 +17,5 @@ struct Recept: Equatable, Identifiable {
 struct RecepiesPage: Equatable {
     let page: Int
     let totalPages: Int
-    let recepies: [Recept]
+    let recepies: [Recipe]
 }

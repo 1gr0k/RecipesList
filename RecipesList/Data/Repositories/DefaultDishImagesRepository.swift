@@ -17,10 +17,33 @@ final class DefaultDishImagesRepository {
 }
 
 extension DefaultDishImagesRepository: DishImagesRepository {
+    func fetchIngredientImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable? {
+        let endpoint = APIEndpoints.getIngredientImage(path: imagePath)
+        let task = RepositoryTask()
+        task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
+
+            let result = result.mapError { $0 as Error }
+            DispatchQueue.main.async { completion(result) }
+        }
+        return task
+    }
+    
     
     func fetchImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable? {
         
-        let endpoint = APIEndpoints.getDishImage(path: imagePath)
+        let endpoint = APIEndpoints.getRecipePreviewImage(path: imagePath)
+        let task = RepositoryTask()
+        task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
+
+            let result = result.mapError { $0 as Error }
+            DispatchQueue.main.async { completion(result) }
+        }
+        return task
+    }
+    
+    func fetchDetailImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable? {
+        
+        let endpoint = APIEndpoints.getDetailRecipeImage(path: imagePath)
         let task = RepositoryTask()
         task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
 

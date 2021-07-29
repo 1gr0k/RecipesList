@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 extension ReceptQueryEntity {
-    convenience init(receptQuery: ReceptQuery, insertInto context: NSManagedObjectContext) {
+    convenience init(receptQuery: RecipeQuery, insertInto context: NSManagedObjectContext) {
         self.init(context: context)
         query = receptQuery.query
         createdAt = Date()
@@ -17,13 +17,13 @@ extension ReceptQueryEntity {
 }
 
 extension ReceptQueryEntity {
-    func toDomain() -> ReceptQuery {
+    func toDomain() -> RecipeQuery {
         return .init(query: query ?? "")
     }
 }
 
 
-extension RecepiesResponseDTO.ReceptDTO {
+extension RecipesResponseDTO.ReceptDTO {
     func toEntity(in context: NSManagedObjectContext) -> ReceptResponseEntity {
         let entity: ReceptResponseEntity = .init(context: context)
         entity.id = Int64(id)

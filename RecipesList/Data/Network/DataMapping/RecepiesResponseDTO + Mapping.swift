@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-struct RecepiesResponseDTO: Decodable {
+struct RecipesResponseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
         case page = "offset"
         case totalPages = "totalResults"
@@ -20,7 +20,7 @@ struct RecepiesResponseDTO: Decodable {
     
 }
 
-extension RecepiesResponseDTO {
+extension RecipesResponseDTO {
     struct ReceptDTO: Decodable {
         let id: Int
         let title: String?
@@ -28,7 +28,7 @@ extension RecepiesResponseDTO {
     }
 }
 
-extension RecepiesResponseDTO {
+extension RecipesResponseDTO {
     func toDomain() -> RecepiesPage {
         let page = page/10
         let totalPages = totalPages/10
@@ -36,9 +36,9 @@ extension RecepiesResponseDTO {
     }
 }
 
-extension RecepiesResponseDTO.ReceptDTO {
-    func toDomain() -> Recept {
-        return .init(id: Recept.Identifier(id), title: self.title, image: self.image)
+extension RecipesResponseDTO.ReceptDTO {
+    func toDomain() -> Recipe {
+        return .init(id: Recipe.Identifier(id), title: self.title, image: self.image)
     }
 }
 

@@ -47,11 +47,11 @@ final class DefaultSearchRecepiesUseCase: SearchRecepiesUseCase {
 
 
 struct SearchRecepiesUseCaseRequestValue {
-    let query: ReceptQuery
+    let query: RecipeQuery
     let offset: Int
     let number: Int = 10
     
-    init(query: ReceptQuery, page: Int) {
+    init(query: RecipeQuery, page: Int) {
         self.query = query
         self.offset = page*10
     }

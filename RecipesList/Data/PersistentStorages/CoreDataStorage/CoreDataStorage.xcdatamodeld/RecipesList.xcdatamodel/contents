@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19141.11" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="RecepiesRequestEntity" representedClassName="RecepiesRequestEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="offset" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="query" optional="YES" attributeType="String"/>
-        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecepiesResponseEntity" inverseName="request" inverseEntity="RecepiesResponseEntity"/>
+    <entity name="DishTypesResponseEntity" representedClassName="DishTypesResponseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="dType" optional="YES" attributeType="String"/>
+        <relationship name="recipeDetailsResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeDetailsResponseEntity" inverseName="dishTypes" inverseEntity="RecipeDetailsResponseEntity"/>
+    </entity>
+    <entity name="ExtendedIngredientsResponseEntity" representedClassName="ExtendedIngredientsResponseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="recipeDetailresponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeDetailsResponseEntity" inverseName="extendedIngredients" inverseEntity="RecipeDetailsResponseEntity"/>
     </entity>
     <entity name="RecepiesResponseEntity" representedClassName="RecepiesResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalPages" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="recepies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ReceptResponseEntity" inverseName="recepiesResponse" inverseEntity="ReceptResponseEntity"/>
-        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecepiesRequestEntity" inverseName="response" inverseEntity="RecepiesRequestEntity"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipesRequestEntity" inverseName="response" inverseEntity="RecipesRequestEntity"/>
     </entity>
     <entity name="ReceptQueryEntity" representedClassName="ReceptQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -22,10 +25,32 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="recepiesResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecepiesResponseEntity" inverseName="recepies" inverseEntity="RecepiesResponseEntity"/>
     </entity>
+    <entity name="RecipeDetailsRequestEntity" representedClassName="RecipeDetailsRequestEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="query" optional="YES" attributeType="String"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeDetailsResponseEntity" inverseName="request" inverseEntity="RecipeDetailsResponseEntity"/>
+    </entity>
+    <entity name="RecipeDetailsResponseEntity" representedClassName="RecipeDetailsResponseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="dishTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DishTypesResponseEntity" inverseName="recipeDetailsResponse" inverseEntity="DishTypesResponseEntity"/>
+        <relationship name="extendedIngredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExtendedIngredientsResponseEntity" inverseName="recipeDetailresponse" inverseEntity="ExtendedIngredientsResponseEntity"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeDetailsRequestEntity" inverseName="response" inverseEntity="RecipeDetailsRequestEntity"/>
+    </entity>
+    <entity name="RecipesRequestEntity" representedClassName="RecipesRequestEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="offset" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="query" optional="YES" attributeType="String"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecepiesResponseEntity" inverseName="request" inverseEntity="RecepiesResponseEntity"/>
+    </entity>
     <elements>
-        <element name="RecepiesRequestEntity" positionX="-36" positionY="18" width="128" height="89"/>
         <element name="RecepiesResponseEntity" positionX="-18" positionY="27" width="128" height="89"/>
         <element name="ReceptQueryEntity" positionX="-63" positionY="-18" width="128" height="59"/>
         <element name="ReceptResponseEntity" positionX="-54" positionY="9" width="128" height="89"/>
+        <element name="RecipeDetailsRequestEntity" positionX="-27" positionY="54" width="128" height="59"/>
+        <element name="RecipeDetailsResponseEntity" positionX="-36" positionY="45" width="128" height="119"/>
+        <element name="RecipesRequestEntity" positionX="-36" positionY="18" width="128" height="89"/>
+        <element name="DishTypesResponseEntity" positionX="0" positionY="81" width="128" height="59"/>
+        <element name="ExtendedIngredientsResponseEntity" positionX="18" positionY="108" width="128" height="74"/>
     </elements>
 </model>

@@ -76,10 +76,6 @@ public final class DefaultNetworkService {
             }
         }
         
-        //https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=efbb5ebebeb94c7c8865d652cfa24bc1
-        //https://api.spoonacular.com/recipes/complexSearch?query=Pasta&page=1&api_key=efbb5ebebeb94c7c8865d652cfa24bc1&language=ru-US
-        
-        print(request.url)
         logger.log(request: request)
 
         return sessionDataTask

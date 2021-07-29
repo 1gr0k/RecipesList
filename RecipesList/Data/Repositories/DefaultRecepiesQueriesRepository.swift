@@ -20,11 +20,11 @@ final class DefaultRecepiesQueriesRepository {
 }
 
 extension DefaultRecepiesQueriesRepository: RecepiesQueriesRepository {
-    func fetchRecentQueries(maxCount: Int, completion: @escaping (Result<[ReceptQuery], Error>) -> Void) {
+    func fetchRecentQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
         return recepiesQueriesPersistentStorage.fetchRecentQueries(maxCount: maxCount, completion: completion)
     }
     
-    func saveRecentQuery(query: ReceptQuery, completion: @escaping (Result<ReceptQuery, Error>) -> Void) {
+    func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void) {
         recepiesQueriesPersistentStorage.saveRecentQuery(query: query, completion: completion)
     }
 }

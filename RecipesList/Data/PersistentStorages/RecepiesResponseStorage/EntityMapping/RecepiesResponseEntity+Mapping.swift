@@ -9,22 +9,22 @@ import Foundation
 import CoreData
 
 extension RecepiesResponseEntity {
-    func toDTO() -> RecepiesResponseDTO {
+    func toDTO() -> RecipesResponseDTO {
         return .init(page: Int(page), totalPages: Int(totalPages), recepies: recepies?.allObjects.map { ($0 as! ReceptResponseEntity).toDTO() } ?? [])
     }
 }
 
 extension ReceptResponseEntity {
-    func toDTO() -> RecepiesResponseDTO.ReceptDTO {
+    func toDTO() -> RecipesResponseDTO.ReceptDTO {
         return .init(id: Int(id),
                      title: title,
                      image: image)
     }
 }
 
-extension RecepiesRequestDTO {
-    func toEntity(in context: NSManagedObjectContext) -> RecepiesRequestEntity {
-        let entity: RecepiesRequestEntity = .init(context: context)
+extension RecipesRequestDTO {
+    func toEntity(in context: NSManagedObjectContext) -> RecipesRequestEntity {
+        let entity: RecipesRequestEntity = .init(context: context)
         entity.query = query
         entity.offset = Int32(offset)
         entity.number = Int32(number)
@@ -32,7 +32,7 @@ extension RecepiesRequestDTO {
     }
 }
 
-extension RecepiesResponseDTO {
+extension RecipesResponseDTO {
     func toEntity(in context: NSManagedObjectContext) -> RecepiesResponseEntity {
         let entity: RecepiesResponseEntity = .init(context: context)
         entity.page = Int32(page)

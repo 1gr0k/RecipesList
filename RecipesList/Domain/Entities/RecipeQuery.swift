@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ReceptQuery: Equatable {
+struct RecipeQuery: Equatable {
     let query: String
 }

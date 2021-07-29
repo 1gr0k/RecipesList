@@ -8,6 +8,6 @@
 import Foundation
 
 protocol RecepiesQueriesRepository {
-    func fetchRecentQueries(maxCount: Int, completion: @escaping (Result<[ReceptQuery], Error>) -> Void)
-    func saveRecentQuery(query: ReceptQuery, completion: @escaping (Result<ReceptQuery, Error>) -> Void)
+    func fetchRecentQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void)
+    func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void)
 }

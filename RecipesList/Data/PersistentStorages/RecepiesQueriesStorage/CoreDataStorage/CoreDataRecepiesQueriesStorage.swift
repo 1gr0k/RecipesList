@@ -20,7 +20,7 @@ final class CoreDataRecepiesQueriesStorage {
 }
 
 extension CoreDataRecepiesQueriesStorage: RecepiesQueriesStorage {
-    func fetchRecentQueries(maxCount: Int, completion: @escaping (Result<[ReceptQuery], Error>) -> Void) {
+    func fetchRecentQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
         
         coreDataStorage.performBackgroundTask { context in
             do {
@@ -37,7 +37,7 @@ extension CoreDataRecepiesQueriesStorage: RecepiesQueriesStorage {
         }
     }
     
-    func saveRecentQuery(query: ReceptQuery, completion: @escaping (Result<ReceptQuery, Error>) -> Void) {
+    func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             guard let self = self else { return }
             do {
@@ -56,7 +56,7 @@ extension CoreDataRecepiesQueriesStorage: RecepiesQueriesStorage {
 // MARK: - Private
 extension CoreDataRecepiesQueriesStorage {
 
-    private func cleanUpQueries(for query: ReceptQuery, inContext context: NSManagedObjectContext) throws {
+    private func cleanUpQueries(for query: RecipeQuery, inContext context: NSManagedObjectContext) throws {
         let request: NSFetchRequest = ReceptQueryEntity.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(ReceptQueryEntity.createdAt),
                                                     ascending: false)]
@@ -66,7 +66,7 @@ extension CoreDataRecepiesQueriesStorage {
         removeQueries(limit: maxStorageLimit - 1, in: result, inContext: context)
     }
 
-    private func removeDuplicates(for query: ReceptQuery, in queries: inout [ReceptQueryEntity], inContext context: NSManagedObjectContext) {
+    private func removeDuplicates(for query: RecipeQuery, in queries: inout [ReceptQueryEntity], inContext context: NSManagedObjectContext) {
         queries
             .filter { $0.query == query.query }
             .forEach { context.delete($0) }

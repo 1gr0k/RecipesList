@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecepiesRequestDTO: Encodable {
+struct RecipesRequestDTO: Encodable {
     let query: String
     let offset: Int
     let number: Int

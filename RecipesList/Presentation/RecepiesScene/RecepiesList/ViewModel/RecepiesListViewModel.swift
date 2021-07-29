@@ -8,7 +8,7 @@
 import Foundation
 
 struct RecepiesListViewModelActions {
-    let showReceptDetails: (Recept) -> Void
+    let showRecipeDetails: (Recipe) -> Void
 }
 
 enum RecepiesListViewModelLoading {
@@ -40,7 +40,7 @@ protocol RecepiesListViewModelOutput {
 
 protocol RecepiesListViewModel: RecepiesListViewModelOutput, RecepiesListViewModelInput {}
 
-final class DefaultRecepiesListViewModel: RecepiesListViewModel{
+final class DefaultRecipesListViewModel: RecepiesListViewModel{
     
     private let searchRecepiesUseCase: SearchRecepiesUseCase
     private let actions: RecepiesListViewModelActions?
@@ -49,11 +49,9 @@ final class DefaultRecepiesListViewModel: RecepiesListViewModel{
     var totalPageCount: Int = 1
     
     var hasMorePages: Bool {
-                                            print("hasMorePages: \(currentPage < totalPageCount)")
-                                            return currentPage < totalPageCount
+        return currentPage < totalPageCount
     }
     var nextPage: Int {
-        print("nextPage: \(hasMorePages ? currentPage + 1 : currentPage)")
         return hasMorePages ? currentPage + 1 : currentPage }
     
     private var pages: [RecepiesPage] = []
@@ -95,41 +93,41 @@ final class DefaultRecepiesListViewModel: RecepiesListViewModel{
         pages.removeAll()
         items.value.removeAll()
     }
-
-    private func load(receptQuery: ReceptQuery, loading: RecepiesListViewModelLoading) {
+    
+    private func load(receptQuery: RecipeQuery, loading: RecepiesListViewModelLoading) {
         self.loading.value = loading
         query.value = receptQuery.query
-
+        
         recepiesLoadTask = searchRecepiesUseCase.execute(
             requestValue: .init(query: receptQuery, page: nextPage),
             cached: appendPage,
             completion: { result in
-                switch result {
-                case .success(let page):
-                    self.appendPage(page)
-                case .failure(let error):
-                    self.handle(error: error)
-                }
-                self.loading.value = .none
+            switch result {
+            case .success(let page):
+                self.appendPage(page)
+            case .failure(let error):
+                self.handle(error: error)
+            }
+            self.loading.value = .none
         })
     }
     
     private func handle(error: Error) {
         self.error.value = error.isInternetConnectionError ?
-            NSLocalizedString("No internet connection", comment: "") :
-            NSLocalizedString("Failed loading recepies", comment: "")
+        NSLocalizedString("No internet connection", comment: "") :
+        NSLocalizedString("Failed loading recepies", comment: "")
     }
     
-    private func update(receptQuery: ReceptQuery) {
+    private func update(receptQuery: RecipeQuery) {
         resetPages()
         load(receptQuery: receptQuery, loading: .fullScreen)
     }
 }
 
-extension DefaultRecepiesListViewModel {
+extension DefaultRecipesListViewModel {
     func viewDidLoad() {
         query.value = "Pasta"
-        update(receptQuery: ReceptQuery(query: query.value))
+        update(receptQuery: RecipeQuery(query: query.value))
     }
     
     func didLoadNextPage() {
@@ -139,23 +137,23 @@ extension DefaultRecepiesListViewModel {
     
     func didSearch(query: String) {
         guard !query.isEmpty else { return }
-        update(receptQuery: ReceptQuery(query: query))
+        update(receptQuery: RecipeQuery(query: query))
     }
-
+    
     func didCancelSearch() {
         recepiesLoadTask?.cancel()
     }
-
+    
     func showQueriesSuggestions() {
-
+        
     }
-
+    
     func closeQueriesSuggestions() {
-
+        
     }
-
+    
     func didSelectItem(at index: Int) {
-        actions?.showReceptDetails(pages.recepies[index])
+        actions?.showRecipeDetails(pages.recepies[index])
     }
     
 }
@@ -163,5 +161,5 @@ extension DefaultRecepiesListViewModel {
 //MARK: Private
 
 private extension Array where Element == RecepiesPage {
-    var recepies: [Recept] { flatMap { $0.recepies } }
+    var recepies: [Recipe] { flatMap { $0.recepies } }
 }
