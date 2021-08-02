@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-final class RecepiesSceneDIContainer {
+final class RecipesSceneDIContainer {
     
     struct Dependencies{
         let apiDataTransferService: DataTransferService
@@ -53,11 +53,25 @@ final class RecepiesSceneDIContainer {
         return DefaultRecepiesListViewModel(searchReceptUseCase: makeSearchRecepiesUseCase(), actions: actions)
     }
     
+    //MARK: - Main TabBar
+    func makeMainTabBarViewController(views: [UIViewController]) -> MainTabBarController {
+        return MainTabBarController.create(viewModel: makeMainTabBarViewModel(), views: views)
+    }
+    func makeMainTabBarViewModel() ->  MainTabBarViewModel {
+        return MainTabBarViewModel()
+    }
+    
     // MARK: - Flow Coordinators
     func makeRecepiesSearchFlowCoordinator(navigationController: UINavigationController) -> RecepiesSearchFlowCoordinator {
         return RecepiesSearchFlowCoordinator(navigationController: navigationController,
                                            dependencies: self)
     }
+    
+    func makeMainTabBarFlowCoordinator(window: UIWindow, recepiesSceneDIContainer: RecipesSceneDIContainer) -> MainTabBarFlowCoordinator {
+        return MainTabBarFlowCoordinator(window: window,
+                                         dependencies: self, recepiesSceneDIContainer: recepiesSceneDIContainer)
+    }
 }
 
-extension RecepiesSceneDIContainer: RecepiesSearchFlowCoordinatorDependencies {}
+extension RecipesSceneDIContainer: RecepiesSearchFlowCoordinatorDependencies {}
+extension RecipesSceneDIContainer: MainTabBarFlowCoordinatorDependencies {}

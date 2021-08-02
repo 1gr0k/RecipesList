@@ -16,7 +16,7 @@
 		1A61E97826A01F0B007AF003 /* RecepiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E97726A01F0B007AF003 /* RecepiesListViewModel.swift */; };
 		1A61E97B26A01F9B007AF003 /* RecepiesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E97A26A01F9B007AF003 /* RecepiesListTableViewController.swift */; };
 		1A61E98126A02E23007AF003 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */; };
-		1A61E98426A0309A007AF003 /* RecepiesSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */; };
+		1A61E98426A0309A007AF003 /* RecipesSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98326A0309A007AF003 /* RecipesSceneDIContainer.swift */; };
 		1A61E98726A03414007AF003 /* SearchRecepiesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */; };
 		1A61E98D26A038C9007AF003 /* RecepiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */; };
 		1A61E98F26A039AE007AF003 /* ReceptQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98E26A039AE007AF003 /* ReceptQuery.swift */; };
@@ -60,6 +60,10 @@
 		1ACEA58926A829D200D6C35E /* CGSize+ScaledSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58826A829D200D6C35E /* CGSize+ScaledSize.swift */; };
 		1ACEA58B26A8344300D6C35E /* dishImagesPepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58A26A8344300D6C35E /* dishImagesPepository.swift */; };
 		1ACEA58D26A8348200D6C35E /* DefaultDishImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58C26A8348200D6C35E /* DefaultDishImagesRepository.swift */; };
+		1AE2373126B3F89200956EB7 /* MainTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AE2373026B3F89200956EB7 /* MainTabBarController.storyboard */; };
+		1AE2373326B3F8B000956EB7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE2373226B3F8B000956EB7 /* MainTabBarController.swift */; };
+		1AE2373526B3F8C800956EB7 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE2373426B3F8C800956EB7 /* MainTabBarViewModel.swift */; };
+		1AE2373726B4006700956EB7 /* MainTabBarFlowCoorfinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE2373626B4006700956EB7 /* MainTabBarFlowCoorfinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +78,7 @@
 		1A61E97726A01F0B007AF003 /* RecepiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListViewModel.swift; sourceTree = "<group>"; };
 		1A61E97A26A01F9B007AF003 /* RecepiesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListTableViewController.swift; sourceTree = "<group>"; };
 		1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
-		1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesSceneDIContainer.swift; sourceTree = "<group>"; };
+		1A61E98326A0309A007AF003 /* RecipesSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSceneDIContainer.swift; sourceTree = "<group>"; };
 		1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecepiesUseCase.swift; sourceTree = "<group>"; };
 		1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesRepository.swift; sourceTree = "<group>"; };
 		1A61E98E26A039AE007AF003 /* ReceptQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptQuery.swift; sourceTree = "<group>"; };
@@ -118,6 +122,10 @@
 		1ACEA58826A829D200D6C35E /* CGSize+ScaledSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+ScaledSize.swift"; sourceTree = "<group>"; };
 		1ACEA58A26A8344300D6C35E /* dishImagesPepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dishImagesPepository.swift; sourceTree = "<group>"; };
 		1ACEA58C26A8348200D6C35E /* DefaultDishImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDishImagesRepository.swift; sourceTree = "<group>"; };
+		1AE2373026B3F89200956EB7 /* MainTabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = MainTabBarController.storyboard; path = ../../../../../../../MainTabBarController.storyboard; sourceTree = "<group>"; };
+		1AE2373226B3F8B000956EB7 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = ../../../../../../../MainTabBarController.swift; sourceTree = "<group>"; };
+		1AE2373426B3F8C800956EB7 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarViewModel.swift; path = ../../../../../../../MainTabBarViewModel.swift; sourceTree = "<group>"; };
+		1AE2373626B4006700956EB7 /* MainTabBarFlowCoorfinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarFlowCoorfinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +240,7 @@
 		1A61E97326A00D13007AF003 /* RecepiesScene */ = {
 			isa = PBXGroup;
 			children = (
+				1AE2372D26B3F84500956EB7 /* MainTabBar */,
 				1A61E9D026A1BF1B007AF003 /* Flows */,
 				1A61E97426A00D53007AF003 /* RecepiesList */,
 				1A61E9D626A5686A007AF003 /* Behavoirs */,
@@ -300,7 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				1A61E9C826A1BBD3007AF003 /* AppDIContainer.swift */,
-				1A61E98326A0309A007AF003 /* RecepiesSceneDIContainer.swift */,
+				1A61E98326A0309A007AF003 /* RecipesSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -455,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				1A61E9D126A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift */,
+				1AE2373626B4006700956EB7 /* MainTabBarFlowCoorfinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -486,6 +496,32 @@
 				1A61E9E126A56F3B007AF003 /* RecepiesListItemCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		1AE2372D26B3F84500956EB7 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				1AE2372E26B3F85700956EB7 /* ViewModel */,
+				1AE2372F26B3F86000956EB7 /* View */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		1AE2372E26B3F85700956EB7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1AE2373426B3F8C800956EB7 /* MainTabBarViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1AE2372F26B3F86000956EB7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1AE2373226B3F8B000956EB7 /* MainTabBarController.swift */,
+				1AE2373026B3F89200956EB7 /* MainTabBarController.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,6 +584,7 @@
 				1A61E96526A00B82007AF003 /* LaunchScreen.storyboard in Resources */,
 				1A61E96226A00B82007AF003 /* Assets.xcassets in Resources */,
 				1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */,
+				1AE2373126B3F89200956EB7 /* MainTabBarController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,8 +600,10 @@
 				1A61E9B226A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift in Sources */,
 				1A61E9D526A564DC007AF003 /* UIViewController+AddBehaviors.swift in Sources */,
 				1A61E9C526A07041007AF003 /* RecepiesResponseEntity+Mapping.swift in Sources */,
+				1AE2373526B3F8C800956EB7 /* MainTabBarViewModel.swift in Sources */,
 				1A61E9C026A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift in Sources */,
 				1ACEA58B26A8344300D6C35E /* dishImagesPepository.swift in Sources */,
+				1AE2373726B4006700956EB7 /* MainTabBarFlowCoorfinator.swift in Sources */,
 				1A61E9E426A57761007AF003 /* LoadingView.swift in Sources */,
 				1A61E9D226A1BF3C007AF003 /* RecepiesSearchFlowCoordinator.swift in Sources */,
 				1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */,
@@ -607,7 +646,8 @@
 				1ACEA57F26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift in Sources */,
 				1A61E9A526A04907007AF003 /* RecepiesQueriesStorage.swift in Sources */,
 				1A61E9DD26A56A48007AF003 /* RecepiesListItemViewModel.swift in Sources */,
-				1A61E98426A0309A007AF003 /* RecepiesSceneDIContainer.swift in Sources */,
+				1A61E98426A0309A007AF003 /* RecipesSceneDIContainer.swift in Sources */,
+				1AE2373326B3F8B000956EB7 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

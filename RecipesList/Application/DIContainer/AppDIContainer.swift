@@ -27,8 +27,8 @@ final class AppDIContainer {
     }()
     
     // MARK: - DIContainers of scenes
-    func makeRecepiesSceneDIContainer() -> RecepiesSceneDIContainer {
-        let dependencies = RecepiesSceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService)
-        return RecepiesSceneDIContainer(dependencies: dependencies)
+    func makeRecepiesSceneDIContainer() -> RecipesSceneDIContainer {
+        let dependencies = RecipesSceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService)
+        return RecipesSceneDIContainer(dependencies: dependencies)
     }
 }
