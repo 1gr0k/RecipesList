@@ -8,7 +8,7 @@
 import Foundation
 
 struct RecepiesListViewModelActions {
-    let showRecipeDetails: (Recipe) -> Void
+    let showReceptDetails: (Recept) -> Void
 }
 
 enum RecepiesListViewModelLoading {
@@ -24,7 +24,9 @@ protocol RecepiesListViewModelInput {
     func showQueriesSuggestions()
     func closeQueriesSuggestions()
     func didSelectItem(at index: Int)
-    
+    func setLike(id: String)
+    func removeLike(id: String)
+
 }
 
 protocol RecepiesListViewModelOutput {
@@ -42,16 +44,20 @@ protocol RecepiesListViewModel: RecepiesListViewModelOutput, RecepiesListViewMod
 
 final class DefaultRecipesListViewModel: RecepiesListViewModel{
     
-    private let searchRecepiesUseCase: SearchRecepiesUseCase
+    private let favouriteRecepiesUseCase: RecipesListWithFavouritesUseCase
     private let actions: RecepiesListViewModelActions?
-    
+    private let setLikeInteractor: SetLikeInteractor?
+    private let removeLikeInteractor: RemoveLikeInteractor?
+
     var currentPage: Int = 0
     var totalPageCount: Int = 1
     
     var hasMorePages: Bool {
-        return currentPage < totalPageCount
+                                            print("hasMorePages: \(currentPage < totalPageCount)")
+                                            return currentPage < totalPageCount
     }
     var nextPage: Int {
+        print("nextPage: \(hasMorePages ? currentPage + 1 : currentPage)")
         return hasMorePages ? currentPage + 1 : currentPage }
     
     private var pages: [RecepiesPage] = []
@@ -69,10 +75,12 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
     
     //MARK: Init
     
-    init(searchReceptUseCase: SearchRecepiesUseCase,
-         actions: RecepiesListViewModelActions? = nil) {
-        self.searchRecepiesUseCase = searchReceptUseCase
+    init(favouriteRecipesUseCase: RecipesListWithFavouritesUseCase,
+         actions: RecepiesListViewModelActions? = nil, setLikeInteractor: SetLikeInteractor, removeLikeInteractor: RemoveLikeInteractor) {
+        self.favouriteRecepiesUseCase = favouriteRecipesUseCase
         self.actions = actions
+        self.setLikeInteractor = setLikeInteractor
+        self.removeLikeInteractor = removeLikeInteractor
     }
     
     //MARK: - Private
@@ -93,23 +101,23 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
         pages.removeAll()
         items.value.removeAll()
     }
-    
-    private func load(receptQuery: RecipeQuery, loading: RecepiesListViewModelLoading) {
+
+    private func load(receptQuery: ReceptQuery, loading: RecepiesListViewModelLoading) {
         self.loading.value = loading
         query.value = receptQuery.query
-        
-        recepiesLoadTask = searchRecepiesUseCase.execute(
+
+        recepiesLoadTask = favouriteRecepiesUseCase.execute(
             requestValue: .init(query: receptQuery, page: nextPage),
             cached: appendPage,
             completion: { result in
-            switch result {
-            case .success(let page):
-                self.appendPage(page)
-            case .failure(let error):
-                self.handle(error: error)
-            }
-            self.loading.value = .none
-        })
+                switch result {
+                case .success(let page):
+                    self.appendPage(page)
+                case .failure(let error):
+                    self.handle(error: error)
+                }
+                self.loading.value = .none
+            })
     }
     
     private func handle(error: Error) {
@@ -118,16 +126,16 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
         NSLocalizedString("Failed loading recepies", comment: "")
     }
     
-    private func update(receptQuery: RecipeQuery) {
+    private func update(receptQuery: ReceptQuery) {
         resetPages()
         load(receptQuery: receptQuery, loading: .fullScreen)
     }
 }
 
-extension DefaultRecipesListViewModel {
+extension DefaultRecepiesListViewModel {
     func viewDidLoad() {
         query.value = "Pasta"
-        update(receptQuery: RecipeQuery(query: query.value))
+        update(receptQuery: ReceptQuery(query: query.value))
     }
     
     func didLoadNextPage() {
@@ -139,23 +147,45 @@ extension DefaultRecipesListViewModel {
         guard !query.isEmpty else { return }
         update(receptQuery: RecipeQuery(query: query))
     }
-    
+
     func didCancelSearch() {
         recepiesLoadTask?.cancel()
     }
-    
+
     func showQueriesSuggestions() {
-        
+
     }
-    
+
     func closeQueriesSuggestions() {
-        
+
     }
-    
+
     func didSelectItem(at index: Int) {
         actions?.showRecipeDetails(pages.recepies[index])
     }
     
+}
+
+extension DefaultRecepiesListViewModel {
+    func setLike(id: String) {
+        setLikeInteractor?.setLike(id: id, completion: {
+            print("Set like")
+        })
+        self.items.value = self.items.value.map({
+            $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: true) : $0
+        })
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+    }
+
+    func removeLike(id: String) {
+        removeLikeInteractor?.removeLike(id: id, completion: {
+            print("delete like")
+        })
+        self.items.value = self.items.value.map({
+            $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: false) : $0
+        })
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+    }
 }
 
 //MARK: Private

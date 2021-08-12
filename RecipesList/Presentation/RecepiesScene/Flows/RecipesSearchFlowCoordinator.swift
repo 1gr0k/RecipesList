@@ -7,21 +7,21 @@
 
 import UIKit
 
-protocol RecepiesSearchFlowCoordinatorDependencies  {
+protocol RecipesSearchFlowCoordinatorDependencies  {
     func makeRecepiesListViewController(actions: RecepiesListViewModelActions) -> RecepiesListViewController
     func makeRecipeDetailsViewController(recipe: Recipe) -> UIViewController
 }
 
-final class RecepiesSearchFlowCoordinator {
+final class RecipesSearchFlowCoordinator {
     
     private weak var navigationController: UINavigationController?
-    private let dependencies: RecepiesSearchFlowCoordinatorDependencies
+    private let dependencies: RecipesSearchFlowCoordinatorDependencies
 
     private weak var recepiesListVC: RecepiesListViewController?
     private weak var recepiesQueriesSuggestionsVC: UIViewController?
 
     init(navigationController: UINavigationController,
-         dependencies: RecepiesSearchFlowCoordinatorDependencies) {
+         dependencies: RecipesSearchFlowCoordinatorDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }

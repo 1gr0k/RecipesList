@@ -12,6 +12,7 @@ struct Recipe: Equatable, Identifiable {
     let id: Identifier
     let title: String?
     let image: String?
+    let favourite: Bool?
 }
 
 struct RecepiesPage: Equatable {

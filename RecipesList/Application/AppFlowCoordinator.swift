@@ -19,21 +19,22 @@ final class AppFlowCoordinator {
             self.navigationController = navigationController
             self.appDIContainer = appDIContainer
         }
-    
-    
+
+
     init(window: UIWindow,
          appDIContainer: AppDIContainer) {
         self.window = window
         self.appDIContainer = appDIContainer
     }
-    
+
 
     func start() {
+        // In App Flow we can check if user needs to login, if yes we would run login flow
         let recepiesSceneDIContainer = appDIContainer.makeRecepiesSceneDIContainer()
         let flow = recepiesSceneDIContainer.makeMainTabBarFlowCoordinator(window: window!, recepiesSceneDIContainer: recepiesSceneDIContainer)
         flow.start()
     }
-    
+
     func startRecipesList(recepiesSceneDIContainer: RecipesSceneDIContainer) {
         let flow = recepiesSceneDIContainer.makeRecepiesSearchFlowCoordinator(navigationController: navigationController!)
         flow.start()

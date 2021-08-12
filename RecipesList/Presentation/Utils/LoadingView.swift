@@ -28,7 +28,7 @@ public class LoadingView {
     
     public static func hide() {
         DispatchQueue.main.async {
-            guard let spinnet = spinner else { return }
+            guard let _ = spinner else { return }
             spinner?.stopAnimating()
             spinner?.removeFromSuperview()
             self.spinner = nil
