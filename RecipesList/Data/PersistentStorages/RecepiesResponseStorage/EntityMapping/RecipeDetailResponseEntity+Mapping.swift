@@ -11,9 +11,9 @@ import CoreData
 extension RecipeDetailsResponseEntity {
     func toDTO() -> RecipeDetailsResponseDTO {
         return .init(id: Int(id),
-                     title: title!,
-                     image: image!,
-                     dishTypes: dishTypes?.allObjects.map { ($0 as! String) } ?? [],
+                     title: title ?? "",
+                     image: image ?? "",
+                     dishTypes: dishTypes?.allObjects.compactMap {$0 as? String } ?? [],
                      extendedIngredients: extendedIngredients?.allObjects.map { ($0 as! ExtendedIngredientsResponseEntity).toDTO() } ?? [])
     }
 }

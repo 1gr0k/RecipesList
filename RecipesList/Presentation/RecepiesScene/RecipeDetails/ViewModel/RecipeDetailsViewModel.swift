@@ -7,13 +7,20 @@
 
 import Foundation
 
+enum SectionType: Int, CaseIterable {
+    case header
+    case dishTypes
+    case ingredientsModels
+}
+
 protocol RecipeDetailsViewModelInput {
     func viewDidLoad()
 }
 
 protocol RecipeDetailsViewModelOutput {
     var id: String { get }
-    var recipe: Observable<RecipeDetailsCellViewModel?> { get }
+    var imagePath: String { get }
+    var dataSource : Observable<[SectionType: [RecipeDetailCellViewModel]]?> { get }
     
 }
 
@@ -25,7 +32,8 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel {
     private var detailLoadTask: Cancellable? { willSet { detailLoadTask?.cancel() } }
     
     let id: String
-    var recipe: Observable<RecipeDetailsCellViewModel?> = Observable(nil)
+    let imagePath: String
+    var dataSource : Observable<[SectionType: [RecipeDetailCellViewModel]]?> = Observable(nil)
     
     func viewDidLoad() {
         getDetails()
@@ -34,6 +42,7 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel {
     init(recipe: Recipe, recepiesRepository: RecepiesRepository) {
         self.id = recipe.id
         self.recepiesRepository = recepiesRepository
+        self.imagePath = recipe.id.replacingOccurrences(of: " ", with: "-")
     }
     
     private func getDetails() {
@@ -41,8 +50,14 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel {
         detailLoadTask = recepiesRepository.fetchRecipeDetails(query: DetailRecipeQuery(query: id)) { result  in
             switch result {
             case .success(let data):
-                print(data)
-                self.recipe.value = RecipeDetailsCellViewModel(recipe: data)
+                var tempArray = [SectionType: [RecipeDetailCellViewModel]]()
+                let headerModel = HeaderRecipeDeatilsCellViewModel(title: data.title, image: self.imagePath)
+                let dishTypesModel = DishTypesRecipeDetailsCellViewModel(dishTypes: data.dishTypes)
+                let ingredientsModels = data.extendedIngredients.map( {ExtendedIngredientsRecipeDetailsCellViewModel(id: $0.id, name: $0.name)} )
+                tempArray[.header] = [headerModel]
+                tempArray[.dishTypes] = [dishTypesModel]
+                tempArray[.ingredientsModels] = ingredientsModels
+                self.dataSource.value = tempArray
             case .failure: break
             }
         }

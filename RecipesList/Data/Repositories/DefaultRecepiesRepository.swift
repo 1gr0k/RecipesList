@@ -51,7 +51,7 @@ extension DefaultRecepiesRepository: RecepiesRepository {
     func fetchRecipeDetails(query: DetailRecipeQuery,
                             completion: @escaping (Result<DetailRecipe, Error>) -> Void) -> Cancellable? {
         
-        let requestDTO = RecipeDetailsRequestDTO(query: query.query)
+        let requestDTO = RecipeDetailsRequestDTO(recipeId: query.query)
         let task = RepositoryTask()
         
         cache.getDetailsResponse(for: requestDTO) { result in

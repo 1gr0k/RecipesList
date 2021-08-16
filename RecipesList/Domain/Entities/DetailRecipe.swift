@@ -12,12 +12,22 @@ struct DetailRecipe: Equatable, Identifiable {
     let title: String
     let image: String
     let dishTypes: [String]
-    let extendedIngredients: [ExtIngredient]
+    let extendedIngredients: [ExtendedIngredient]
 }
 
 
 
-struct ExtIngredient: Equatable, Identifiable {
+struct ExtendedIngredient: Equatable, Identifiable {
     let id: Int
     let name: String
+    
+    init(model: ExtendedIngredientsRecipeDetailsCellViewModel) {
+        self.id = model.id
+        self.name = model.name
+    }
+    
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+    }
 }

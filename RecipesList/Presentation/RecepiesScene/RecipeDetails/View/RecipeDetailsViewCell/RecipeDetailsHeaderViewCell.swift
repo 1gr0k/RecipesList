@@ -31,8 +31,7 @@ class RecipeDetailsHeaderViewCell: UICollectionViewCell {
     
     private func updateDishImage() {
         
-        guard var imagePath = self.imageSource else { return }
-        imagePath = imagePath.replacingOccurrences(of: " ", with: "-")
+        guard let imagePath = self.imageSource else { return }
         
         imageLoadTask = imageRepository?.fetchDetailImage(with: imagePath) { [weak self] result in
             guard let self = self else { return }

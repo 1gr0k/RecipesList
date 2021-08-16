@@ -34,7 +34,7 @@ extension RecipeDetailsResponseDTO {
 }
 
 extension RecipeDetailsResponseDTO.ExtIngredientDTO {
-    func toDomain() -> ExtIngredient {
+    func toDomain() -> ExtendedIngredient {
         return .init(id: id, name: name)
     }
 }

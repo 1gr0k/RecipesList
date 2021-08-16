@@ -31,7 +31,7 @@ extension DefaultDishImagesRepository: DishImagesRepository {
     
     func fetchImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable? {
         
-        let endpoint = APIEndpoints.getRecipePreviewImage(path: imagePath)
+        let endpoint = APIEndpoints.getRecipeImage(path: imagePath, imageSize: .small)
         let task = RepositoryTask()
         task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
 
@@ -43,7 +43,7 @@ extension DefaultDishImagesRepository: DishImagesRepository {
     
     func fetchDetailImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable? {
         
-        let endpoint = APIEndpoints.getDetailRecipeImage(path: imagePath)
+        let endpoint = APIEndpoints.getRecipeImage(path: imagePath, imageSize: .large)
         let task = RepositoryTask()
         task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
 

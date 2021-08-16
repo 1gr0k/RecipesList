@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import SwiftUI
+
+private let imageRatio: Float = 370 / 556
 
 class RecipeDetailsViewController: UIViewController, StoryboardInstantiable {
     
@@ -32,7 +35,8 @@ class RecipeDetailsViewController: UIViewController, StoryboardInstantiable {
     }
     
     private func bind(to viewModel: RecipeDetailsViewModel) {
-        viewModel.recipe.observe(on: self) { [weak self] _ in self?.updateItems() }
+        //        viewModel.recipe.observe(on: self) { [weak self] _ in self?.updateItems() }
+        viewModel.dataSource.observe(on: self) { [weak self] _ in self?.updateItems() }
     }
     
     private func updateItems() {
@@ -61,7 +65,7 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: view.frame.width - 16, height: view.frame.width / 556 * 370)
+            return CGSize(width: view.frame.width - 16, height: CGFloat(Int(Float(view.frame.width) * imageRatio)))
         case 1:
             return CGSize(width: view.frame.width - 16, height: 50)
         case 2:
@@ -72,37 +76,48 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return viewModel.dataSource.value?.count ?? 0
     }
     
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            if section == 2 {
-                return viewModel.recipe.value?.extIngredients.count ?? 0
-            } else {
-            return 1
-        }
+        guard let section = SectionType(rawValue: section),
+              let sectionModel = viewModel.dataSource.value?[section]
+        else { return 0 }
+        return sectionModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch indexPath.section {
-        case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath) as! RecipeDetailsHeaderViewCell
-            cell.fill(with: viewModel.id, dishImageRepository: dishImageRepository)
+        guard let section = SectionType(rawValue: indexPath.section),
+              let sectionModels = viewModel.dataSource.value?[section]
+        else { return UICollectionViewCell()}
+        switch sectionModels[indexPath.row] {
+            
+        case is HeaderRecipeDeatilsCellViewModel:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath) as? RecipeDetailsHeaderViewCell,
+                  let viewModel = sectionModels[indexPath.row] as? HeaderRecipeDeatilsCellViewModel
+            else { return UICollectionViewCell()}
+            cell.fill(with: viewModel.image, dishImageRepository: dishImageRepository)
             return cell
-        case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "typesCell", for: indexPath) as! RecipeDetailsTypesCollectionViewCell
-            cell.fill(dishTypes: viewModel.recipe.value?.dishTypes ?? [])
+            
+        case is DishTypesRecipeDetailsCellViewModel:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "typesCell", for: indexPath) as? RecipeDetailsTypesCollectionViewCell,
+                  let viewModel = sectionModels[indexPath.row] as? DishTypesRecipeDetailsCellViewModel
+            else { return UICollectionViewCell()}
+            cell.fill(dishTypes: viewModel.dishTypes)
             return cell
-        case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ingredientsCell", for: indexPath) as! RecipeDetailsIngredientsViewCell
-            cell.fill(with: (viewModel.recipe.value?.extIngredients[indexPath.row] ?? ExtIngredient(id: 0, name: "")), dishImageRepository: dishImageRepository)
+            
+        case is ExtendedIngredientsRecipeDetailsCellViewModel:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ingredientsCell", for: indexPath) as? RecipeDetailsIngredientsViewCell,
+                  let viewModel = sectionModels[indexPath.row] as? ExtendedIngredientsRecipeDetailsCellViewModel
+            else { return UICollectionViewCell()}
+            cell.fill(with: ExtendedIngredient(model: viewModel), dishImageRepository: dishImageRepository)
             return cell
+            
         default:
             return UICollectionViewCell()
         }
     }
-    
-    
 }

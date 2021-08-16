@@ -41,23 +41,7 @@ class RecipeDetailsTypesCollectionViewCell: UICollectionViewCell {
         scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         for dishType in dishTypes {
-            let view = UIView()
-            let label = UILabel()
-            
-            view.addSubview(label)
-            stackView.addArrangedSubview(view)
-            
-            view.translatesAutoresizingMaskIntoConstraints = false
-            label.translatesAutoresizingMaskIntoConstraints = false
-            
-            label.text = dishType
-            
-            view.backgroundColor = .gray
-            view.layer.cornerRadius = 5
-            view.leadingAnchor.constraint(equalTo: label.leadingAnchor, constant: -10).isActive = true
-            view.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant:  10).isActive = true
-            view.topAnchor.constraint(equalTo: label.topAnchor, constant: -5).isActive = true
-            view.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant:  5).isActive = true
+            setupDishTypeView(dishType: dishType, stackView: stackView)
         }
         
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8).isActive = true
@@ -68,6 +52,26 @@ class RecipeDetailsTypesCollectionViewCell: UICollectionViewCell {
         stackView.axis  = NSLayoutConstraint.Axis.horizontal
         stackView.distribution  = UIStackView.Distribution.equalSpacing
         stackView.spacing   = 8
+    }
+    
+    func setupDishTypeView(dishType: String, stackView: UIStackView) {
+        let view = UIView()
+        let label = UILabel()
+        
+        view.addSubview(label)
+        stackView.addArrangedSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = dishType
+        
+        view.backgroundColor = .gray
+        view.layer.cornerRadius = 5
+        view.leadingAnchor.constraint(equalTo: label.leadingAnchor, constant: -10).isActive = true
+        view.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant:  10).isActive = true
+        view.topAnchor.constraint(equalTo: label.topAnchor, constant: -5).isActive = true
+        view.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant:  5).isActive = true
     }
 }
 

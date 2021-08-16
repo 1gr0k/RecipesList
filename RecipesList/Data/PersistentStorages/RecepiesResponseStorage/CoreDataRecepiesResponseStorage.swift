@@ -28,7 +28,7 @@ final class CoreDataRecepiesResponseStorage {
     private func fetchRequest(for requestDto: RecipeDetailsRequestDTO) -> NSFetchRequest<RecipeDetailsRequestEntity> {
         let request: NSFetchRequest = RecipeDetailsRequestEntity.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@",
-                                        #keyPath(RecipeDetailsRequestEntity.query), requestDto.query)
+                                        #keyPath(RecipeDetailsRequestEntity.query), requestDto.recipeId)
         return request
     }
     

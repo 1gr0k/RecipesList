@@ -8,5 +8,5 @@
 import Foundation
 
 struct RecipeDetailsRequestDTO: Encodable {
-    let query: String
+    let recipeId: String
 }
