@@ -35,7 +35,6 @@ final class RecipesListTableManager: NSObject {
         tableView.dataSource = self
         tableView.isScrollEnabled = true
         tableView.backgroundColor = .clear
-        tableView.allowsSelection = false
         tableView.backgroundColor = .white
 
     }
@@ -76,7 +75,10 @@ extension RecipesListTableManager: UITableViewDelegate, UITableViewDataSource {
     
     private func handleRemoveFromFavourite(index: Int) {
         viewModel!.removeLike(id: viewModel!.items.value[index].id, title: viewModel!.items.value[index].title!)
-//        self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel!.didSelectItem(at: indexPath.row)
     }
     
 }

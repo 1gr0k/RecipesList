@@ -16,6 +16,11 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
     private var dishImageView: UIImageView?
+    private var stackLink: UIStackView?
+    
+    override func prepareForReuse() {
+        stackLink!.removeFromSuperview()
+    }
     
     func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
         self.viewModel = viewModel
@@ -45,20 +50,18 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         let innerStackWidth = (self.frame.width - 32.0) * stacksRatio
         
         let label = UILabel()
-//        let favImage = UIImageView()
         
         let innerStack = UIStackView()
         innerStack.addSubview(label)
-//        innerStack.addSubview(favImage)
         
         label.translatesAutoresizingMaskIntoConstraints = false
-//        favImage.translatesAutoresizingMaskIntoConstraints = false
         innerStack.translatesAutoresizingMaskIntoConstraints = false
         
         
         let dishImage = UIImageView()
         self.dishImageView = dishImage
         let extStack = UIStackView()
+        self.stackLink = extStack
         
         dishImage.translatesAutoresizingMaskIntoConstraints = false
         extStack.translatesAutoresizingMaskIntoConstraints = false
@@ -87,12 +90,7 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         label.trailingAnchor.constraint(equalTo: innerStack.trailingAnchor, constant: -8).isActive = true
         label.centerYAnchor.constraint(equalTo: innerStack.centerYAnchor).isActive = true
         label.numberOfLines = 2
-        
-//        favImage.heightAnchor.constraint(equalTo: label.heightAnchor).isActive = true
-//        favImage.widthAnchor.constraint(equalTo: label.heightAnchor).isActive = true
-//        favImage.leadingAnchor.constraint(equalTo: innerStack.leadingAnchor, constant: innerStack.frame.height * 0.1).isActive = true
-//        favImage.centerYAnchor.constraint(equalTo: innerStack.centerYAnchor).isActive = true
-//        favImage.image = viewModel.favourite! ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+
 
         dishImage.trailingAnchor.constraint(equalTo: extStack.trailingAnchor).isActive = true
         dishImage.leadingAnchor.constraint(equalTo: innerStack.trailingAnchor, constant: 8).isActive = true

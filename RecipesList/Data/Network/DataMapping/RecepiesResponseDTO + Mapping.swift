@@ -39,10 +39,10 @@ extension RecipesResponseDTO {
     }
 }
 
-extension RecepiesResponseDTO.ReceptDTO {
-    func toDomain(favouriteList: [String]) -> Recept {
+extension RecipesResponseDTO.ReceptDTO {
+    func toDomain(favouriteList: [String]) -> Recipe {
         let favourite = favouriteList.contains { $0 == String(self.id)}
-        return .init(id: Recept.Identifier(id), title: self.title, image: self.image, favourite: favourite)
+        return .init(id: Recipe.Identifier(id), title: self.title, image: self.image, favourite: favourite)
     }
 }
 

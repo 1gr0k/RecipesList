@@ -15,9 +15,6 @@ protocol RecipesListWithFavouritesUseCase {
 
 final class DefaultFavoritesRecipesUseCase: RecipesListWithFavouritesUseCase {
     
-//    favoriteRepository (getAll//, delete, add)
-//    RecepiesRepository (get)
-    
     private let getAllLikesInteractor: GetAllLikesInteractor
     private let recipiesRepository: RecepiesRepository
     private let recepiesQueriesRepository: RecepiesQueriesRepository
@@ -51,7 +48,7 @@ final class DefaultFavoritesRecipesUseCase: RecipesListWithFavouritesUseCase {
             if case .success = result {
             resultWithFav = result.map { recipesPage in
                     RecepiesPage(page: recipesPage.page, totalPages: recipesPage.totalPages, recepies: recipesPage.recepies.map { recept in
-                        Recept(id: recept.id, title: recept.title, image: recept.image, favourite: self.checkRecept(id: recept.id))
+                        Recipe(id: recept.id, title: recept.title, image: recept.image, favourite: self.checkRecept(id: recept.id))
                     })
                 }
             }
@@ -71,11 +68,11 @@ final class DefaultFavoritesRecipesUseCase: RecipesListWithFavouritesUseCase {
 
 
 struct FavoritesRecipesUseCaseRequestValue {
-    let query: ReceptQuery
+    let query: RecipeQuery
     let offset: Int
     let number: Int = 10
     
-    init(query: ReceptQuery, page: Int) {
+    init(query: RecipeQuery, page: Int) {
         self.query = query
         self.offset = page*10
     }

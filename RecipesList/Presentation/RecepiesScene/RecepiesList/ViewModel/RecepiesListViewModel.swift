@@ -8,7 +8,7 @@
 import Foundation
 
 struct RecepiesListViewModelActions {
-    let showReceptDetails: (Recept) -> Void
+    let showRecipeDetails: (String) -> Void
 }
 
 enum RecepiesListViewModelLoading {
@@ -26,7 +26,9 @@ protocol RecepiesListViewModelInput {
     func didSelectItem(at index: Int)
     func setLike(id: String)
     func removeLike(id: String)
-
+    func refresh()
+    func checkTimer()
+    
 }
 
 protocol RecepiesListViewModelOutput {
@@ -48,13 +50,14 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
     private let actions: RecepiesListViewModelActions?
     private let setLikeInteractor: SetLikeInteractor?
     private let removeLikeInteractor: RemoveLikeInteractor?
-
+    private var timer: Timer?
+    
     var currentPage: Int = 0
     var totalPageCount: Int = 1
     
     var hasMorePages: Bool {
-                                            print("hasMorePages: \(currentPage < totalPageCount)")
-                                            return currentPage < totalPageCount
+        print("hasMorePages: \(currentPage < totalPageCount)")
+        return currentPage < totalPageCount
     }
     var nextPage: Int {
         print("nextPage: \(hasMorePages ? currentPage + 1 : currentPage)")
@@ -101,11 +104,11 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
         pages.removeAll()
         items.value.removeAll()
     }
-
-    private func load(receptQuery: ReceptQuery, loading: RecepiesListViewModelLoading) {
+    
+    private func load(receptQuery: RecipeQuery, loading: RecepiesListViewModelLoading) {
         self.loading.value = loading
         query.value = receptQuery.query
-
+        
         recepiesLoadTask = favouriteRecepiesUseCase.execute(
             requestValue: .init(query: receptQuery, page: nextPage),
             cached: appendPage,
@@ -126,16 +129,16 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
         NSLocalizedString("Failed loading recepies", comment: "")
     }
     
-    private func update(receptQuery: ReceptQuery) {
+    private func update(receptQuery: RecipeQuery) {
         resetPages()
         load(receptQuery: receptQuery, loading: .fullScreen)
     }
 }
 
-extension DefaultRecepiesListViewModel {
+extension DefaultRecipesListViewModel {
     func viewDidLoad() {
         query.value = "Pasta"
-        update(receptQuery: ReceptQuery(query: query.value))
+        update(receptQuery: RecipeQuery(query: query.value))
     }
     
     func didLoadNextPage() {
@@ -147,44 +150,97 @@ extension DefaultRecepiesListViewModel {
         guard !query.isEmpty else { return }
         update(receptQuery: RecipeQuery(query: query))
     }
-
+    
     func didCancelSearch() {
         recepiesLoadTask?.cancel()
     }
-
+    
     func showQueriesSuggestions() {
-
+        
     }
-
+    
     func closeQueriesSuggestions() {
-
+        
     }
-
+    
     func didSelectItem(at index: Int) {
-        actions?.showRecipeDetails(pages.recepies[index])
+        actions?.showRecipeDetails(pages.recepies[index].id)
+    }
+    
+    func refresh() {
+        print("element in favourite deleted")
+        viewDidLoad()
     }
     
 }
 
-extension DefaultRecepiesListViewModel {
+extension DefaultRecipesListViewModel {
     func setLike(id: String) {
-        setLikeInteractor?.setLike(id: id, completion: {
-            print("Set like")
-        })
-        self.items.value = self.items.value.map({
-            $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: true) : $0
-        })
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+        
+        let queue = DispatchQueue(label: "setLikeQueue", attributes: .concurrent)
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        queue.sync {
+            semaphore.wait()
+            setLikeInteractor?.setLike(id: id, completion: {
+                print("Set like")
+                semaphore.signal()
+            })
+            
+        }
+        queue.sync {
+            semaphore.wait()
+            self.items.value = self.items.value.map({
+                $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: true) : $0
+            })
+            semaphore.signal()
+        }
+        queue.sync {
+            semaphore.wait()
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(favouriteListChangedNotification), userInfo: nil, repeats: false)
+            semaphore.signal()
+        }
+        
     }
-
+    
     func removeLike(id: String) {
-        removeLikeInteractor?.removeLike(id: id, completion: {
-            print("delete like")
-        })
-        self.items.value = self.items.value.map({
-            $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: false) : $0
-        })
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+        
+        let queue = DispatchQueue(label: "setLikeQueue", attributes: .concurrent)
+        let semaphore = DispatchSemaphore(value: 1)
+        queue.sync {
+            semaphore.wait()
+            removeLikeInteractor?.removeLike(id: id, completion: {
+                print("delete like")
+                semaphore.signal()
+            })
+        }
+        
+        queue.sync {
+            semaphore.wait()
+            self.items.value = self.items.value.map({
+                $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: false) : $0
+            })
+            semaphore.signal()
+        }
+        
+        queue.sync {
+            semaphore.wait()
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(favouriteListChangedNotification), userInfo: nil, repeats: false)
+            semaphore.signal()
+        }
+    }
+    
+    @objc private func favouriteListChangedNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FavouriteListChanged"), object: nil)
+    }
+    
+    internal func checkTimer() {
+        if timer != nil {
+            timer?.invalidate()
+            favouriteListChangedNotification()
+        }
     }
 }
 

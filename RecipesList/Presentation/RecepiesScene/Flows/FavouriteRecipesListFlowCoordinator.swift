@@ -8,8 +8,8 @@
 import UIKit
 
 protocol FavouriteRecipesListFlowCoordinatorDependencies  {
-//    func makeFavouriteRecipesViewController() -> FavouriteRecipesTableViewController
-    func makeFavouriteRecipesViewController() -> UIViewController
+    func makeFavouriteRecipesViewController(actions: RecepiesListViewModelActions) -> UIViewController
+    func makeRecipeDetailsViewController(id: String) -> UIViewController
 }
 
 final class FavouriteRecipesListFlowCoordinator {
@@ -27,7 +27,12 @@ final class FavouriteRecipesListFlowCoordinator {
     }
     
     func start() {
-        let vc = dependencies.makeFavouriteRecipesViewController()
+        let vc = dependencies.makeFavouriteRecipesViewController(actions: RecepiesListViewModelActions(showRecipeDetails: showRecipeDetails))
         navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    private func showRecipeDetails(id: String) {
+        let vc = dependencies.makeRecipeDetailsViewController(id: id)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
