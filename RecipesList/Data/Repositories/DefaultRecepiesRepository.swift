@@ -75,28 +75,6 @@ extension DefaultRecepiesRepository: RecepiesRepository {
         return task
     }
 
-//    func fetchRecipeDetails(query: DetailRecipeQuery,
-//                            completion: @escaping (Result<DetailRecipe, Error>) -> Void) -> Cancellable? {
-//
-//        let requestDTO = RecipeDetailsRequestDTO(query: query.query)
-//        let task = RepositoryTask()
-//
-//        cache.getDetailsResponse(for: requestDTO) { result in
-//
-//            guard !task.isCancelled else { return }
-//            let endpoint = APIEndpoints.getRecipeDetails(with: requestDTO)
-//            task.networkTask = self.dataTransferService.request(with: endpoint) { result in
-//                switch result {
-//                case .success(let responseDTO):
-//                    completion(.success(responseDTO.toDomain()))
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }
-//        }
-//        return task
-//    }
-
 
 
     func fetchRecipeDetails(query: DetailRecipeQuery,

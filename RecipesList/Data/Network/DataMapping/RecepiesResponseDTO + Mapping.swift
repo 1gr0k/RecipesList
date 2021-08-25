@@ -32,17 +32,13 @@ extension RecipesResponseDTO {
     func toDomain() -> RecepiesPage {
         let page = page/DefaultRecipesListViewModel.itemsPerPage
         let totalPages = totalPages/DefaultRecipesListViewModel.itemsPerPage
-
-        let favouriteList : [String] = [] //через функцию получу текущий список избранного
-
-        return .init(page: page, totalPages: totalPages, recepies: recepies.map { $0.toDomain(favouriteList: favouriteList)})
+        return .init(page: page, totalPages: totalPages, recepies: recepies.map { $0.toDomain()})
     }
 }
 
 extension RecipesResponseDTO.ReceptDTO {
-    func toDomain(favouriteList: [String]) -> Recipe {
-        let favourite = favouriteList.contains { $0 == String(self.id)}
-        return .init(id: Recipe.Identifier(id), title: self.title, image: self.image, favourite: favourite)
+    func toDomain() -> Recipe {
+        return .init(id: Recipe.Identifier(id), title: self.title, image: self.image, favourite: false)
     }
 }
 
