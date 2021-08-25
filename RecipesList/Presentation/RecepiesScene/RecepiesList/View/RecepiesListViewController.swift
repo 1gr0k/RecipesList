@@ -14,7 +14,6 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
     @IBOutlet private var recepiesListContainer: UIView!
     @IBOutlet private var searchBarContainer: UIView!
     @IBOutlet private(set) var suggestionsListContainer: UIView!
-    @IBOutlet private var testLabel: UILabel!
     
     private var viewModel: RecepiesListViewModel!
     private var dishImagesRepository: DishImagesRepository?
@@ -28,6 +27,7 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
         let view = RecepiesListViewController.instantiateViewController()
         view.viewModel = viewModel
         view.dishImagesRepository = dishImagesRepository
+        
         return view
     }
     
@@ -37,6 +37,7 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
         setupBehaviours()
         bind(to: viewModel)
         viewModel.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(notificatoinUpdateItems), name: NSNotification.Name(rawValue: "removeRecipeFromFavourite"), object: nil)
     }
     
     private func bind(to viewModel: RecepiesListViewModel) {
@@ -49,6 +50,7 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchController.isActive = false
+        viewModel.checkTimer()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -149,5 +151,11 @@ extension RecepiesListViewController: UISearchControllerDelegate {
 
     public func didDismissSearchController(_ searchController: UISearchController) {
         updateQueriesSuggestions()
+    }
+}
+
+extension RecepiesListViewController {
+    @objc private func notificatoinUpdateItems() {
+        viewModel.refresh()
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct RecepiesListViewModelActions {
-    let showRecipeDetails: (Recipe) -> Void
+    let showRecipeDetails: (String) -> Void
 }
 
 enum RecepiesListViewModelLoading {
@@ -24,6 +24,10 @@ protocol RecepiesListViewModelInput {
     func showQueriesSuggestions()
     func closeQueriesSuggestions()
     func didSelectItem(at index: Int)
+    func setLike(id: String)
+    func removeLike(id: String)
+    func refresh()
+    func checkTimer()
     
 }
 
@@ -42,16 +46,23 @@ protocol RecepiesListViewModel: RecepiesListViewModelOutput, RecepiesListViewMod
 
 final class DefaultRecipesListViewModel: RecepiesListViewModel{
     
-    private let searchRecepiesUseCase: SearchRecepiesUseCase
+    static let itemsPerPage = 10
+    
+    private let favouriteRecepiesUseCase: RecipesListWithFavouritesUseCase
     private let actions: RecepiesListViewModelActions?
+    private let setLikeInteractor: SetLikeInteractor?
+    private let removeLikeInteractor: RemoveLikeInteractor?
+    private var timer: Timer?
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
     
     var hasMorePages: Bool {
+        print("hasMorePages: \(currentPage < totalPageCount)")
         return currentPage < totalPageCount
     }
     var nextPage: Int {
+        print("nextPage: \(hasMorePages ? currentPage + 1 : currentPage)")
         return hasMorePages ? currentPage + 1 : currentPage }
     
     private var pages: [RecepiesPage] = []
@@ -69,10 +80,12 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
     
     //MARK: Init
     
-    init(searchReceptUseCase: SearchRecepiesUseCase,
-         actions: RecepiesListViewModelActions? = nil) {
-        self.searchRecepiesUseCase = searchReceptUseCase
+    init(favouriteRecipesUseCase: RecipesListWithFavouritesUseCase,
+         actions: RecepiesListViewModelActions? = nil, setLikeInteractor: SetLikeInteractor, removeLikeInteractor: RemoveLikeInteractor) {
+        self.favouriteRecepiesUseCase = favouriteRecipesUseCase
         self.actions = actions
+        self.setLikeInteractor = setLikeInteractor
+        self.removeLikeInteractor = removeLikeInteractor
     }
     
     //MARK: - Private
@@ -98,18 +111,18 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
         self.loading.value = loading
         query.value = receptQuery.query
         
-        recepiesLoadTask = searchRecepiesUseCase.execute(
+        recepiesLoadTask = favouriteRecepiesUseCase.execute(
             requestValue: .init(query: receptQuery, page: nextPage),
             cached: appendPage,
             completion: { result in
-            switch result {
-            case .success(let page):
-                self.appendPage(page)
-            case .failure(let error):
-                self.handle(error: error)
-            }
-            self.loading.value = .none
-        })
+                switch result {
+                case .success(let page):
+                    self.appendPage(page)
+                case .failure(let error):
+                    self.handle(error: error)
+                }
+                self.loading.value = .none
+            })
     }
     
     private func handle(error: Error) {
@@ -153,9 +166,54 @@ extension DefaultRecipesListViewModel {
     }
     
     func didSelectItem(at index: Int) {
-        actions?.showRecipeDetails(pages.recepies[index])
+        actions?.showRecipeDetails(pages.recepies[index].id)
     }
     
+    func refresh() {
+        print("element in favourite deleted")
+        viewDidLoad()
+    }
+    
+}
+
+extension DefaultRecipesListViewModel {
+    func setLike(id: String) {
+        
+        setLikeInteractor?.setLike(id: id, completion: {
+            self.items.value = self.items.value.map({
+                $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: true) : $0
+            })
+            DispatchQueue.main.async {
+            self.timer?.invalidate()
+            self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.favouriteListChangedNotification), userInfo: nil, repeats: false)
+        }
+        })
+    }
+    
+    func removeLike(id: String) {
+        
+        removeLikeInteractor?.removeLike(id: id, completion: {
+            self.items.value = self.items.value.map({
+                $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: false) : $0
+            })
+            DispatchQueue.main.async {
+                self.timer?.invalidate()
+                self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.favouriteListChangedNotification), userInfo: nil, repeats: false)
+            }
+        })
+    }
+    
+    @objc private func favouriteListChangedNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FavouriteListChanged"), object: nil)
+        timer = nil
+    }
+    
+    internal func checkTimer() {
+        if timer != nil {
+            timer?.invalidate()
+            favouriteListChangedNotification()
+        }
+    }
 }
 
 //MARK: Private

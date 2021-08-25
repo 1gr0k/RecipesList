@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MainTabBarFlowCoordinatorDependencies  {
-    func makeMainTabBarViewController(views: [UIViewController]) -> MainTabBarController
+    func makeMainTabBarViewController(views: [UINavigationController]) -> MainTabBarController
     func makeRecepiesListViewController(actions: RecepiesListViewModelActions) -> RecepiesListViewController
 }
 
@@ -28,12 +28,15 @@ final class MainTabBarFlowCoordinator {
     
     func start() {
         
-        let navigationController = UINavigationController()
+        let mainListNavigationController = UINavigationController()
+        let favouriteListNavigationController = UINavigationController()
         
         let appDIContainer = AppDIContainer()
-        let appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
-        appFlowCoordinator.startRecipesList(recepiesSceneDIContainer: recepiesSceneDIContainer)
+        let appFlowCoordinator = AppFlowCoordinator(recepiesDIContainer: recepiesSceneDIContainer, appDIContainer: appDIContainer)
         
-        window?.rootViewController = dependencies.makeMainTabBarViewController(views: [navigationController])
+        appFlowCoordinator.startRecipesList(navigationController: mainListNavigationController)
+        appFlowCoordinator.startFavouriteList(navigationController: favouriteListNavigationController)
+        
+        window?.rootViewController = dependencies.makeMainTabBarViewController(views: [mainListNavigationController, favouriteListNavigationController])
     }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19134"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -86,25 +87,41 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecepiesListItemCell" rowHeight="165" id="skg-Tt-iVH" customClass="RecepiesListItemCell" customModule="RecipesList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="414" height="165"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="165"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="skg-Tt-iVH" translatesAutoresizingMaskIntoConstraints="NO" id="PKv-hL-n5C">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="165"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6oq-VO-ciG">
-                                            <rect key="frame" x="16" y="16" width="0.0" height="150"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6oq-VO-ciG">
+                                            <rect key="frame" x="16" y="16" width="382" height="133"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5IP-yQ-haq">
-                                                    <rect key="frame" x="0.0" y="65" width="200" height="20.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fTV-3c-QiV">
+                                                    <rect key="frame" x="0.0" y="56.5" width="160" height="20.5"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QIE-9l-HcQ">
+                                                            <rect key="frame" x="0.0" y="-0.5" width="22" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="3ac-jI-HRB"/>
+                                                                <constraint firstAttribute="width" constant="22" id="Ogq-f7-hxi"/>
+                                                            </constraints>
+                                                            <imageReference key="image" image="star" catalog="system"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5IP-yQ-haq">
+                                                            <rect key="frame" x="30" y="0.0" width="130" height="20.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="9Pk-Gf-qoK"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="9Pk-Gf-qoK"/>
+                                                        <constraint firstItem="QIE-9l-HcQ" firstAttribute="centerY" secondItem="fTV-3c-QiV" secondAttribute="centerY" id="Kek-GM-3g5"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JGf-0u-hne">
-                                                    <rect key="frame" x="-214" y="0.0" width="214" height="150"/>
+                                                </stackView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JGf-0u-hne">
+                                                    <rect key="frame" x="168" y="0.0" width="214" height="133"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="214" id="iCU-my-uV3"/>
                                                         <constraint firstAttribute="height" constant="150" id="orF-fB-z19"/>
@@ -120,8 +137,15 @@
                                         <constraint firstAttribute="bottom" secondItem="6oq-VO-ciG" secondAttribute="bottom" constant="16" id="zZd-1y-8gC"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="PKv-hL-n5C" firstAttribute="top" secondItem="skg-Tt-iVH" secondAttribute="top" id="33I-jn-rQH"/>
+                                    <constraint firstAttribute="trailing" secondItem="PKv-hL-n5C" secondAttribute="trailing" id="gbb-3Y-a6s"/>
+                                    <constraint firstItem="PKv-hL-n5C" firstAttribute="leading" secondItem="skg-Tt-iVH" secondAttribute="leading" id="hAh-NU-mev"/>
+                                    <constraint firstAttribute="bottom" secondItem="PKv-hL-n5C" secondAttribute="bottom" id="vW5-cN-6C4"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dishImageView" destination="JGf-0u-hne" id="3uX-Va-RbT"/>
+                                    <outlet property="favouriteImage" destination="QIE-9l-HcQ" id="fW2-hN-U1F"/>
                                     <outlet property="idLabel" destination="5IP-yQ-haq" id="qOe-z0-a3O"/>
                                 </connections>
                             </tableViewCell>
@@ -135,10 +159,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GwM-rD-kBc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="128"/>
+            <point key="canvasLocation" x="886.95652173913049" y="93.75"/>
         </scene>
     </scenes>
     <resources>
+        <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

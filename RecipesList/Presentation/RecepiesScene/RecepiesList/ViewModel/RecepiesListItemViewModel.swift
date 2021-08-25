@@ -11,6 +11,7 @@ struct RecepiesListItemViewModel: Equatable {
     let id: String?
     let title: String
     let image: String?
+    var favourite: Bool?
 }
 
 extension RecepiesListItemViewModel {
@@ -19,6 +20,7 @@ extension RecepiesListItemViewModel {
         self.title = recept.title ?? ""
         self.image = recept.id
         self.id = recept.id
+        self.favourite = recept.favourite
         
     }
 }

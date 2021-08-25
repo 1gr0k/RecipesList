@@ -30,15 +30,15 @@ extension RecipesResponseDTO {
 
 extension RecipesResponseDTO {
     func toDomain() -> RecepiesPage {
-        let page = page/10
-        let totalPages = totalPages/10
+        let page = page/DefaultRecipesListViewModel.itemsPerPage
+        let totalPages = totalPages/DefaultRecipesListViewModel.itemsPerPage
         return .init(page: page, totalPages: totalPages, recepies: recepies.map { $0.toDomain()})
     }
 }
 
 extension RecipesResponseDTO.ReceptDTO {
     func toDomain() -> Recipe {
-        return .init(id: Recipe.Identifier(id), title: self.title, image: self.image)
+        return .init(id: Recipe.Identifier(id), title: self.title, image: self.image, favourite: false)
     }
 }
 

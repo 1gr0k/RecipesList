@@ -9,6 +9,7 @@ import UIKit
 
 final class RecepiesListItemCell: UITableViewCell {
     
+    @IBOutlet weak var favouriteImage: UIImageView!
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var dishImageView: UIImageView!
     
@@ -22,6 +23,7 @@ final class RecepiesListItemCell: UITableViewCell {
     func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
         self.viewModel = viewModel
         self.imageRepository = dishImageRepository
+        favouriteImage.image = viewModel.favourite! ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
         
         idLabel.text = viewModel.title
         updateDishImage()

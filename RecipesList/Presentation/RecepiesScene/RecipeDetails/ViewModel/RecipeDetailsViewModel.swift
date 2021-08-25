@@ -39,10 +39,10 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel {
         getDetails()
     }
 
-    init(recipe: Recipe, recepiesRepository: RecepiesRepository) {
-        self.id = recipe.id
+    init(id: String, recepiesRepository: RecepiesRepository) {
+        self.id = id
         self.recepiesRepository = recepiesRepository
-        self.imagePath = recipe.id.replacingOccurrences(of: " ", with: "-")
+        self.imagePath = id.replacingOccurrences(of: " ", with: "-")
     }
     
     private func getDetails() {
