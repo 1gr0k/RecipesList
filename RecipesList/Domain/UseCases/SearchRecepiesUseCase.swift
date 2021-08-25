@@ -38,7 +38,6 @@ final class DefaultSearchRecepiesUseCase: SearchRecepiesUseCase {
             if case .success = result {
                 self.recepiesQueriesRepository.saveRecentQuery(query: requestValue.query) { _ in }
             }
-            
             completion(result)
         })
     }

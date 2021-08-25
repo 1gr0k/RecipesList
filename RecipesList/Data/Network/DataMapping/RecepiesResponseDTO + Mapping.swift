@@ -30,8 +30,8 @@ extension RecipesResponseDTO {
 
 extension RecipesResponseDTO {
     func toDomain() -> RecepiesPage {
-        let page = page/10
-        let totalPages = totalPages/10
+        let page = page/DefaultRecipesListViewModel.itemsPerPage
+        let totalPages = totalPages/DefaultRecipesListViewModel.itemsPerPage
 
         let favouriteList : [String] = [] //через функцию получу текущий список избранного
 

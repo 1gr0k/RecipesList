@@ -16,10 +16,12 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
     private var dishImageView: UIImageView?
-    private var stackLink: UIStackView?
+    private var externalStack: UIStackView?
+    private var innerStack: UIStackView?
+    private var titleLabel: UILabel?
     
     override func prepareForReuse() {
-        stackLink!.removeFromSuperview()
+        externalStack!.removeFromSuperview()
     }
     
     func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
@@ -49,52 +51,51 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         let stacksRatio = 0.2
         let innerStackWidth = (self.frame.width - 32.0) * stacksRatio
         
-        let label = UILabel()
+        self.titleLabel = UILabel()
+        titleLabel!.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel!.text = viewModel.title
+        titleLabel!.numberOfLines = 2
         
-        let innerStack = UIStackView()
-        innerStack.addSubview(label)
+        self.innerStack = UIStackView()
+        innerStack!.translatesAutoresizingMaskIntoConstraints = false
+        innerStack!.addSubview(titleLabel!)
+        innerStack!.alignment = .center
+        innerStack!.contentMode = .scaleToFill
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        innerStack.translatesAutoresizingMaskIntoConstraints = false
+        self.dishImageView = UIImageView()
+        dishImageView!.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.externalStack = UIStackView()
+        externalStack!.translatesAutoresizingMaskIntoConstraints = false
+        externalStack!.distribution = .fillProportionally
+        externalStack!.axis = .horizontal
+        
+        externalStack!.addSubview(innerStack!)
+        externalStack!.addSubview(dishImageView!)
+        self.addSubview(externalStack!)
+        
+        setupConstraints(innerStackWidth: innerStackWidth)
+    }
+    
+    private func setupConstraints(innerStackWidth: Double) {
+        externalStack!.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        externalStack!.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        externalStack!.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        externalStack!.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        
+        innerStack!.topAnchor.constraint(equalTo: externalStack!.topAnchor).isActive = true
+        innerStack!.bottomAnchor.constraint(equalTo: externalStack!.bottomAnchor).isActive = true
+        innerStack!.leadingAnchor.constraint(equalTo: externalStack!.leadingAnchor).isActive = true
+        innerStack!.trailingAnchor.constraint(equalTo: externalStack!.trailingAnchor, constant: -innerStackWidth).isActive = true
+        
+        titleLabel!.leadingAnchor.constraint(equalTo: innerStack!.leadingAnchor, constant: 8).isActive = true
+        titleLabel!.trailingAnchor.constraint(equalTo: innerStack!.trailingAnchor, constant: -8).isActive = true
+        titleLabel!.centerYAnchor.constraint(equalTo: innerStack!.centerYAnchor).isActive = true
         
         
-        let dishImage = UIImageView()
-        self.dishImageView = dishImage
-        let extStack = UIStackView()
-        self.stackLink = extStack
-        
-        dishImage.translatesAutoresizingMaskIntoConstraints = false
-        extStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        extStack.addSubview(innerStack)
-        extStack.addSubview(dishImage)
-        
-        self.addSubview(extStack)
-        
-        extStack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        extStack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        extStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        extStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        extStack.distribution = .fillProportionally
-        extStack.axis = .horizontal
-        
-        innerStack.topAnchor.constraint(equalTo: extStack.topAnchor).isActive = true
-        innerStack.bottomAnchor.constraint(equalTo: extStack.bottomAnchor).isActive = true
-        innerStack.leadingAnchor.constraint(equalTo: extStack.leadingAnchor).isActive = true
-        innerStack.trailingAnchor.constraint(equalTo: extStack.trailingAnchor, constant: -innerStackWidth).isActive = true
-        innerStack.alignment = .center
-        innerStack.contentMode = .scaleToFill
-        
-        label.text = viewModel.title
-        label.leadingAnchor.constraint(equalTo: innerStack.leadingAnchor, constant: 8).isActive = true
-        label.trailingAnchor.constraint(equalTo: innerStack.trailingAnchor, constant: -8).isActive = true
-        label.centerYAnchor.constraint(equalTo: innerStack.centerYAnchor).isActive = true
-        label.numberOfLines = 2
-
-
-        dishImage.trailingAnchor.constraint(equalTo: extStack.trailingAnchor).isActive = true
-        dishImage.leadingAnchor.constraint(equalTo: innerStack.trailingAnchor, constant: 8).isActive = true
-        dishImage.centerYAnchor.constraint(equalTo: extStack.centerYAnchor).isActive = true
-        dishImage.heightAnchor.constraint(equalToConstant: innerStackWidth * 0.74).isActive = true
+        dishImageView!.trailingAnchor.constraint(equalTo: externalStack!.trailingAnchor).isActive = true
+        dishImageView!.leadingAnchor.constraint(equalTo: innerStack!.trailingAnchor, constant: 8).isActive = true
+        dishImageView!.centerYAnchor.constraint(equalTo: externalStack!.centerYAnchor).isActive = true
+        dishImageView!.heightAnchor.constraint(equalToConstant: innerStackWidth * 0.74).isActive = true
     }
 }

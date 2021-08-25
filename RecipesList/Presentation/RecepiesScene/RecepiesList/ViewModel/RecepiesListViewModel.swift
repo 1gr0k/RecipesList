@@ -46,6 +46,8 @@ protocol RecepiesListViewModel: RecepiesListViewModelOutput, RecepiesListViewMod
 
 final class DefaultRecipesListViewModel: RecepiesListViewModel{
     
+    static let itemsPerPage = 10
+    
     private let favouriteRecepiesUseCase: RecipesListWithFavouritesUseCase
     private let actions: RecepiesListViewModelActions?
     private let setLikeInteractor: SetLikeInteractor?
@@ -177,63 +179,33 @@ extension DefaultRecipesListViewModel {
 extension DefaultRecipesListViewModel {
     func setLike(id: String) {
         
-        let queue = DispatchQueue(label: "setLikeQueue", attributes: .concurrent)
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        queue.sync {
-            semaphore.wait()
-            setLikeInteractor?.setLike(id: id, completion: {
-                print("Set like")
-                semaphore.signal()
-            })
-            
-        }
-        queue.sync {
-            semaphore.wait()
+        setLikeInteractor?.setLike(id: id, completion: {
             self.items.value = self.items.value.map({
                 $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: true) : $0
             })
-            semaphore.signal()
+            DispatchQueue.main.async {
+            self.timer?.invalidate()
+            self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.favouriteListChangedNotification), userInfo: nil, repeats: false)
         }
-        queue.sync {
-            semaphore.wait()
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(favouriteListChangedNotification), userInfo: nil, repeats: false)
-            semaphore.signal()
-        }
-        
+        })
     }
     
     func removeLike(id: String) {
         
-        let queue = DispatchQueue(label: "setLikeQueue", attributes: .concurrent)
-        let semaphore = DispatchSemaphore(value: 1)
-        queue.sync {
-            semaphore.wait()
-            removeLikeInteractor?.removeLike(id: id, completion: {
-                print("delete like")
-                semaphore.signal()
-            })
-        }
-        
-        queue.sync {
-            semaphore.wait()
+        removeLikeInteractor?.removeLike(id: id, completion: {
             self.items.value = self.items.value.map({
                 $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: false) : $0
             })
-            semaphore.signal()
-        }
-        
-        queue.sync {
-            semaphore.wait()
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(favouriteListChangedNotification), userInfo: nil, repeats: false)
-            semaphore.signal()
-        }
+            DispatchQueue.main.async {
+                self.timer?.invalidate()
+                self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.favouriteListChangedNotification), userInfo: nil, repeats: false)
+            }
+        })
     }
     
     @objc private func favouriteListChangedNotification() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FavouriteListChanged"), object: nil)
+        timer = nil
     }
     
     internal func checkTimer() {

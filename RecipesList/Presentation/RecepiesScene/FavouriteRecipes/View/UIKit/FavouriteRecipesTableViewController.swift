@@ -19,8 +19,10 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
         viewModel.viewDidload()
         setupUI()
         bind(to: viewModel)
-        
-        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     static func create(viewModel: FavouriteRecipesViewModel, dishImagesRepository: DishImagesRepository?) -> FavouriteRecipesTableViewController {
@@ -29,9 +31,6 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
         view.dishImagesRepository = dishImagesRepository
         
         NotificationCenter.default.addObserver(view, selector: #selector(notificationUpdateItems), name: NSNotification.Name(rawValue: "FavouriteListChanged"), object: nil)
-        
-        view.title = "Избранное"
-        view.tabBarItem.image = UIImage(systemName: "star")
         return view
     }
 

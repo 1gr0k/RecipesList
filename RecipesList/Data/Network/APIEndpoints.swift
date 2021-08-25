@@ -40,7 +40,7 @@ struct APIEndpoints {
             
     }
     
-    static func getFavouriteRecipes(with favouriteRecipesRequestDTO: FavouriteRecipesRequestDTO) -> Endpoint<[FavouriteRecipesResponseDTO.FavouriteReceptDTO]>{
+    static func getRecipesListByIds(with favouriteRecipesRequestDTO: FavouriteRecipesRequestDTO) -> Endpoint<[FavouriteRecipesResponseDTO.FavouriteReceptDTO]>{
         return Endpoint(path: "recipes/informationBulk",
                         method: .get,
                         queryParametersEncodable: favouriteRecipesRequestDTO)

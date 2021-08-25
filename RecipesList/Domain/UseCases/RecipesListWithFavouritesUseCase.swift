@@ -58,10 +58,7 @@ final class DefaultFavoritesRecipesUseCase: RecipesListWithFavouritesUseCase {
     
     func checkRecept(id: String) -> Bool {
         guard let favourites = self.favourites?.recepies else { return false }
-        for recept in favourites {
-            if recept.id == id { return true }
-        }
-        return false
+        return favourites.contains { $0.id == id }
     }
 }
 

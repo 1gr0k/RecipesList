@@ -10,7 +10,6 @@ import Foundation
 
 protocol FavouriteRecipesViewModelInput {
     func viewDidload()
-    func didLoadNextPage()
     func removeLike(id: String, title: String)
     func didSelectItem(at index: Int)
     func refresh()
@@ -63,37 +62,17 @@ extension DefaultFavouriteRecipesViewModel {
         load(loading: .fullScreen)
     }
     
-    func didLoadNextPage() {
-        print("loadNextPage")
-    }
-    
     func refresh() {
         load(loading: .fullScreen)
     }
 }
 extension DefaultFavouriteRecipesViewModel {
     func removeLike(id: String, title: String) {
-        let index = self.items.value.firstIndex(of: FavouriteRecept(id: id, title: title))
-        
-        let queue = DispatchQueue(label: "removeLikeQueue", attributes: .concurrent)
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        queue.sync {
-            semaphore.wait()
+        let index = self.items.value.firstIndex { $0.id == id }
             removeLikeInteractor?.removeLike(id: id, completion: {
-                semaphore.signal()
+                self.items.value.remove(at: index!)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeRecipeFromFavourite"), object: nil)
             })
-        }
-        queue.sync {
-            semaphore.wait()
-            self.items.value.remove(at: index!)
-            semaphore.signal()
-        }
-        queue.sync {
-            semaphore.wait()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeRecipeFromFavourite"), object: nil)
-            semaphore.signal()
-        }
     }
 }
 

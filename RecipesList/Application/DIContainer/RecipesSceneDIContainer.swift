@@ -102,11 +102,11 @@ final class RecipesSceneDIContainer {
     }
     
     //MARK: - Main TabBar
-    func makeMainTabBarViewController(views: [UIViewController]) -> MainTabBarController {
-        return MainTabBarController.create(viewModel: makeMainTabBarViewModel(), views: views)
+    func makeMainTabBarViewController(views: [UINavigationController]) -> MainTabBarController {
+        return MainTabBarController.create(viewModel: makeMainTabBarViewModel(views: views), views: views)
     }
-    func makeMainTabBarViewModel() ->  MainTabBarViewModel {
-        return MainTabBarViewModel()
+    func makeMainTabBarViewModel(views: [UINavigationController]) ->  MainTabBarViewModel {
+        return DefaultMainTabBarViewModel(views: views)
     }
     
     // MARK: - Flow Coordinators

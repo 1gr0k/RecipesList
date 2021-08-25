@@ -27,8 +27,6 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
         let view = RecepiesListViewController.instantiateViewController()
         view.viewModel = viewModel
         view.dishImagesRepository = dishImagesRepository
-        view.title = "Рецепты"
-        view.tabBarItem.image = UIImage(systemName: "list.bullet")
         
         return view
     }

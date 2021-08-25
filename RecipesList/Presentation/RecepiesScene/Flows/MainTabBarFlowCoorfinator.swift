@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MainTabBarFlowCoordinatorDependencies  {
-    func makeMainTabBarViewController(views: [UIViewController]) -> MainTabBarController
+    func makeMainTabBarViewController(views: [UINavigationController]) -> MainTabBarController
     func makeRecepiesListViewController(actions: RecepiesListViewModelActions) -> RecepiesListViewController
 }
 

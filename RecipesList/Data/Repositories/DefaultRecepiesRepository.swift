@@ -24,16 +24,16 @@ extension DefaultRecepiesRepository: RecepiesRepository {
                            number: Int,
                            cached: @escaping (RecepiesPage) -> Void,
                            completion: @escaping (Result<RecepiesPage, Error>) -> Void) -> Cancellable? {
-        
+
         let requestDTO = RecipesRequestDTO(query: query.query, offset: offset, number: number)
         let task = RepositoryTask()
-        
+
         cache.getResponse(for: requestDTO) { result in
             if case let .success(responseDTO?) = result {
                 cached(responseDTO.toDomain())
             }
             guard !task.isCancelled else { return }
-            
+
             let endpoint = APIEndpoints.getRecepies(with: requestDTO)
             task.networkTask = self.dataTransferService.request(with: endpoint) { result in
                 switch result {
@@ -60,7 +60,7 @@ extension DefaultRecepiesRepository: RecepiesRepository {
 //            }
 //            guard !task.isCancelled else { return }
 
-            let endpoint = APIEndpoints.getFavouriteRecipes(with: requestDTO)
+            let endpoint = APIEndpoints.getRecipesListByIds(with: requestDTO)
             task.networkTask = self.dataTransferService.request(with: endpoint) { result in
                 switch result {
                 case .success(let responseDTO):
