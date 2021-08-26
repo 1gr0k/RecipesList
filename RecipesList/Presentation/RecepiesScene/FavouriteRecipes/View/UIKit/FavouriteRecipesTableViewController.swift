@@ -21,6 +21,11 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
         bind(to: viewModel)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.checkTimer()
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -36,6 +41,7 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
 
     func setupUI(){
         tableViewManager = RecipesListTableManager(tableView: tableView, data: viewModel.items.value, dishImageRepository: dishImagesRepository!, viewModel: viewModel)
+        self.view.backgroundColor = .systemGray5
     }
     
     private func bind(to viewModel: FavouriteRecipesViewModel) {

@@ -42,8 +42,6 @@ struct FavouriteRecipesListView: View {
                     Button(role: .destructive) {
 
                         viewModelWrapper.viewModel?.removeLike(id: recept.id, title: recept.title!)
-                        print(index)
-                        print("test")
                     }
                 label: {
                         Label("Delete", systemImage: "trash")

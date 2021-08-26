@@ -39,7 +39,9 @@ class RecepiesListTableViewController: UITableViewController {
     
     private func setupViews() {
         tableView.estimatedRowHeight = RecepiesListItemCell.height
-        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 150
+        tableView.separatorColor = UIColor.clear
+        tableView.allowsSelection = false
     }
 
 
@@ -48,62 +50,41 @@ class RecepiesListTableViewController: UITableViewController {
 extension RecepiesListTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.items.value.count
+        return viewModel.items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecepiesListItemCell.reuseIdentifier, for: indexPath) as? RecepiesListItemCell else {
             assertionFailure("Cannot dequeue reusable cell \(RecepiesListItemCell.self) with reuseIdentifier: \(RecepiesListItemCell.reuseIdentifier)")
             return UITableViewCell()
         }
         
-        cell.fill(with: viewModel.items.value[indexPath.row], dishImageRepository: dishImageRepository)
+        cell.fill(with: viewModel.items[indexPath.row], dishImageRepository: dishImageRepository)
+        cell.setLike = {
+            self.viewModel.setLike(id: self.viewModel.items[indexPath.row].id!)
+        }
+        cell.removeLike = {
+            self.viewModel.removeLike(id: self.viewModel.items[indexPath.row].id!)
+        }
+        cell.didSelectItem = {
+            self.viewModel.didSelectItem(at: indexPath.row)
+        }
         
-        if indexPath.row == viewModel.items.value.count - 1 {
+        if indexPath.row == viewModel.items.count - 1 {
             viewModel.didLoadNextPage()
         }
         
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectItem(at: indexPath.row)
-    }
-
 }
 
 extension RecepiesListTableViewController {
 
     private func handleMarkAsFavourite(index: Int) {
-        viewModel.setLike(id: viewModel.items.value[index].id!)
+        viewModel.setLike(id: viewModel.items[index].id!)
     }
 
     private func handleRemoveFromFavourite(index: Int) {
-        viewModel.removeLike(id: viewModel.items.value[index].id!)
-    }
-
-    override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        var actions: [UIContextualAction] = []
-        if viewModel.items.value[indexPath.row].favourite! {
-            let action = UIContextualAction(style: .destructive,
-                                            title: "remove from Favourite") { [weak self] (action, view, completionHandler) in
-                self?.handleRemoveFromFavourite(index: indexPath.row)
-                completionHandler(true)
-            }
-            action.backgroundColor = .systemRed
-            actions.append(action)
-        } else {
-            let action = UIContextualAction(style: .normal,
-                                            title: "Favourite") { [weak self] (action, view, completionHandler) in
-                self?.handleMarkAsFavourite(index: indexPath.row)
-                completionHandler(true)
-            }
-            action.backgroundColor = .systemBlue
-            actions.append(action)
-        }
-
-        return UISwipeActionsConfiguration(actions: actions)
+        viewModel.removeLike(id: viewModel.items[index].id!)
     }
 }

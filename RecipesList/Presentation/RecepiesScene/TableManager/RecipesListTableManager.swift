@@ -34,8 +34,9 @@ final class RecipesListTableManager: NSObject {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = true
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .systemGray5
         tableView.backgroundColor = .white
+        tableView.separatorColor = .clear
 
     }
 }
@@ -52,30 +53,19 @@ extension RecipesListTableManager: UITableViewDelegate, UITableViewDataSource {
         }
         let model = dataSource[indexPath.row] as! FavouriteRecept
         cell.fill(with: RecepiesListItemViewModel(id: model.id, title: model.title!, image: model.id, favourite: true), dishImageRepository: dishImageRepository)
+        cell.didSelectItem = {
+            self.viewModel?.didSelectItem(at: indexPath.row)
+        }
+        cell.removeLike = { [self] in
+            self.viewModel?.removeLike(id: (viewModel?.items.value[indexPath.row].id)!, title: (viewModel?.items.value[indexPath.row].title)!)
+        }
         
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 150
     }
-    
-    func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        var actions: [UIContextualAction] = []
-            let action = UIContextualAction(style: .destructive,
-                                            title: "remove from Favourite") { [weak self] (action, view, completionHandler) in
-                self?.handleRemoveFromFavourite(index: indexPath.row)
-                completionHandler(true)
-            }
-            action.backgroundColor = .systemRed
-            actions.append(action)
-        
-        return UISwipeActionsConfiguration(actions: actions)
-    }
-    
-    private func handleRemoveFromFavourite(index: Int) {
-        viewModel!.removeLike(id: viewModel!.items.value[index].id, title: viewModel!.items.value[index].title!)
-    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel!.didSelectItem(at: indexPath.row)

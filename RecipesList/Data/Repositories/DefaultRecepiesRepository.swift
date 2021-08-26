@@ -64,7 +64,7 @@ extension DefaultRecepiesRepository: RecepiesRepository {
             task.networkTask = self.dataTransferService.request(with: endpoint) { result in
                 switch result {
                 case .success(let responseDTO):
-                    print(responseDTO)
+//                    print(responseDTO)
 //                    self.cache.save(response: responseDTO, for: requestDTO)
                     completion(.success(responseDTO.toDomain()))
                 case .failure(let error):

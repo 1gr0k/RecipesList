@@ -19,7 +19,7 @@ final class RecipesSceneDIContainer {
     
     //MARK: - Persistent Storage
     lazy var recepiesQueriesStorage: RecepiesQueriesStorage = CoreDataRecepiesQueriesStorage(maxStorageLimit: 10)
-    lazy var recepiesResponseCache: RecipesResponseStorage = CoreDataRecepiesResponseStorage()
+    lazy var recepiesResponseCache: RecepiesResponseStorage = CoreDataRecepiesResponseStorage()
     lazy var favouriteRecepiesStorage: FavouriteRecipesStorage = CoreDataFavouriteRecipesStorage()
     
     init(dependencies: Dependencies) {
@@ -74,56 +74,35 @@ final class RecipesSceneDIContainer {
     }
     
     func makeRecepiesListViewModel(actions: RecepiesListViewModelActions) -> RecepiesListViewModel {
-        return DefaultRecipesListViewModel(favouriteRecipesUseCase: makeFavouritesRecipesUseCase(), actions: actions, setLikeInteractor: makeSetLikeInteractor(), removeLikeInteractor: makeRemoveLikeInteractor())
+        return DefaultRecepiesListViewModel(favouriteRecipesUseCase: makeFavouritesRecipesUseCase(), actions: actions, setLikeInteractor: makeSetLikeInteractor(), removeLikeInteractor: makeRemoveLikeInteractor())
     }
     
     //MARK: - Favourites List
     
-    func makeFavouriteRecipesViewController(actions: RecepiesListViewModelActions) -> UIViewController {
+    //    func makeFavouriteRecipesViewController() -> FavouriteRecipesTableViewController {
+    func makeFavouriteRecipesViewController() -> UIViewController {
         
-//                    let view = FavouriteRecipesListView(viewModelWrapper: FavouriteRecipesListViewModelWrapper(viewModel: makeFavouriteRecipesViewModel(actions: actions)), dishImagesRepository: makeDishImagesRepository())
-//                    return UIHostingController(rootView: view)
+//            let view = FavouriteRecipesListView(viewModelWrapper: FavouriteRecipesListViewModelWrapper(viewModel: makeFavouriteRecipesViewModel()), dishImagesRepository: makeDishImagesRepository())
+//            return UIHostingController(rootView: view)
+        
+            return FavouriteRecipesTableViewController.create(viewModel: makeFavouriteRecipesViewModel(), dishImagesRepository: makeDishImagesRepository())
+        
+    
+}
 
-        return FavouriteRecipesTableViewController.create(viewModel: makeFavouriteRecipesViewModel(actions: actions), dishImagesRepository: makeDishImagesRepository())
-        
-        
-    }
-    func makeFavouriteRecipesViewModel(actions: RecepiesListViewModelActions) -> FavouriteRecipesViewModel {
-        return DefaultFavouriteRecipesViewModel(favouriteRecipesListUseCase: makeFavouriteRecipesListUseCase(), removeLikeInteractor: makeRemoveLikeInteractor(), actions: actions)
-    }
-    
-    //MARK: - Recipe Details
-    func makeRecipeDetailsViewController(id: String) -> UIViewController {
-        return RecipeDetailsViewController.create(with: makeRecipeDetailsViewModel(id: id), dishImagesRepository: makeDishImagesRepository())
-    }
-    
-    func makeRecipeDetailsViewModel(id: String) -> RecipeDetailsViewModel {
-        return DefaultRecipeDetailsViewModel(id: id, recepiesRepository: makeRecepiesRepository())
-    }
-    
-    //MARK: - Main TabBar
-    func makeMainTabBarViewController(views: [UINavigationController]) -> MainTabBarController {
-        return MainTabBarController.create(viewModel: makeMainTabBarViewModel(views: views), views: views)
-    }
-    func makeMainTabBarViewModel(views: [UINavigationController]) ->  MainTabBarViewModel {
-        return DefaultMainTabBarViewModel(views: views)
-    }
-    
-    // MARK: - Flow Coordinators
-    func makeRecepiesSearchFlowCoordinator(navigationController: UINavigationController) -> RecipesSearchFlowCoordinator {
-        return RecipesSearchFlowCoordinator(navigationController: navigationController, dependencies: self)
-    }
-    
-    func makeMainTabBarFlowCoordinator(window: UIWindow, recepiesSceneDIContainer: RecipesSceneDIContainer) -> MainTabBarFlowCoordinator {
-        return MainTabBarFlowCoordinator(window: window,
-                                         dependencies: self, recepiesSceneDIContainer: recepiesSceneDIContainer)
-    }
-    
-    func makeFavouriteRecipesFlowCoordinator(navigationController: UINavigationController) -> FavouriteRecipesListFlowCoordinator {
-        return FavouriteRecipesListFlowCoordinator(navigationController: navigationController, dependencies: self)
-    }
+func makeFavouriteRecipesViewModel() -> FavouriteRecipesViewModel {
+    return DefaultFavouriteRecipesViewModel(favouriteRecipesListUseCase: makeFavouriteRecipesListUseCase(), removeLikeInteractor: makeRemoveLikeInteractor())
+}
+
+// MARK: - Flow Coordinators
+func makeRecipesSearchFlowCoordinator(navigationController: UINavigationController) -> RecipesSearchFlowCoordinator {
+    return RecipesSearchFlowCoordinator(navigationController: navigationController,
+                                        dependencies: self)
+}
+func makeFavouriteRecipesFlowCoordinator(navigationController: UINavigationController) -> FavouriteRecipesListFlowCoordinator {
+    return FavouriteRecipesListFlowCoordinator(navigationController: navigationController, dependencies: self)
+}
 }
 
 extension RecipesSceneDIContainer: RecipesSearchFlowCoordinatorDependencies {}
-extension RecipesSceneDIContainer: MainTabBarFlowCoordinatorDependencies {}
 extension RecipesSceneDIContainer: FavouriteRecipesListFlowCoordinatorDependencies {}

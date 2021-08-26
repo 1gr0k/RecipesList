@@ -21,6 +21,5 @@ extension RecepiesListItemViewModel {
         self.image = recept.id
         self.id = recept.id
         self.favourite = recept.favourite
-        
     }
 }
