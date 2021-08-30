@@ -83,7 +83,7 @@ final class RecipesSceneDIContainer {
         
 //                    let view = FavouriteRecipesListView(viewModelWrapper: FavouriteRecipesListViewModelWrapper(viewModel: makeFavouriteRecipesViewModel(actions: actions)), dishImagesRepository: makeDishImagesRepository())
 //                    return UIHostingController(rootView: view)
-
+//
         return FavouriteRecipesTableViewController.create(viewModel: makeFavouriteRecipesViewModel(actions: actions), dishImagesRepository: makeDishImagesRepository())
         
         
@@ -102,11 +102,11 @@ final class RecipesSceneDIContainer {
     }
     
     //MARK: - Main TabBar
-    func makeMainTabBarViewController(views: [UINavigationController]) -> MainTabBarController {
-        return MainTabBarController.create(viewModel: makeMainTabBarViewModel(views: views), views: views)
+    func makeMainTabBarViewController(views: [UIViewController]) -> MainTabBarController {
+        return MainTabBarController.create(viewModel: makeMainTabBarViewModel(), views: views)
     }
-    func makeMainTabBarViewModel(views: [UINavigationController]) ->  MainTabBarViewModel {
-        return DefaultMainTabBarViewModel(views: views)
+    func makeMainTabBarViewModel() ->  MainTabBarViewModel {
+        return MainTabBarViewModel()
     }
     
     // MARK: - Flow Coordinators

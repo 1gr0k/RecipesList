@@ -13,6 +13,7 @@ protocol FavouriteRecipesViewModelInput {
     func removeLike(id: String, title: String)
     func didSelectItem(at index: Int)
     func refresh()
+    func viewDesappear()
 }
 
 protocol FavouriteRecipesViewModelOutput {
@@ -31,6 +32,7 @@ class DefaultFavouriteRecipesViewModel: FavouriteRecipesViewModel {
     private var favouriteRecipesListUseCase: FavouriteRecipesListUseCase
     private let removeLikeInteractor: RemoveLikeInteractor?
     private let actions: RecepiesListViewModelActions?
+    private var timer: Timer?
     
     private var recepiesLoadTask: Cancellable? { willSet {recepiesLoadTask?.cancel() } }
     
@@ -71,8 +73,23 @@ extension DefaultFavouriteRecipesViewModel {
         let index = self.items.value.firstIndex { $0.id == id }
             removeLikeInteractor?.removeLike(id: id, completion: {
                 self.items.value.remove(at: index!)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeRecipeFromFavourite"), object: nil)
+                DispatchQueue.main.async {
+                    self.timer?.invalidate()
+                    self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.favouriteListChangedNotification), userInfo: nil, repeats: false)
+                }
             })
+    }
+    
+    @objc func favouriteListChangedNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeRecipeFromFavourite"), object: nil)
+        timer = nil
+    }
+    
+    internal func viewDesappear() {
+        if timer != nil {
+            timer?.invalidate()
+            favouriteListChangedNotification()
+        }
     }
 }
 
