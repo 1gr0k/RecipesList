@@ -9,6 +9,8 @@ import UIKit
 
 class FavouriteRecipesTableViewCell: UITableViewCell {
     
+    let animationTime = 0.5
+    
     var didSelectItem: (() -> Void)!
     var removeLike: (() -> Void)!
     
@@ -18,15 +20,65 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
     private var imageRepository: DishImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
-    private var dishImageView: UIImageView!
-    private var externalStack: UIStackView!
-    private var innerStack: UIStackView!
-    private var titleLabel: UILabel!
-    private var likeView: UIView!
-    private var likeImage: UIImageView!
+    private lazy var dishImageView: UIImageView = {
+        let dishImageView = UIImageView()
+        dishImageView.translatesAutoresizingMaskIntoConstraints = false
+        dishImageView.layer.cornerRadius = 15
+        dishImageView.clipsToBounds = true
+        return dishImageView
+    }()
+    
+    private lazy var externalStack: UIStackView = {
+        let externalStack = UIStackView()
+        externalStack.translatesAutoresizingMaskIntoConstraints = false
+        externalStack.distribution = .fillProportionally
+        externalStack.axis = .horizontal
+        externalStack.backgroundColor = .white
+        externalStack.layer.cornerRadius = 25
+        externalStack.layer.shadowColor = UIColor.black.cgColor
+        externalStack.layer.shadowRadius = 3
+        externalStack.layer.shadowOpacity = 0.2
+        externalStack.layer.shadowOffset = CGSize(width: 4, height: 4)
+        return externalStack
+    }()
+    
+    private lazy var innerStack: UIStackView = {
+        let innerStack = UIStackView()
+        innerStack.translatesAutoresizingMaskIntoConstraints = false
+        innerStack.alignment = .center
+        innerStack.contentMode = .scaleToFill
+        return innerStack
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = viewModel.title
+        titleLabel.numberOfLines = 3
+        titleLabel.font = .boldSystemFont(ofSize: 18)
+        return titleLabel
+    }()
+    
+    private lazy var likeView: UIView = {
+        let likeView = UIView()
+        likeView.translatesAutoresizingMaskIntoConstraints = false
+        likeView.layer.cornerRadius = 15
+        likeView.backgroundColor = .systemBlue
+        return likeView
+    }()
+    
+    private lazy var likeImage: UIImageView = {
+        let likeImage = UIImageView()
+        likeImage.translatesAutoresizingMaskIntoConstraints = false
+        let likeIconImage = "trash"
+        likeImage.image = UIImage(systemName: likeIconImage)
+        likeImage.tintColor = .white
+        return likeImage
+    }()
     
     override func prepareForReuse() {
         externalStack.removeFromSuperview()
+        externalStack.clearsContextBeforeDrawing
     }
     
     func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
@@ -58,45 +110,6 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         let imageRatio = 0.74
         let imageWidth = (self.frame.width - 16.0) * stacksRatio
         
-        self.titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = viewModel.title
-        titleLabel.numberOfLines = 3
-        titleLabel.font = .boldSystemFont(ofSize: 18)
-        
-        self.innerStack = UIStackView()
-        innerStack.translatesAutoresizingMaskIntoConstraints = false
-        innerStack.alignment = .center
-        innerStack.contentMode = .scaleToFill
-        
-        self.dishImageView = UIImageView()
-        dishImageView.translatesAutoresizingMaskIntoConstraints = false
-        dishImageView.layer.cornerRadius = 15
-        dishImageView.clipsToBounds = true
-        
-        self.externalStack = recipeStack()
-        externalStack.translatesAutoresizingMaskIntoConstraints = false
-        externalStack.distribution = .fillProportionally
-        externalStack.axis = .horizontal
-        externalStack.backgroundColor = .white
-        externalStack.layer.cornerRadius = 25
-        externalStack.layer.shadowColor = UIColor.black.cgColor
-        externalStack.layer.shadowRadius = 3
-        externalStack.layer.shadowOpacity = 0.2
-        externalStack.layer.shadowOffset = CGSize(width: 4, height: 4)
-        
-        self.likeView = UIView()
-        likeView.translatesAutoresizingMaskIntoConstraints = false
-        likeView.layer.cornerRadius = 15
-        likeView.backgroundColor = .systemGray4
-        likeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.removeLike(_:))))
-        
-        self.likeImage = UIImageView()
-        likeImage.translatesAutoresizingMaskIntoConstraints = false
-        let likeIconImage = "trash"
-        likeImage.image = UIImage(systemName: likeIconImage)
-        likeImage.tintColor = .white
-        
         likeView.addSubview(likeImage)
         innerStack.addSubview(likeView)
         innerStack.addSubview(titleLabel)
@@ -105,6 +118,7 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         self.addSubview(externalStack)
         
         setupConstraints(imageWidth: imageWidth, imageRatio: imageRatio)
+        setupGestures()
     }
     
     private func setupConstraints(imageWidth: Double, imageRatio: Double) {
@@ -138,11 +152,56 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         likeImage.widthAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
-    @objc func tapRecipe(_ sender: UITapGestureRecognizer) {
-        didSelectItem()
+    private func setupGestures() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(self.tapDeleteLike(_:)))
+        gesture.minimumPressDuration = 0
+        likeView.addGestureRecognizer(gesture)
     }
     
-    @objc func removeLike(_ sender: UITapGestureRecognizer) {
-        removeLike()
+    @objc private func tapDeleteLike(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            likeView.backgroundColor = .systemGray5
+        case .ended:
+            print("ended")
+            onChangeRecognizer(sender) {
+                self.likeAnimation {
+                    self.removeLike()
+                    DispatchQueue.main.async {
+                        self.externalStack.removeFromSuperview()
+                    }
+                }
+            }
+        case .changed:
+            onChangeRecognizer(sender)
+        @unknown default:
+            print("")
+        }
+    }
+    
+    private func onChangeRecognizer(_ sender: UILongPressGestureRecognizer, completion: (()->Void)? = nil) {
+        guard let senderView = sender.view else { return }
+                let lastLocation = sender.location(in: senderView)
+                guard senderView.bounds.contains(lastLocation) else {
+                    likeView.backgroundColor = viewModel.favourite ? .systemBlue : .white
+                    return
+                }
+        completion?()
+    }
+    
+    func likeAnimation(completion: @escaping () -> Void) {
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: self.animationTime) { [weak self] in
+                    self!.likeView.backgroundColor = .white
+                }
+            }
+        DispatchQueue.global().asyncAfter(deadline: .now() + self.animationTime) {
+            completion()
+        }
+    }
+    
+    @objc func tapRecipe(_ sender: UITapGestureRecognizer) {
+        didSelectItem()
     }
 }

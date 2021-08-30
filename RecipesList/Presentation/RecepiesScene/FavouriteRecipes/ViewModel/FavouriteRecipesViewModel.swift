@@ -13,7 +13,7 @@ protocol FavouriteRecipesViewModelInput {
     func removeLike(id: String, title: String)
     func didSelectItem(at index: Int)
     func refresh()
-    func checkTimer()
+    func viewDesappear()
 }
 
 protocol FavouriteRecipesViewModelOutput {
@@ -85,7 +85,7 @@ extension DefaultFavouriteRecipesViewModel {
         timer = nil
     }
     
-    internal func checkTimer() {
+    internal func viewDesappear() {
         if timer != nil {
             timer?.invalidate()
             favouriteListChangedNotification()

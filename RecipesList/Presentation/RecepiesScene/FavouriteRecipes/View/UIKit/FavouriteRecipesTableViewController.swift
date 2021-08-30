@@ -23,7 +23,7 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.checkTimer()
+        viewModel.viewDesappear()
     }
     
     deinit {

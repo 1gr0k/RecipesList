@@ -27,7 +27,7 @@ protocol RecepiesListViewModelInput {
     func setLike(id: String)
     func removeLike(id: String)
     func refresh()
-    func checkTimer()
+    func viewDisappear()
     
 }
 
@@ -208,7 +208,7 @@ extension DefaultRecipesListViewModel {
         timer = nil
     }
     
-    internal func checkTimer() {
+    internal func viewDisappear() {
         if timer != nil {
             timer?.invalidate()
             favouriteListChangedNotification()

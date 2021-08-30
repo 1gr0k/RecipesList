@@ -50,7 +50,7 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchController.isActive = false
-        viewModel.checkTimer()
+        viewModel.viewDisappear()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
