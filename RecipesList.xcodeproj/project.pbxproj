@@ -1069,7 +1069,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = efbb5ebebeb94c7c8865d652cfa24bc1;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1091,7 +1091,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = efbb5ebebeb94c7c8865d652cfa24bc1;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

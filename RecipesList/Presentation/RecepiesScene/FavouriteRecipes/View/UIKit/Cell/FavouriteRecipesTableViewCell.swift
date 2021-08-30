@@ -53,7 +53,6 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = viewModel.title
         titleLabel.numberOfLines = 3
         titleLabel.font = .boldSystemFont(ofSize: 18)
         return titleLabel
@@ -63,7 +62,6 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         let likeView = UIView()
         likeView.translatesAutoresizingMaskIntoConstraints = false
         likeView.layer.cornerRadius = 15
-        likeView.backgroundColor = .systemBlue
         return likeView
     }()
     
@@ -78,7 +76,6 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         externalStack.removeFromSuperview()
-        externalStack.clearsContextBeforeDrawing
     }
     
     func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
@@ -119,6 +116,7 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         
         setupConstraints(imageWidth: imageWidth, imageRatio: imageRatio)
         setupGestures()
+        setupState()
     }
     
     private func setupConstraints(imageWidth: Double, imageRatio: Double) {
@@ -156,6 +154,11 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(self.tapDeleteLike(_:)))
         gesture.minimumPressDuration = 0
         likeView.addGestureRecognizer(gesture)
+    }
+    
+    private func setupState() {
+        likeView.backgroundColor = .systemBlue
+        titleLabel.text = viewModel.title
     }
     
     @objc private func tapDeleteLike(_ sender: UILongPressGestureRecognizer) {
