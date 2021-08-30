@@ -9,6 +9,7 @@ import UIKit
 
 public class LoadingView {
     internal static var spinner: UIActivityIndicatorView?
+    internal static var blurView: UIVisualEffectView?
     
     public static func show() {
         DispatchQueue.main.async {
@@ -18,10 +19,16 @@ public class LoadingView {
                 let spinner = UIActivityIndicatorView(frame: frame)
                 spinner.backgroundColor = UIColor.black.withAlphaComponent(0.2)
                 spinner.style = .large
-                window.addSubview(spinner)
+                let blur = UIBlurEffect(style: .light)
+                let blurView = UIVisualEffectView(effect: blur)
+                blurView.frame = frame
+                blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                blurView.contentView.addSubview(spinner)
+                window.addSubview(blurView)
                 
                 spinner.startAnimating()
                 self.spinner = spinner
+                self.blurView = blurView
             }
         }
     }
@@ -30,8 +37,15 @@ public class LoadingView {
         DispatchQueue.main.async {
             guard let _ = spinner else { return }
             spinner?.stopAnimating()
-            spinner?.removeFromSuperview()
-            self.spinner = nil
+            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCrossDissolve) {
+                blurView?.effect = nil
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                blurView?.removeFromSuperview()
+                self.spinner = nil
+                self.blurView = nil
+            }
+            
         }
     }
     

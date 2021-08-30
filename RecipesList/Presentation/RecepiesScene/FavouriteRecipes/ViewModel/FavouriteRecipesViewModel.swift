@@ -26,9 +26,6 @@ protocol FavouriteRecipesViewModel: FavouriteRecipesViewModelOutput, FavouriteRe
 
 class DefaultFavouriteRecipesViewModel: FavouriteRecipesViewModel {
 
-    
-    
-    
     private var favouriteRecipesListUseCase: FavouriteRecipesListUseCase
     private let removeLikeInteractor: RemoveLikeInteractor?
     private let actions: RecepiesListViewModelActions?
@@ -51,6 +48,7 @@ class DefaultFavouriteRecipesViewModel: FavouriteRecipesViewModel {
         favouriteRecipesListUseCase.execute(completion: { result in
             if case let .success(favouriteRecipe) = result {
                 self.items.value = favouriteRecipe.recepies
+                self.loading.value = .none
             } else {
                 self.items.value = []
             }
