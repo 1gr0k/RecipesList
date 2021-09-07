@@ -62,13 +62,9 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
         
         switch loading {
         case .fullScreen: LoadingView.show()
-        case .none:
-            print("none loading")
-//            recepiesListContainer.isHidden = viewModel.items.value.isZero
-        case .some(.nextPage):
-            print("test")
+        case .none, .some:
+            return
         }
-//        recepiesTabelViewController?.updateLoading(loading)
     }
     
 }
