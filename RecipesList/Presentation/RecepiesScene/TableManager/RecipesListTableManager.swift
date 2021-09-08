@@ -27,7 +27,12 @@ final class RecipesListTableManager: NSObject {
     
     func update(models: [Any]) {
         dataSource = models
-        tableView.reloadData()
+        UIView.transition(with: tableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+//                          options: .showHideTransitionViews,
+                          animations: { self.tableView.reloadData() })
+//        tableView.reloadData()
     }
 
     private func setupTableView() {
@@ -38,6 +43,13 @@ final class RecipesListTableManager: NSObject {
         tableView.backgroundColor = .white
         tableView.separatorColor = .clear
 
+    }
+    
+    func updateLoading(_ loading: RecepiesListViewModelLoading?) {
+//        switch loading {
+//        case .fullScreen, .none:
+            tableView.tableFooterView = nil
+//        }
     }
 }
 

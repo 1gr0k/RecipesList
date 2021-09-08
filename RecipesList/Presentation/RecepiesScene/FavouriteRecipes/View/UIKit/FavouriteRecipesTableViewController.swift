@@ -46,6 +46,7 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
     
     private func bind(to viewModel: FavouriteRecipesViewModel) {
         viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
+        viewModel.loading.observe(on: self) { [weak self] in self?.updateLoading($0)}
     }
 
     private func updateItems() {
@@ -56,5 +57,14 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
         viewModel.refresh()
     }
     
+    private func updateLoading(_ loading: RecepiesListViewModelLoading?) {
+        LoadingView.hide()
+        
+        switch loading {
+        case .fullScreen: LoadingView.show()
+        case .none, .some:
+            return
+        }
+    }
     
 }
