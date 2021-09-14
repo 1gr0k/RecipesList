@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A233FD326F0D74300FF0101 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */; };
+		1A233FD426F0D74300FF0101 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FD126F0D74300FF0101 /* MainTabBarController.swift */; };
+		1A233FD526F0D74300FF0101 /* MainTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */; };
 		1A61E95626A00B80007AF003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95526A00B80007AF003 /* AppDelegate.swift */; };
 		1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */; };
 		1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A61E95B26A00B80007AF003 /* RecepiesListViewController.storyboard */; };
@@ -70,9 +73,6 @@
 		1A684BB226BC22F600CEFA28 /* FavouriteRecipesRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A684BB126BC22F600CEFA28 /* FavouriteRecipesRequestDTO.swift */; };
 		1A684BB426BC23C000CEFA28 /* FavouriteRecipesResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A684BB326BC23C000CEFA28 /* FavouriteRecipesResponseDTO+Mapping.swift */; };
 		1A684BB626BD610400CEFA28 /* SetLikeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A684BB526BD610400CEFA28 /* SetLikeInteractor.swift */; };
-		1A7BB18F26E7A0E300D14DE9 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BB18E26E7A0E300D14DE9 /* MainTabBarViewModel.swift */; };
-		1A7BB19226E7A0F300D14DE9 /* MainTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A7BB19026E7A0F300D14DE9 /* MainTabBarController.storyboard */; };
-		1A7BB19326E7A0F300D14DE9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BB19126E7A0F300D14DE9 /* MainTabBarController.swift */; };
 		1A9F6D1326C6750D0000B708 /* RecipeImageSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F6D1226C6750D0000B708 /* RecipeImageSizes.swift */; };
 		1AA694B126CBBFBB00E949CC /* DishTypesRecipeDetailsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA694A526CBBFBB00E949CC /* DishTypesRecipeDetailsCellViewModel.swift */; };
 		1AA694B226CBBFBB00E949CC /* ExtendedIngredientsRecipeDetailsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA694A626CBBFBB00E949CC /* ExtendedIngredientsRecipeDetailsCellViewModel.swift */; };
@@ -103,6 +103,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
+		1A233FD126F0D74300FF0101 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTabBarController.storyboard; sourceTree = "<group>"; };
 		1A61E95226A00B80007AF003 /* RecipesList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A61E95526A00B80007AF003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListViewController.swift; sourceTree = "<group>"; };
@@ -168,9 +171,6 @@
 		1A684BB126BC22F600CEFA28 /* FavouriteRecipesRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRecipesRequestDTO.swift; sourceTree = "<group>"; };
 		1A684BB326BC23C000CEFA28 /* FavouriteRecipesResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavouriteRecipesResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		1A684BB526BD610400CEFA28 /* SetLikeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLikeInteractor.swift; sourceTree = "<group>"; };
-		1A7BB18E26E7A0E300D14DE9 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
-		1A7BB19026E7A0F300D14DE9 /* MainTabBarController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTabBarController.storyboard; sourceTree = "<group>"; };
-		1A7BB19126E7A0F300D14DE9 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1A9F6D1226C6750D0000B708 /* RecipeImageSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageSizes.swift; sourceTree = "<group>"; };
 		1AA694A526CBBFBB00E949CC /* DishTypesRecipeDetailsCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishTypesRecipeDetailsCellViewModel.swift; sourceTree = "<group>"; };
 		1AA694A626CBBFBB00E949CC /* ExtendedIngredientsRecipeDetailsCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedIngredientsRecipeDetailsCellViewModel.swift; sourceTree = "<group>"; };
@@ -217,6 +217,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A233FCD26F0D74300FF0101 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				1A233FCE26F0D74300FF0101 /* ViewModel */,
+				1A233FD026F0D74300FF0101 /* View */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		1A233FCE26F0D74300FF0101 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1A233FD026F0D74300FF0101 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A233FD126F0D74300FF0101 /* MainTabBarController.swift */,
+				1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1A61E94926A00B80007AF003 = {
 			isa = PBXGroup;
 			children = (
@@ -320,10 +346,10 @@
 		1A61E97326A00D13007AF003 /* RecepiesScene */ = {
 			isa = PBXGroup;
 			children = (
+				1A233FCD26F0D74300FF0101 /* MainTabBar */,
 				1A684BA526BAC54300CEFA28 /* TableManager */,
 				1A684B9726BAA0B300CEFA28 /* FavouriteRecipes */,
 				1AA694A326CBBFBB00E949CC /* RecipeDetails */,
-				1AE2372D26B3F84500956EB7 /* MainTabBar */,
 				1A61E9D026A1BF1B007AF003 /* Flows */,
 				1A61E97426A00D53007AF003 /* RecepiesList */,
 				1A61E9D626A5686A007AF003 /* Behavoirs */,
@@ -738,32 +764,6 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
-		1AE2372D26B3F84500956EB7 /* MainTabBar */ = {
-			isa = PBXGroup;
-			children = (
-				1AE2372E26B3F85700956EB7 /* ViewModel */,
-				1AE2372F26B3F86000956EB7 /* View */,
-			);
-			path = MainTabBar;
-			sourceTree = "<group>";
-		};
-		1AE2372E26B3F85700956EB7 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				1A7BB18E26E7A0E300D14DE9 /* MainTabBarViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		1AE2372F26B3F86000956EB7 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1A7BB19026E7A0F300D14DE9 /* MainTabBarController.storyboard */,
-				1A7BB19126E7A0F300D14DE9 /* MainTabBarController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -824,7 +824,7 @@
 				1AA694B626CBBFBB00E949CC /* RecipeDetailsViewController.storyboard in Resources */,
 				1A684B9D26BAA10D00CEFA28 /* FavouriteRecipesTableViewController.storyboard in Resources */,
 				1A61E96526A00B82007AF003 /* LaunchScreen.storyboard in Resources */,
-				1A7BB19226E7A0F300D14DE9 /* MainTabBarController.storyboard in Resources */,
+				1A233FD526F0D74300FF0101 /* MainTabBarController.storyboard in Resources */,
 				1A61E96226A00B82007AF003 /* Assets.xcassets in Resources */,
 				1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */,
 			);
@@ -866,7 +866,7 @@
 				1A9F6D1326C6750D0000B708 /* RecipeImageSizes.swift in Sources */,
 				1A61E99C26A040B3007AF003 /* DataTransferService.swift in Sources */,
 				1A61E99E26A04177007AF003 /* NetworkService.swift in Sources */,
-				1A7BB19326E7A0F300D14DE9 /* MainTabBarController.swift in Sources */,
+				1A233FD426F0D74300FF0101 /* MainTabBarController.swift in Sources */,
 				1AA694B326CBBFBB00E949CC /* RecipeDetailsCellViewModelProtocol.swift in Sources */,
 				1ACEA57D26A58C9700D6C35E /* ConnectionError.swift in Sources */,
 				1A61E9DF26A56A86007AF003 /* Observable.swift in Sources */,
@@ -891,6 +891,7 @@
 				1A684B9B26BAA10500CEFA28 /* FavouriteRecipesTableViewController.swift in Sources */,
 				1AA694B826CBBFBB00E949CC /* RecipeDetailsIngredientsViewCell.swift in Sources */,
 				1AA694B726CBBFBB00E949CC /* RecipeDetailsTypesCollectionViewCell.swift in Sources */,
+				1A233FD326F0D74300FF0101 /* MainTabBarViewModel.swift in Sources */,
 				1A61E9C226A06B23007AF003 /* APIEndpoints.swift in Sources */,
 				1A684B9226B91D6F00CEFA28 /* FavouriteRecipesDTO+Mapping.swift in Sources */,
 				1A684BAE26BC028F00CEFA28 /* FavouriteRecipesListUseCase.swift in Sources */,
@@ -904,7 +905,6 @@
 				1ACEA58D26A8348200D6C35E /* DefaultDishImagesRepository.swift in Sources */,
 				1ACEA57B26A58C7400D6C35E /* DataTransferError+ConnectionError.swift in Sources */,
 				1ACEA58526A6FDAC00D6C35E /* Recipe.swift in Sources */,
-				1A7BB18F26E7A0E300D14DE9 /* MainTabBarViewModel.swift in Sources */,
 				1A684B8E26B9141900CEFA28 /* FavouriteRecipesEntity.swift in Sources */,
 				1A684BB226BC22F600CEFA28 /* FavouriteRecipesRequestDTO.swift in Sources */,
 				1A61E9CB26A1BC0E007AF003 /* AppConfigurations.swift in Sources */,
