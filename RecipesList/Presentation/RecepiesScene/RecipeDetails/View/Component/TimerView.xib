@@ -44,6 +44,9 @@
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="string" keyPath="readyInMinutes" value="tese"/>
                 <userDefinedRuntimeAttribute type="string" keyPath="testLabelText" value="еуые"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="LineWidth">
+                    <integer key="value" value="20"/>
+                </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="insideView" destination="Lwy-Jo-hpP" id="JMK-pk-N8b"/>

@@ -65,7 +65,7 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: view.frame.width - 16, height: CGFloat(Int(Float(view.frame.width) * imageRatio)) + 150)
+            return CGSize(width: view.frame.width - 16, height: CGFloat(Int(Float(view.frame.width) * imageRatio)) + 230)
         case 1:
             return CGSize(width: view.frame.width - 16, height: 50)
         case 2:

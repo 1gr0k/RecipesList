@@ -17,7 +17,7 @@ class RecipeDetailsHeaderViewCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height - 150)
+        imageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height - 230)
         imageView.contentMode = UIView.ContentMode.scaleAspectFit
         return imageView
     }()
@@ -26,6 +26,11 @@ class RecipeDetailsHeaderViewCell: UICollectionViewCell {
         let timerView = TimerView()
         timerView.setupMinutes(in: viewModel?.readyInMinutes ?? 0)
         return timerView
+    }()
+    
+    private lazy var timerViewCell: TimerViewCell = {
+        let timerViewCell = TimerViewCell()
+        return timerViewCell
     }()
     
     func fill(with viewmodel: HeaderRecipeDeatilsCellViewModel, dishImageRepository: DishImagesRepository?) {
@@ -51,17 +56,32 @@ class RecipeDetailsHeaderViewCell: UICollectionViewCell {
     
     private func setupViews() {
         timerView.translatesAutoresizingMaskIntoConstraints = false
+        timerViewCell.translatesAutoresizingMaskIntoConstraints = false
         addSubview(timerView)
+        timerViewCell.proxyView!.timerView.addSubview(timerView)
+//        timerViewCell.addSubview(timerView)
+        addSubview(timerViewCell)
         addSubview(imageView)
+        
+        setupTimerViewCellConstraint(timerCell: timerViewCell)
         setupTimerConstraint(timer: timerView)
     }
     
     private func setupTimerConstraint(timer: TimerView) {
         NSLayoutConstraint.activate([
-            timer.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            timer.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             timer.heightAnchor.constraint(equalToConstant: 150),
-            timer.widthAnchor.constraint(equalToConstant: 150)
+            timer.widthAnchor.constraint(equalToConstant: 150),
+            timer.topAnchor.constraint(equalTo: timerViewCell.proxyView!.timerView.topAnchor),
+            timer.leadingAnchor.constraint(equalTo: timerViewCell.proxyView!.timerView.leadingAnchor)
+        ])
+    }
+    
+    private func setupTimerViewCellConstraint(timerCell: TimerViewCell) {
+        NSLayoutConstraint.activate([
+            timerCell.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            timerCell.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            timerCell.heightAnchor.constraint(equalToConstant: 220),
+            timerCell.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
 }

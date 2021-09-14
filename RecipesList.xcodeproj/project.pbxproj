@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1A233FC426E8C2E500FF0101 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A233FC326E8C2E500FF0101 /* TimerView.xib */; };
 		1A233FC626E8C2F800FF0101 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FC526E8C2F800FF0101 /* TimerView.swift */; };
+		1A233FCA26F0A05C00FF0101 /* TimerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A233FC926F0A05C00FF0101 /* TimerViewCell.xib */; };
+		1A233FCC26F0A06800FF0101 /* TimerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FCB26F0A06800FF0101 /* TimerViewCell.swift */; };
 		1A61E95626A00B80007AF003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95526A00B80007AF003 /* AppDelegate.swift */; };
 		1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */; };
 		1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A61E95B26A00B80007AF003 /* RecepiesListViewController.storyboard */; };
@@ -107,6 +109,8 @@
 /* Begin PBXFileReference section */
 		1A233FC326E8C2E500FF0101 /* TimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
 		1A233FC526E8C2F800FF0101 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		1A233FC926F0A05C00FF0101 /* TimerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerViewCell.xib; sourceTree = "<group>"; };
+		1A233FCB26F0A06800FF0101 /* TimerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewCell.swift; sourceTree = "<group>"; };
 		1A61E95226A00B80007AF003 /* RecipesList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A61E95526A00B80007AF003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 			children = (
 				1A233FC326E8C2E500FF0101 /* TimerView.xib */,
 				1A233FC526E8C2F800FF0101 /* TimerView.swift */,
+				1A233FC926F0A05C00FF0101 /* TimerViewCell.xib */,
+				1A233FCB26F0A06800FF0101 /* TimerViewCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -841,6 +847,7 @@
 				1A61E96526A00B82007AF003 /* LaunchScreen.storyboard in Resources */,
 				1A7BB19226E7A0F300D14DE9 /* MainTabBarController.storyboard in Resources */,
 				1A61E96226A00B82007AF003 /* Assets.xcassets in Resources */,
+				1A233FCA26F0A05C00FF0101 /* TimerViewCell.xib in Resources */,
 				1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -924,6 +931,7 @@
 				1A684B8E26B9141900CEFA28 /* FavouriteRecipesEntity.swift in Sources */,
 				1A684BB226BC22F600CEFA28 /* FavouriteRecipesRequestDTO.swift in Sources */,
 				1A61E9CB26A1BC0E007AF003 /* AppConfigurations.swift in Sources */,
+				1A233FCC26F0A06800FF0101 /* TimerViewCell.swift in Sources */,
 				1A61E98F26A039AE007AF003 /* RecipeQuery.swift in Sources */,
 				1AB8B37626A9987E000A0115 /* RecipeDetailsRequestDTO+Mapping.swift in Sources */,
 				1A61E98126A02E23007AF003 /* StoryboardInstantiable.swift in Sources */,
@@ -1085,7 +1093,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = aa3344048a3f4311a314f4720ef4750b;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1107,7 +1115,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = aa3344048a3f4311a314f4720ef4750b;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
