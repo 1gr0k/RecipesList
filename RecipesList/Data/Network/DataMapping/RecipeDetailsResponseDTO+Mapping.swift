@@ -11,6 +11,7 @@ struct RecipeDetailsResponseDTO: Decodable {
     let id: Int
     let title: String
     let image: String
+    let readyInMinutes: Int
     let dishTypes: [String]
     let extendedIngredients: [ExtIngredientDTO]
 }
@@ -28,6 +29,7 @@ extension RecipeDetailsResponseDTO {
         return .init(id: String(id),
                      title: title,
                      image: image,
+                     readyInMinutes: readyInMinutes,
                      dishTypes: dishTypes,
                      extendedIngredients: extendedIngredients.map { $0.toDomain() })
     }

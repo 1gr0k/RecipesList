@@ -13,6 +13,7 @@ extension RecipeDetailsResponseEntity {
         return .init(id: Int(id),
                      title: title ?? "",
                      image: image ?? "",
+                     readyInMinutes: 0,
                      dishTypes: dishTypes?.allObjects.compactMap {$0 as? String } ?? [],
                      extendedIngredients: extendedIngredients?.allObjects.map { ($0 as! ExtendedIngredientsResponseEntity).toDTO() } ?? [])
     }

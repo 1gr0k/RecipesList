@@ -11,6 +11,7 @@ struct DetailRecipe: Equatable, Identifiable {
     let id: String
     let title: String
     let image: String
+    let readyInMinutes: Int
     let dishTypes: [String]
     let extendedIngredients: [ExtendedIngredient]
 }
