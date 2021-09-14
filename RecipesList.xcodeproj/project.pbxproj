@@ -74,9 +74,6 @@
 		1A684BB226BC22F600CEFA28 /* FavouriteRecipesRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A684BB126BC22F600CEFA28 /* FavouriteRecipesRequestDTO.swift */; };
 		1A684BB426BC23C000CEFA28 /* FavouriteRecipesResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A684BB326BC23C000CEFA28 /* FavouriteRecipesResponseDTO+Mapping.swift */; };
 		1A684BB626BD610400CEFA28 /* SetLikeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A684BB526BD610400CEFA28 /* SetLikeInteractor.swift */; };
-		1A7BB18F26E7A0E300D14DE9 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BB18E26E7A0E300D14DE9 /* MainTabBarViewModel.swift */; };
-		1A7BB19226E7A0F300D14DE9 /* MainTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A7BB19026E7A0F300D14DE9 /* MainTabBarController.storyboard */; };
-		1A7BB19326E7A0F300D14DE9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BB19126E7A0F300D14DE9 /* MainTabBarController.swift */; };
 		1A9F6D1326C6750D0000B708 /* RecipeImageSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F6D1226C6750D0000B708 /* RecipeImageSizes.swift */; };
 		1AA694B126CBBFBB00E949CC /* DishTypesRecipeDetailsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA694A526CBBFBB00E949CC /* DishTypesRecipeDetailsCellViewModel.swift */; };
 		1AA694B226CBBFBB00E949CC /* ExtendedIngredientsRecipeDetailsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA694A626CBBFBB00E949CC /* ExtendedIngredientsRecipeDetailsCellViewModel.swift */; };
