@@ -65,7 +65,7 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: view.frame.width - 16, height: CGFloat(Int(Float(view.frame.width) * imageRatio)))
+            return CGSize(width: view.frame.width - 16, height: CGFloat(Int(Float(view.frame.width) * imageRatio)) + 230)
         case 1:
             return CGSize(width: view.frame.width - 16, height: 50)
         case 2:
@@ -99,7 +99,7 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath) as? RecipeDetailsHeaderViewCell,
                   let viewModel = sectionModels[indexPath.row] as? HeaderRecipeDeatilsCellViewModel
             else { return UICollectionViewCell()}
-            cell.fill(with: viewModel.image, dishImageRepository: dishImageRepository)
+            cell.fill(with: viewModel, dishImageRepository: dishImageRepository)
             return cell
             
         case is DishTypesRecipeDetailsCellViewModel:

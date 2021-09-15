@@ -51,7 +51,7 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel {
             switch result {
             case .success(let data):
                 var tempArray = [SectionType: [RecipeDetailCellViewModel]]()
-                let headerModel = HeaderRecipeDeatilsCellViewModel(title: data.title, image: self.imagePath)
+                let headerModel = HeaderRecipeDeatilsCellViewModel(title: data.title, image: self.imagePath, readyInMinutes: data.readyInMinutes)
                 let dishTypesModel = DishTypesRecipeDetailsCellViewModel(dishTypes: data.dishTypes)
                 let ingredientsModels = data.extendedIngredients.map( {ExtendedIngredientsRecipeDetailsCellViewModel(id: $0.id, name: $0.name)} )
                 tempArray[.header] = [headerModel]
