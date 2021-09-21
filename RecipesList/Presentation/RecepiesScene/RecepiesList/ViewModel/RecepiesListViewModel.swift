@@ -9,6 +9,7 @@ import Foundation
 
 struct RecepiesListViewModelActions {
     let showRecipeDetails: (String) -> Void
+    let showApiError: (ApiErrorDelegate) -> Void
 }
 
 enum RecepiesListViewModelLoading {
@@ -28,6 +29,7 @@ protocol RecepiesListViewModelInput {
     func removeLike(id: String)
     func refresh()
     func viewDisappear()
+    func showApiError()
     
 }
 
@@ -45,7 +47,8 @@ protocol RecepiesListViewModelOutput {
 
 protocol RecepiesListViewModel: RecepiesListViewModelOutput, RecepiesListViewModelInput {}
 
-final class DefaultRecipesListViewModel: RecepiesListViewModel{
+final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate{
+    
     let onRefresh: Observable<Void> = Observable({}())
     
     static let itemsPerPage = 10
@@ -126,14 +129,18 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
     }
     
     private func handle(error: Error) {
-        self.error.value = error.isInternetConnectionError ?
-        NSLocalizedString("No internet connection", comment: "") :
-        NSLocalizedString("Failed loading recepies", comment: "")
+        if error.isApiKeyError { self.error.value = "Некорректный ключ API" }
+        if error.isApiKeyAvaliableRequests { self.error.value = "Достигнут дневной лимит запросов ключа" }
+        if error.isInternetConnectionError { self.error.value = "Отсутствует интернет соединение"}
     }
     
     private func update(receptQuery: RecipeQuery) {
         resetPages()
         load(receptQuery: receptQuery, loading: .fullScreen)
+    }
+    
+    func update() {
+        update(receptQuery: RecipeQuery(query: query.value))
     }
 }
 
@@ -171,6 +178,10 @@ extension DefaultRecipesListViewModel {
     
     func refresh() {
         viewDidLoad()
+    }
+    
+    func showApiError() {
+        actions?.showApiError(self)
     }
     
 }

@@ -13,7 +13,6 @@ private let imageRatio: Float = 370 / 556
 class RecipeDetailsViewController: UIViewController, StoryboardInstantiable {
     
     @IBOutlet weak var detailsCollectionView: UICollectionView!
-    @IBOutlet weak var testLabel: UILabel!
     private var viewModel: RecipeDetailsViewModel!
     private var dishImageRepository: DishImagesRepository!
     
@@ -35,8 +34,8 @@ class RecipeDetailsViewController: UIViewController, StoryboardInstantiable {
     }
     
     private func bind(to viewModel: RecipeDetailsViewModel) {
-        //        viewModel.recipe.observe(on: self) { [weak self] _ in self?.updateItems() }
         viewModel.dataSource.observe(on: self) { [weak self] _ in self?.updateItems() }
+        viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
     }
     
     private func updateItems() {
@@ -59,7 +58,6 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
         detailsCollectionView.register(RecipeDetailsTypesCollectionViewCell.self, forCellWithReuseIdentifier: "typesCell")
         
         detailsCollectionView.collectionViewLayout = layout
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -119,5 +117,11 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
         default:
             return UICollectionViewCell()
         }
+    }
+    
+    func showError(_ error: String) {
+        guard !error.isEmpty else { return }
+        let vc = viewModel.createApiErrorController()
+        self.present(vc, animated: true)
     }
 }

@@ -178,7 +178,7 @@ final class RecepiesListItemCell: UITableViewCell {
     case .changed:
         onChangeRecognizerStack(sender)
     @unknown default:
-        print("")
+        return
     }
     }
     
@@ -197,7 +197,6 @@ final class RecepiesListItemCell: UITableViewCell {
         case .began:
             likeView.backgroundColor = .systemGray5
         case .ended:
-            print("ended")
             onChangeRecognizer(sender) {
                 self.likeAnimation {
                     self.viewModel.favourite ? self.removeLike!() : self.setLike!()
@@ -207,7 +206,7 @@ final class RecepiesListItemCell: UITableViewCell {
         case .changed:
             onChangeRecognizer(sender)
         @unknown default:
-            print("")
+            return
         }
     }
     

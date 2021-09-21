@@ -45,4 +45,11 @@ struct APIEndpoints {
                         method: .get,
                         queryParametersEncodable: favouriteRecipesRequestDTO)
     }
+    
+    static func getRandomRecipe(api: String) -> Endpoint<()>{
+        return Endpoint(path: "recipes/random?apiKey=\(api)",
+                        isFullPath: false,
+                        method: .get,
+                        queryParameters: ["apiKey":api])
+    }
 }

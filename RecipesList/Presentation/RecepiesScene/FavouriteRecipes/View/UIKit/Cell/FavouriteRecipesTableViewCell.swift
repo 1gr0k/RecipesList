@@ -166,7 +166,6 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         case .began:
             likeView.backgroundColor = .systemGray5
         case .ended:
-            print("ended")
             onChangeRecognizer(sender) {
                 self.likeAnimation {
                     self.removeLike()
@@ -178,7 +177,7 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         case .changed:
             onChangeRecognizer(sender)
         @unknown default:
-            print("")
+            return
         }
     }
     

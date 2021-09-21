@@ -14,8 +14,7 @@ final class AppDIContainer {
     // MARK: - Network
     lazy var apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseURL)!,
-                                          queryParameters: ["apiKey": appConfiguration.apiKey,
-                                                            "language": NSLocale.preferredLanguages.first ?? "en"])
+                                          queryParameters: ["apiKey": appConfiguration.apiKey])
         
         let apiDataNetwork = DefaultNetworkService(config: config)
         return DefaultDataTransferService(with: apiDataNetwork)
@@ -26,9 +25,15 @@ final class AppDIContainer {
         return DefaultDataTransferService(with: imagesDataNetwork)
     }()
     
+    lazy var apiCheckDataTransferService: DataTransferService = {
+        let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseURL)!)
+        let imagesDataNetwork = DefaultNetworkService(config: config)
+        return DefaultDataTransferService(with: imagesDataNetwork)
+    }()
+    
     // MARK: - DIContainers of scenes
     func makeRecepiesSceneDIContainer() -> RecipesSceneDIContainer {
-        let dependencies = RecipesSceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService)
+        let dependencies = RecipesSceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService, apiCheckDataTransferService: apiCheckDataTransferService)
         return RecipesSceneDIContainer(dependencies: dependencies)
     }
 }

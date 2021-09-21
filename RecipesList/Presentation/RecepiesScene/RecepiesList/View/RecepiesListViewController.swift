@@ -108,7 +108,7 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
 
     private func showError(_ error: String) {
         guard !error.isEmpty else { return }
-        showAlert(title: viewModel.errorTitle, message: error)
+        viewModel.showApiError()
     }
 }
 
@@ -157,6 +157,10 @@ extension RecepiesListViewController: UISearchControllerDelegate {
 
 extension RecepiesListViewController {
     @objc private func notificatoinUpdateItems() {
+        viewModel.refresh()
+    }
+    
+    @objc private func notificationApiKeyChanged() {
         viewModel.refresh()
     }
 }

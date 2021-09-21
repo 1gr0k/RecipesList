@@ -16,4 +16,21 @@ extension DataTransferError: ConnectionError {
         }
         return true
     }
+    
+    public var isAuthorized: Bool {
+        guard case let DataTransferError.networkFailure(networkError) = self,
+              case .unathorized = networkError else {
+                return false
+        }
+        return true
+    }
+    
+    public var isAvaliableRequests: Bool {
+        guard case let DataTransferError.networkFailure(networkError) = self,
+              case .requestLimit = networkError else {
+                return false
+        }
+        return true
+    }
 }
+

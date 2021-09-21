@@ -10,6 +10,10 @@
 		1A233FD326F0D74300FF0101 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */; };
 		1A233FD426F0D74300FF0101 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FD126F0D74300FF0101 /* MainTabBarController.swift */; };
 		1A233FD526F0D74300FF0101 /* MainTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */; };
+		1A233FDC26F0E05D00FF0101 /* ApiErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FDB26F0E05D00FF0101 /* ApiErrorViewController.swift */; };
+		1A233FE326F2052F00FF0101 /* SetApiKeyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FE226F2052F00FF0101 /* SetApiKeyInteractor.swift */; };
+		1A233FE526F2065B00FF0101 /* ApiErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FE426F2065B00FF0101 /* ApiErrorViewModel.swift */; };
+		1A233FE926F34F3900FF0101 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FE826F34F3900FF0101 /* NetworkError.swift */; };
 		1A61E95626A00B80007AF003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95526A00B80007AF003 /* AppDelegate.swift */; };
 		1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */; };
 		1A61E95D26A00B80007AF003 /* RecepiesListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A61E95B26A00B80007AF003 /* RecepiesListViewController.storyboard */; };
@@ -99,6 +103,7 @@
 		1ACEA58926A829D200D6C35E /* CGSize+ScaledSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58826A829D200D6C35E /* CGSize+ScaledSize.swift */; };
 		1ACEA58B26A8344300D6C35E /* dishImagesPepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58A26A8344300D6C35E /* dishImagesPepository.swift */; };
 		1ACEA58D26A8348200D6C35E /* DefaultDishImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEA58C26A8348200D6C35E /* DefaultDishImagesRepository.swift */; };
+		1AD9184226F9D9CC00D79468 /* APiErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9184126F9D9CC00D79468 /* APiErrorDelegate.swift */; };
 		1AE2373726B4006700956EB7 /* MainTabBarFlowCoorfinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE2373626B4006700956EB7 /* MainTabBarFlowCoorfinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +111,10 @@
 		1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		1A233FD126F0D74300FF0101 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTabBarController.storyboard; sourceTree = "<group>"; };
+		1A233FDB26F0E05D00FF0101 /* ApiErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorViewController.swift; sourceTree = "<group>"; };
+		1A233FE226F2052F00FF0101 /* SetApiKeyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetApiKeyInteractor.swift; sourceTree = "<group>"; };
+		1A233FE426F2065B00FF0101 /* ApiErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorViewModel.swift; sourceTree = "<group>"; };
+		1A233FE826F34F3900FF0101 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		1A61E95226A00B80007AF003 /* RecipesList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A61E95526A00B80007AF003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A61E95926A00B80007AF003 /* RecepiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +212,7 @@
 		1ACEA58826A829D200D6C35E /* CGSize+ScaledSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+ScaledSize.swift"; sourceTree = "<group>"; };
 		1ACEA58A26A8344300D6C35E /* dishImagesPepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dishImagesPepository.swift; sourceTree = "<group>"; };
 		1ACEA58C26A8348200D6C35E /* DefaultDishImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDishImagesRepository.swift; sourceTree = "<group>"; };
+		1AD9184126F9D9CC00D79468 /* APiErrorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APiErrorDelegate.swift; sourceTree = "<group>"; };
 		1AE2373626B4006700956EB7 /* MainTabBarFlowCoorfinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarFlowCoorfinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,6 +249,31 @@
 			children = (
 				1A233FD126F0D74300FF0101 /* MainTabBarController.swift */,
 				1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1A233FDD26F1EFF700FF0101 /* ApiError */ = {
+			isa = PBXGroup;
+			children = (
+				1A233FDF26F1F01500FF0101 /* View */,
+				1A233FDE26F1F00C00FF0101 /* ViewModel */,
+			);
+			path = ApiError;
+			sourceTree = "<group>";
+		};
+		1A233FDE26F1F00C00FF0101 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1A233FE426F2065B00FF0101 /* ApiErrorViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1A233FDF26F1F01500FF0101 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A233FDB26F0E05D00FF0101 /* ApiErrorViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,6 +381,7 @@
 		1A61E97326A00D13007AF003 /* RecepiesScene */ = {
 			isa = PBXGroup;
 			children = (
+				1A233FDD26F1EFF700FF0101 /* ApiError */,
 				1A233FCD26F0D74300FF0101 /* MainTabBar */,
 				1A684BA526BAC54300CEFA28 /* TableManager */,
 				1A684B9726BAA0B300CEFA28 /* FavouriteRecipes */,
@@ -410,6 +446,7 @@
 			children = (
 				1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */,
 				1A61E9E526A579EA007AF003 /* Alertable.swift */,
+				1AD9184126F9D9CC00D79468 /* APiErrorDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -461,6 +498,7 @@
 			children = (
 				1A61E99226A03AB7007AF003 /* Cancellable.swift */,
 				1ACEA57C26A58C9700D6C35E /* ConnectionError.swift */,
+				1A233FE826F34F3900FF0101 /* NetworkError.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -688,6 +726,7 @@
 				1A684BA926BBF88B00CEFA28 /* GetAllLikesInteractor.swift */,
 				1A684BB526BD610400CEFA28 /* SetLikeInteractor.swift */,
 				1ABD0EED26C168B300FE01D9 /* removeLikeInteractor.swift */,
+				1A233FE226F2052F00FF0101 /* SetApiKeyInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -853,13 +892,16 @@
 				1A61E9E426A57761007AF003 /* LoadingView.swift in Sources */,
 				1A61E9D226A1BF3C007AF003 /* RecipesSearchFlowCoordinator.swift in Sources */,
 				1A684B9026B917ED00CEFA28 /* FavouriteRecipesStorage.swift in Sources */,
+				1A233FE326F2052F00FF0101 /* SetApiKeyInteractor.swift in Sources */,
 				1A684BB026BC20B100CEFA28 /* FavouriteRecipesQuery.swift in Sources */,
 				1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */,
 				1A61E9CD26A1BD93007AF003 /* AppAppearance.swift in Sources */,
 				1A61E97826A01F0B007AF003 /* RecepiesListViewModel.swift in Sources */,
 				1A61E9BB26A05F5F007AF003 /* CoreDataStorage.swift in Sources */,
+				1A233FE526F2065B00FF0101 /* ApiErrorViewModel.swift in Sources */,
 				1A61E9B626A057E1007AF003 /* DefaultRecepiesQueriesRepository.swift in Sources */,
 				1A61E99326A03AB7007AF003 /* Cancellable.swift in Sources */,
+				1A233FE926F34F3900FF0101 /* NetworkError.swift in Sources */,
 				1A61E9B826A05DD1007AF003 /* CoreDataRecepiesQueriesStorage.swift in Sources */,
 				1A61E9E626A579EA007AF003 /* Alertable.swift in Sources */,
 				1A61E99926A03FEF007AF003 /* DefaultRecepiesRepository.swift in Sources */,
@@ -881,6 +923,7 @@
 				1ACEA58926A829D200D6C35E /* CGSize+ScaledSize.swift in Sources */,
 				1AA694B926CBBFBB00E949CC /* RecipeDetailsHeaderViewCell.swift in Sources */,
 				1A61E9A226A04894007AF003 /* RecipesResponseStorage.swift in Sources */,
+				1A233FDC26F0E05D00FF0101 /* ApiErrorViewController.swift in Sources */,
 				1AB8B38226AAC9E2000A0115 /* DetailRecipe.swift in Sources */,
 				1A61E9CF26A1BE3B007AF003 /* AppFlowCoordinator.swift in Sources */,
 				1A684BA726BAC55B00CEFA28 /* RecipesListTableManager.swift in Sources */,
@@ -898,6 +941,7 @@
 				1AA694B126CBBFBB00E949CC /* DishTypesRecipeDetailsCellViewModel.swift in Sources */,
 				1A61E97B26A01F9B007AF003 /* RecepiesListTableViewController.swift in Sources */,
 				1A684BA426BAB28B00CEFA28 /* FavouriteRecipesListFlowCoordinator.swift in Sources */,
+				1AD9184226F9D9CC00D79468 /* APiErrorDelegate.swift in Sources */,
 				1A61E98726A03414007AF003 /* SearchRecepiesUseCase.swift in Sources */,
 				1A61E99626A03B36007AF003 /* RecepiesQueriesRepository.swift in Sources */,
 				1A61E9B426A056E0007AF003 /* NetworkConfig.swift in Sources */,
@@ -1069,7 +1113,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
+				API_KEY = c7c0e59913b348b9817373d009fbc9;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1091,7 +1135,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
+				API_KEY = c7c0e59913b348b9817373d009fbc9;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

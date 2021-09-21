@@ -9,7 +9,8 @@ import UIKit
 
 protocol RecipesSearchFlowCoordinatorDependencies  {
     func makeRecepiesListViewController(actions: RecepiesListViewModelActions) -> RecepiesListViewController
-    func makeRecipeDetailsViewController(id: String) -> UIViewController
+    func makeRecipeDetailsViewController(id: String, errorAction: (ApiErrorDelegate) -> Void) -> UIViewController
+    func makeApiErrorViewController(delegate: ApiErrorDelegate) -> ApiErrorViewController
 }
 
 final class RecipesSearchFlowCoordinator {
@@ -28,13 +29,18 @@ final class RecipesSearchFlowCoordinator {
     
     func start() {
         
-        let vc = dependencies.makeRecepiesListViewController(actions: RecepiesListViewModelActions(showRecipeDetails: showRecipeDetails))
+        let vc = dependencies.makeRecepiesListViewController(actions: RecepiesListViewModelActions(showRecipeDetails: showRecipeDetails, showApiError: showApiError))
         navigationController?.pushViewController(vc, animated: false)
         recepiesListVC = vc
     }
     
     private func showRecipeDetails(id: String) {
-        let vc = dependencies.makeRecipeDetailsViewController(id: id)
+        let vc = dependencies.makeRecipeDetailsViewController(id: id, errorAction: showApiError)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func showApiError(delegate: ApiErrorDelegate) {
+        let vc = dependencies.makeApiErrorViewController(delegate: delegate)
+        navigationController?.present(vc, animated: true)
     }
 }

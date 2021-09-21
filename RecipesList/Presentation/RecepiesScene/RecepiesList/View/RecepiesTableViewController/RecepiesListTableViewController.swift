@@ -61,7 +61,6 @@ extension RecepiesListTableViewController {
         
         cell.fill(with: viewModel.items[indexPath.row], dishImageRepository: dishImageRepository)
         cell.setLike = {
-            print("set like: \(self.viewModel.items[indexPath.row].title)")
             self.viewModel.setLike(id: self.viewModel.items[indexPath.row].id!)
         }
         cell.removeLike = {
