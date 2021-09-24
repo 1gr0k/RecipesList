@@ -9,7 +9,7 @@ import UIKit
 
 protocol RecipesSearchFlowCoordinatorDependencies  {
     func makeRecepiesListViewController(actions: RecepiesListViewModelActions) -> RecepiesListViewController
-    func makeRecipeDetailsViewController(id: String, errorAction: (ApiErrorDelegate) -> Void) -> UIViewController
+    func makeRecipeDetailsViewController(id: String) -> UIViewController
     func makeApiErrorViewController(delegate: ApiErrorDelegate) -> ApiErrorViewController
 }
 
@@ -35,7 +35,7 @@ final class RecipesSearchFlowCoordinator {
     }
     
     private func showRecipeDetails(id: String) {
-        let vc = dependencies.makeRecipeDetailsViewController(id: id, errorAction: showApiError)
+        let vc = dependencies.makeRecipeDetailsViewController(id: id)
         navigationController?.pushViewController(vc, animated: true)
     }
     

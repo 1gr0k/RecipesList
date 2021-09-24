@@ -17,6 +17,7 @@ public enum NetworkError: Error {
     case requestLimit
     case serverError
     case clientError
+    case any
 }
 
 public protocol NetworkCancellable {

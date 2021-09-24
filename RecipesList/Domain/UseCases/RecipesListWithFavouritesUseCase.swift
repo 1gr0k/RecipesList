@@ -51,7 +51,7 @@ final class DefaultFavoritesRecipesUseCase: RecipesListWithFavouritesUseCase {
                         Recipe(id: recept.id, title: recept.title, image: recept.image, favourite: self.checkRecept(id: recept.id))
                     })
                 }
-            } 
+            }
             completion(resultWithFav)
         })
     }

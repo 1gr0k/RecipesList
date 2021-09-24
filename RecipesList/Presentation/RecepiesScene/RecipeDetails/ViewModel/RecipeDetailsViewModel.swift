@@ -63,9 +63,8 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
                 tempArray[.ingredientsModels] = ingredientsModels
                 self.dataSource.value = tempArray
             case .failure(let error):
-                if error.isApiKeyError { self.error.value = "Некорректный ключ API" }
-                if error.isApiKeyAvaliableRequests { self.error.value = "Достигнут дневной лимит запросов ключа" }
-                if error.isInternetConnectionError { self.error.value = "Отсутствует интернет соединение"}
+                let error = ErrorType(error: error as! NetworkError)
+                self.error.value = error.errorMessage
             }
         }
     }
@@ -76,5 +75,40 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
     
     func update() {
         self.getDetails()
+    }
+}
+
+extension DefaultRecipeDetailsViewModel {
+    enum ErrorType {
+    case apiKey
+    case available
+    case connectionError
+    case defaultError
+
+        var errorMessage: String {
+            switch self {
+            case .apiKey:
+                return "Некорректный ключ API"
+            case .available:
+                return "Достигнут дневной лимит запросов ключа"
+            case .connectionError:
+                return "Отсутствует интернет соединение"
+            default:
+                return "Что-то пошло не так"
+            }
+        }
+        
+        init(error: NetworkError) {
+            switch error {
+            case .unathorized:
+                self = .apiKey
+            case .requestLimit:
+                self = .available
+            case .notConnected:
+                self = .connectionError
+            default:
+                self = .defaultError
+            }
+        }
     }
 }

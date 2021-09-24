@@ -9,7 +9,7 @@ import UIKit
 
 protocol FavouriteRecipesListFlowCoordinatorDependencies  {
     func makeFavouriteRecipesViewController(actions: RecepiesListViewModelActions) -> UIViewController
-    func makeRecipeDetailsViewController(id: String, errorAction: (ApiErrorDelegate) -> Void) -> UIViewController
+    func makeRecipeDetailsViewController(id: String) -> UIViewController
     func makeApiErrorViewController(delegate: ApiErrorDelegate) -> ApiErrorViewController
 }
 
@@ -33,7 +33,7 @@ final class FavouriteRecipesListFlowCoordinator {
     }
     
     private func showRecipeDetails(id: String) {
-        let vc = dependencies.makeRecipeDetailsViewController(id: id, errorAction: showApiError)
+        let vc = dependencies.makeRecipeDetailsViewController(id: id)
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -13,7 +13,13 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
     private var viewModel: ApiErrorViewModel?
     weak var delegate: ApiErrorDelegate?
     
-    private let maxTextFieldHeight:CGFloat = 300
+    private let screenRatio = 0.3
+    private lazy var maxTextFieldHeight:CGFloat = {
+        round(UIScreen.main.bounds.height * self.screenRatio)
+    }()
+    
+    private var isOkButtonActive = false
+    private var isPlaceholderActive = true
     
     private lazy var mainView: UIView = {
         let view = UIView()
@@ -51,14 +57,14 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         let button = UIView()
         button.layer.cornerRadius = 21
         button.layer.masksToBounds = true
-        button.backgroundColor = .systemGray6
+        button.backgroundColor = .systemGray5
         return button
     }()
     
     private lazy var okButtonGradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        let startColor = UIColor(displayP3Red: 0.9333333373069763, green: 0.6431372761726379, blue: 0.8078431487083435, alpha: 1)
-        let endColor = UIColor(displayP3Red: 0.772549033164978, green: 0.545098066329956, blue: 0.9490196108818054, alpha: 1)
+        let startColor = UIColor(displayP3Red: 238 / 255, green: 164 / 255, blue: 206 / 255, alpha: 1)
+        let endColor = UIColor(displayP3Red: 197 / 255, green: 139 / 255, blue: 242 / 255, alpha: 1)
         gradient.colors = [startColor.cgColor, endColor.cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 0)
@@ -217,6 +223,19 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         ])
     }
     
+    func makeOkButtonActive() {
+        addGestureForOkButton()
+        isOkButtonActive.toggle()
+    }
+    
+    func makeOkButtonInactive() {
+        isOkButtonActive.toggle()
+        okButton.layer.sublayers![0].removeFromSuperlayer()
+        okButton.backgroundColor = .systemGray5
+        okButton.gestureRecognizers?.removeAll()
+        
+    }
+    
     private func setupApiTextFieldConstraints() {
         apiTextfield.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -230,14 +249,20 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .lightGray {
+        if isPlaceholderActive {
+            isPlaceholderActive.toggle()
             textView.text = ""
             textView.textColor = .black
         }
-        addGestureForOkButton()
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count >= 10, !isOkButtonActive {
+            makeOkButtonActive()
+        } else if textView.text.count < 10, isOkButtonActive {
+            makeOkButtonInactive()
+        }
+        
         if textView.contentSize.height == CGFloat(maxTextFieldHeight) {
             textView.isScrollEnabled = true
         }

@@ -25,15 +25,10 @@ final class AppDIContainer {
         return DefaultDataTransferService(with: imagesDataNetwork)
     }()
     
-    lazy var apiCheckDataTransferService: DataTransferService = {
-        let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseURL)!)
-        let imagesDataNetwork = DefaultNetworkService(config: config)
-        return DefaultDataTransferService(with: imagesDataNetwork)
-    }()
     
     // MARK: - DIContainers of scenes
     func makeRecepiesSceneDIContainer() -> RecipesSceneDIContainer {
-        let dependencies = RecipesSceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService, apiCheckDataTransferService: apiCheckDataTransferService)
+        let dependencies = RecipesSceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService, imageDataTransferService: imageDataTransferService)
         return RecipesSceneDIContainer(dependencies: dependencies)
     }
 }

@@ -129,9 +129,8 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate
     }
     
     private func handle(error: Error) {
-        if error.isApiKeyError { self.error.value = "Некорректный ключ API" }
-        if error.isApiKeyAvaliableRequests { self.error.value = "Достигнут дневной лимит запросов ключа" }
-        if error.isInternetConnectionError { self.error.value = "Отсутствует интернет соединение"}
+        let error = ErrorType(error: error as! NetworkError)
+        self.error.value = error.errorMessage
     }
     
     private func update(receptQuery: RecipeQuery) {
@@ -231,4 +230,39 @@ extension DefaultRecipesListViewModel {
 
 private extension Array where Element == RecepiesPage {
     var recepies: [Recipe] { flatMap { $0.recepies } }
+}
+
+extension DefaultRecipesListViewModel {
+    enum ErrorType {
+    case apiKey
+    case available
+    case connectionError
+    case defaultError
+
+        var errorMessage: String {
+            switch self {
+            case .apiKey:
+                return "Некорректный ключ API"
+            case .available:
+                return "Достигнут дневной лимит запросов ключа"
+            case .connectionError:
+                return "Отсутствует интернет соединение"
+            default:
+                return "Что-то пошло не так"
+            }
+        }
+        
+        init(error: NetworkError) {
+            switch error {
+            case .unathorized:
+                self = .apiKey
+            case .requestLimit:
+                self = .available
+            case .notConnected:
+                self = .connectionError
+            default:
+                self = .defaultError
+            }
+        }
+    }
 }

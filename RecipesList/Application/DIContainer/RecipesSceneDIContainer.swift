@@ -13,7 +13,6 @@ final class RecipesSceneDIContainer {
     struct Dependencies{
         let apiDataTransferService: DataTransferService
         let imageDataTransferService: DataTransferService
-        let apiCheckDataTransferService: DataTransferService
     }
     
     private let dependencies: Dependencies
@@ -64,10 +63,6 @@ final class RecipesSceneDIContainer {
         return DefaultRecepiesRepository(dataTransferService: dependencies.apiDataTransferService, cache: recepiesResponseCache)
     }
     
-    func makeRecipeRepositoryForCheckApi() -> RecepiesRepository {
-        return DefaultRecepiesRepository(dataTransferService: dependencies.apiCheckDataTransferService, cache: recepiesResponseCache)
-    }
-    
     func makeRecepiesQueriesRepository() -> RecepiesQueriesRepository {
         return DefaultRecepiesQueriesRepository(dataTransferService: dependencies.apiDataTransferService, recepiesQueriesPersistentStorage: recepiesQueriesStorage)
     }
@@ -102,7 +97,7 @@ final class RecipesSceneDIContainer {
     }
     
     //MARK: - Recipe Details
-    func makeRecipeDetailsViewController(id: String, errorAction: (ApiErrorDelegate) -> Void) -> UIViewController {
+    func makeRecipeDetailsViewController(id: String) -> UIViewController {
         return RecipeDetailsViewController.create(with: makeRecipeDetailsViewModel(id: id), dishImagesRepository: makeDishImagesRepository())
     }
     

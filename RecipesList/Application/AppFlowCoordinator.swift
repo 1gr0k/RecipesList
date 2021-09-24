@@ -27,7 +27,6 @@ final class AppFlowCoordinator {
         self.appDIContainer = appDIContainer
     }
 
-
     func start() {
         let recepiesSceneDIContainer = appDIContainer.makeRecepiesSceneDIContainer()
         let flow = recepiesSceneDIContainer.makeMainTabBarFlowCoordinator(window: window!, recepiesSceneDIContainer: recepiesSceneDIContainer)
