@@ -39,6 +39,10 @@ final class RecipesSceneDIContainer {
         RemoveLikeInteractor(favouriteRecipesStorage: favouriteRecepiesStorage)
     }
     
+    func makeSetApiKeyInteractor() -> SetApiKeyInteractor {
+        SetApiKeyInteractor()
+    }
+    
     //MARK: - Use Cases
     func makeSearchRecepiesUseCase() -> SearchRecepiesUseCase {
         return DefaultSearchRecepiesUseCase(recepiesRepository: makeRecepiesRepository(), recepiesQueriesRepository: makeRecepiesQueriesRepository())
@@ -98,7 +102,16 @@ final class RecipesSceneDIContainer {
     }
     
     func makeRecipeDetailsViewModel(id: String) -> RecipeDetailsViewModel {
-        return DefaultRecipeDetailsViewModel(id: id, recepiesRepository: makeRecepiesRepository())
+        return DefaultRecipeDetailsViewModel(id: id, recepiesRepository: makeRecepiesRepository(), dependencies: self)
+    }
+    
+    //MARK: - ApiError
+    func makeApiErrorViewController(delegate: ApiErrorDelegate) -> ApiErrorViewController {
+        return ApiErrorViewController.create(with: makeApiErrorViewModel(), delegate: delegate)
+    }
+    
+    func makeApiErrorViewModel() -> ApiErrorViewModel {
+        return DefaultApiErrorViewModel(setApiKeyInteractor: makeSetApiKeyInteractor())
     }
     
     //MARK: - Main TabBar

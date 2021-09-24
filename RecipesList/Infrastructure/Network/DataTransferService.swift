@@ -15,7 +15,7 @@ public enum DataTransferError: Error {
 }
 
 public protocol DataTransferService {
-    typealias CompletionHandler<T> = (Result<T, DataTransferError>) -> Void
+    typealias CompletionHandler<T> = (Result<T, NetworkError>) -> Void
     
     @discardableResult
     func request<T: Decodable, E: ResponseRequestable>(with endpoint: E,
@@ -60,11 +60,10 @@ extension DefaultDataTransferService: DataTransferService {
         return self.networkService.request(endpoint: endpoint) { result in
             switch result {
             case .success(let data):
-                let result: Result<T, DataTransferError> = self.decode(data: data, decoder: endpoint.responseDecoder)
+                let result: Result<T, NetworkError> = self.decode(data: data, decoder: endpoint.responseDecoder)
                 DispatchQueue.main.async { return completion(result) }
             case .failure(let error):
                 self.errorLogger.log(error: error)
-                let error = self.resolve(networkError: error)
                 DispatchQueue.main.async { return completion(.failure(error)) }
             }
         }
@@ -77,21 +76,20 @@ extension DefaultDataTransferService: DataTransferService {
                 DispatchQueue.main.async { return completion(.success(())) }
             case .failure(let error):
                 self.errorLogger.log(error: error)
-                let error = self.resolve(networkError: error)
                 DispatchQueue.main.async { return completion(.failure(error)) }
             }
         }
     }
 
     // MARK: - Private
-    private func decode<T: Decodable>(data: Data?, decoder: ResponseDecoder) -> Result<T, DataTransferError> {
+    private func decode<T: Decodable>(data: Data?, decoder: ResponseDecoder) -> Result<T, NetworkError> {
         do {
-            guard let data = data else { return .failure(.noResponse) }
+            guard let data = data else { return .failure(.any) }
             let result: T = try decoder.decode(data)
             return .success(result)
         } catch {
             self.errorLogger.log(error: error)
-            return .failure(.parsing(error))
+            return .failure(.any)
         }
     }
     

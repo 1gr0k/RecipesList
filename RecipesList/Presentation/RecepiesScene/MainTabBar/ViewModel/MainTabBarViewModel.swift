@@ -31,13 +31,13 @@ class DefaultMainTabBarViewModel: MainTabBarViewModel {
                     viewVC.title = "Избранное"
                     viewVC.tabBarItem.image = UIImage(systemName: "heart")
                 default:
-                    print("error")
+                    return
                 }
             }
         }
     }
     
     func viewDidLoad() {
-        print("didLoad")
+//        print("didLoad")
     }
 }

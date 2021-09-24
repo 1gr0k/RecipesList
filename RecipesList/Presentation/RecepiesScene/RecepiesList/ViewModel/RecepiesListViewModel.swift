@@ -9,6 +9,7 @@ import Foundation
 
 struct RecepiesListViewModelActions {
     let showRecipeDetails: (String) -> Void
+    let showApiError: (ApiErrorDelegate) -> Void
 }
 
 enum RecepiesListViewModelLoading {
@@ -28,6 +29,7 @@ protocol RecepiesListViewModelInput {
     func removeLike(id: String)
     func refresh()
     func viewDisappear()
+    func showApiError()
     
 }
 
@@ -45,7 +47,8 @@ protocol RecepiesListViewModelOutput {
 
 protocol RecepiesListViewModel: RecepiesListViewModelOutput, RecepiesListViewModelInput {}
 
-final class DefaultRecipesListViewModel: RecepiesListViewModel{
+final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate{
+    
     let onRefresh: Observable<Void> = Observable({}())
     
     static let itemsPerPage = 10
@@ -126,14 +129,17 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel{
     }
     
     private func handle(error: Error) {
-        self.error.value = error.isInternetConnectionError ?
-        NSLocalizedString("No internet connection", comment: "") :
-        NSLocalizedString("Failed loading recepies", comment: "")
+        let error = ErrorType(error: error as! NetworkError)
+        self.error.value = error.errorMessage
     }
     
     private func update(receptQuery: RecipeQuery) {
         resetPages()
         load(receptQuery: receptQuery, loading: .fullScreen)
+    }
+    
+    func update() {
+        update(receptQuery: RecipeQuery(query: query.value))
     }
 }
 
@@ -171,6 +177,10 @@ extension DefaultRecipesListViewModel {
     
     func refresh() {
         viewDidLoad()
+    }
+    
+    func showApiError() {
+        actions?.showApiError(self)
     }
     
 }
@@ -220,4 +230,39 @@ extension DefaultRecipesListViewModel {
 
 private extension Array where Element == RecepiesPage {
     var recepies: [Recipe] { flatMap { $0.recepies } }
+}
+
+extension DefaultRecipesListViewModel {
+    enum ErrorType {
+    case apiKey
+    case available
+    case connectionError
+    case defaultError
+
+        var errorMessage: String {
+            switch self {
+            case .apiKey:
+                return "Некорректный ключ API"
+            case .available:
+                return "Достигнут дневной лимит запросов ключа"
+            case .connectionError:
+                return "Отсутствует интернет соединение"
+            default:
+                return "Что-то пошло не так"
+            }
+        }
+        
+        init(error: NetworkError) {
+            switch error {
+            case .unathorized:
+                self = .apiKey
+            case .requestLimit:
+                self = .available
+            case .notConnected:
+                self = .connectionError
+            default:
+                self = .defaultError
+            }
+        }
+    }
 }

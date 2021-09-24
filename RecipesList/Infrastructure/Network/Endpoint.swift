@@ -114,6 +114,7 @@ extension Requestable {
 
         let bodyParamaters = try bodyParamatersEncodable?.toDictionary() ?? self.bodyParamaters
         if !bodyParamaters.isEmpty {
+            print(bodyParamaters)
             urlRequest.httpBody = encodeBody(bodyParamaters: bodyParamaters, bodyEncoding: bodyEncoding)
         }
         urlRequest.httpMethod = method.rawValue

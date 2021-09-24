@@ -20,7 +20,7 @@ extension DefaultDishImagesRepository: DishImagesRepository {
     func fetchIngredientImage(with imagePath: String, completion: @escaping (Result<Data, Error>) -> Void) -> Cancellable? {
         let endpoint = APIEndpoints.getIngredientImage(path: imagePath)
         let task = RepositoryTask()
-        task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
+        task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, NetworkError>) in
 
             let result = result.mapError { $0 as Error }
             DispatchQueue.main.async { completion(result) }
@@ -33,7 +33,7 @@ extension DefaultDishImagesRepository: DishImagesRepository {
         
         let endpoint = APIEndpoints.getRecipeImage(path: imagePath, imageSize: .small)
         let task = RepositoryTask()
-        task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
+        task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, NetworkError>) in
 
             let result = result.mapError { $0 as Error }
             DispatchQueue.main.async { completion(result) }
@@ -45,7 +45,7 @@ extension DefaultDishImagesRepository: DishImagesRepository {
         
         let endpoint = APIEndpoints.getRecipeImage(path: imagePath, imageSize: .large)
         let task = RepositoryTask()
-        task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, DataTransferError>) in
+            task.networkTask = dataTransferService.request(with: endpoint) { (result: Result<Data, NetworkError>) in
 
             let result = result.mapError { $0 as Error }
             DispatchQueue.main.async { completion(result) }
