@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Swinject
+import InjectPropertyWrapper
 
 final class RecepiesListViewController: UIViewController, StoryboardInstantiable, Alertable {
     
@@ -15,20 +17,21 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
     @IBOutlet private var searchBarContainer: UIView!
     @IBOutlet private(set) var suggestionsListContainer: UIView!
     
-    private var viewModel: RecepiesListViewModel!
-    private var dishImagesRepository: DishImagesRepository?
+    @Inject private var viewModel: RecepiesListViewModel!
+    @Inject private var dishImagesRepository: DishImagesRepository
     
     private var recepiesTabelViewController: RecepiesListTableViewController?
     private var searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
     
-    static func create(with viewModel: RecepiesListViewModel, dishImagesRepository: DishImagesRepository?) -> RecepiesListViewController {
+    static func create() -> RecepiesListViewController {
         let view = RecepiesListViewController.instantiateViewController()
-        view.viewModel = viewModel
-        view.dishImagesRepository = dishImagesRepository
-        
         return view
+    }
+    
+    func setupActions(action: RecepiesListViewModelActions) {
+        viewModel.setupActions(actions: action)
     }
     
     override func viewDidLoad() {

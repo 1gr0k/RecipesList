@@ -8,13 +8,13 @@
 import Foundation
 
 final class DefaultRecepiesRepository {
-    private let dataTransferService: DataTransferService
-    private let cache: RecipesResponseStorage
-    
-    init(dataTransferService: DataTransferService, cache: RecipesResponseStorage) {
-        self.dataTransferService = dataTransferService
-        self.cache = cache
-    }
+    private lazy var dataTransferService: DataTransferService = {
+        AppDelegate.container.resolve(DataTransferService.self, name: "apiDataTransferService")!
+    }()
+    private lazy var cache: RecipesResponseStorage = {
+        AppDelegate.container.resolve(RecipesResponseStorage.self)!
+    }()
+
 }
 
 extension DefaultRecepiesRepository: RecepiesRepository {

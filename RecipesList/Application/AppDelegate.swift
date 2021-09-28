@@ -7,11 +7,14 @@
 
 import UIKit
 import CoreData
+import Swinject
+import InjectPropertyWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let appDIContainer = AppDIContainer()
+    static let container = Container()
+    
     var appFlowCoordinator: AppFlowCoordinator?
     var window: UIWindow?
 
@@ -19,8 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AppAppearance.setupAppearance()
         
+        InjectSettings.resolver = AppDelegate.container
+        
+        AppDelegate.container.registerAllInjections()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        appFlowCoordinator = AppFlowCoordinator(window: window!, appDIContainer: appDIContainer)
+        
+        appFlowCoordinator = AppFlowCoordinator(window: window!)
         appFlowCoordinator?.start()
         
         window?.makeKeyAndVisible()

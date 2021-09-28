@@ -6,15 +6,15 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 class RemoveLikeInteractor {
-    private let favouriteRecipesStorage: FavouriteRecipesStorage
     
-    init(favouriteRecipesStorage: FavouriteRecipesStorage) {
-        self.favouriteRecipesStorage = favouriteRecipesStorage
-    }
+    @Inject private var favouriteRecepiesStorage: FavouriteRecipesStorage
+
     func removeLike(id: String, completion: @escaping () ->Void) {
-        favouriteRecipesStorage.remove(for: FavouriteRecipesDTO(id: id)) {
+        
+        favouriteRecepiesStorage.remove(for: FavouriteRecipesDTO(id: id)) {
             completion()
         }
     }

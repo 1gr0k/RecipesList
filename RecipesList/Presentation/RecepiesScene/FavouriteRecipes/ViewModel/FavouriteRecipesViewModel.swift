@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 
 protocol FavouriteRecipesViewModelInput {
@@ -14,6 +15,7 @@ protocol FavouriteRecipesViewModelInput {
     func didSelectItem(at index: Int)
     func refresh()
     func viewDesappear()
+    func setupActions(actions: RecepiesListViewModelActions)
 }
 
 protocol FavouriteRecipesViewModelOutput {
@@ -26,9 +28,8 @@ protocol FavouriteRecipesViewModel: FavouriteRecipesViewModelOutput, FavouriteRe
 
 class DefaultFavouriteRecipesViewModel: FavouriteRecipesViewModel {
 
-    private var favouriteRecipesListUseCase: FavouriteRecipesListUseCase
-    private let removeLikeInteractor: RemoveLikeInteractor?
-    private let actions: RecepiesListViewModelActions?
+    @Inject private var favouriteRecipesListUseCase: FavouriteRecipesListUseCase
+    private var actions: RecepiesListViewModelActions?
     private var timer: Timer?
     
     private var recepiesLoadTask: Cancellable? { willSet {recepiesLoadTask?.cancel() } }
@@ -36,12 +37,6 @@ class DefaultFavouriteRecipesViewModel: FavouriteRecipesViewModel {
     // MARK: Output
     let items: Observable<[FavouriteRecept]> = Observable([])
     let loading: Observable<RecepiesListViewModelLoading?> = Observable(.none)
-    
-    init(favouriteRecipesListUseCase: FavouriteRecipesListUseCase, removeLikeInteractor: RemoveLikeInteractor, actions: RecepiesListViewModelActions? = nil) {
-        self.favouriteRecipesListUseCase = favouriteRecipesListUseCase
-        self.removeLikeInteractor = removeLikeInteractor
-        self.actions = actions
-    }
     
     private func load(loading: RecepiesListViewModelLoading) {
         self.loading.value = loading
@@ -53,6 +48,10 @@ class DefaultFavouriteRecipesViewModel: FavouriteRecipesViewModel {
                 self.items.value = []
             }
         })
+    }
+    
+    func setupActions(actions: RecepiesListViewModelActions) {
+        self.actions = actions
     }
 }
 
@@ -69,7 +68,7 @@ extension DefaultFavouriteRecipesViewModel {
 extension DefaultFavouriteRecipesViewModel {
     func removeLike(id: String, title: String) {
         let index = self.items.value.firstIndex { $0.id == id }
-            removeLikeInteractor?.removeLike(id: id, completion: {
+        AppDelegate.container.resolve(RemoveLikeInteractor.self)!.removeLike(id: id, completion: {
                 self.items.value.remove(at: index!)
                 DispatchQueue.main.async {
                     self.timer?.invalidate()

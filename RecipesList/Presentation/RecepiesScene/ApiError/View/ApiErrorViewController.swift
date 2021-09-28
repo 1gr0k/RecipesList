@@ -7,10 +7,11 @@
 
 import Foundation
 import UIKit
+import InjectPropertyWrapper
 
 class ApiErrorViewController:UIViewController, UITextViewDelegate {
     
-    private var viewModel: ApiErrorViewModel?
+    @Inject private var viewModel: ApiErrorViewModel
     weak var delegate: ApiErrorDelegate?
     
     private let screenRatio = 0.3
@@ -108,9 +109,8 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         setupViews()
     }
     
-    static func create(with viewModel: ApiErrorViewModel, delegate: ApiErrorDelegate) -> ApiErrorViewController {
+    static func create(delegate: ApiErrorDelegate) -> ApiErrorViewController {
         let view = ApiErrorViewController()
-        view.viewModel = viewModel
         view.delegate = delegate
         return view
     }
@@ -142,7 +142,7 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
             okButton.backgroundColor = .systemGray5
             apiTextfield.endEditing(false)
         case .ended:
-            viewModel?.setApi(api: apiTextfield.text)
+            viewModel.setApi(api: apiTextfield.text)
             self.dismiss(animated: true)
             self.delegate?.update()
         case .failed, .cancelled:

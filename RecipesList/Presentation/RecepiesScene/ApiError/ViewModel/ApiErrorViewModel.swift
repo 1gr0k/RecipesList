@@ -17,13 +17,8 @@ protocol ApiErrorViewModel: ApiErrorViewModelInput {
 
 class DefaultApiErrorViewModel: ApiErrorViewModel {
     
-    private let setApiKeyInteractor: SetApiKeyInteractor
-    
-    init(setApiKeyInteractor: SetApiKeyInteractor) {
-        self.setApiKeyInteractor = setApiKeyInteractor
-    }
     
     func setApi(api: String) {
-        setApiKeyInteractor.setApiKey(api: api)
+        AppDelegate.container.resolve(SetApiKeyInteractor.self)?.setApiKey(api: api)
     }
 }

@@ -9,14 +9,12 @@ import Foundation
 
 final class DefaultRecepiesQueriesRepository {
     
-    private let dataTransferService: DataTransferService
-    private var recepiesQueriesPersistentStorage: RecepiesQueriesStorage
-    
-    init(dataTransferService: DataTransferService,
-         recepiesQueriesPersistentStorage: RecepiesQueriesStorage) {
-        self.dataTransferService = dataTransferService
-        self.recepiesQueriesPersistentStorage = recepiesQueriesPersistentStorage
-    }
+    private lazy var dataTransferService: DataTransferService = {
+        AppDelegate.container.resolve(DataTransferService.self, name: "apiDataTransferService")!
+    }()
+    private lazy var recepiesQueriesPersistentStorage: RecepiesQueriesStorage = {
+        AppDelegate.container.resolve(RecepiesQueriesStorage.self, name: "recepiesQueriesStorage")!
+    }()
 }
 
 extension DefaultRecepiesQueriesRepository: RecepiesQueriesRepository {

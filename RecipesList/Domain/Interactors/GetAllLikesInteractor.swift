@@ -6,13 +6,12 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 class GetAllLikesInteractor {
-    private let favouriteRecipesStorage: FavouriteRecipesStorage
-    
-    init(favouriteRecipesStorage: FavouriteRecipesStorage) {
-        self.favouriteRecipesStorage = favouriteRecipesStorage
-    }
+        
+    @Inject private var favouriteRecipesStorage: FavouriteRecipesStorage
+
     func getFavourite(completion: @escaping (Result<FavouriteRecipes, CoreDataStorageError>) ->Void)  {
         favouriteRecipesStorage.getFavourite { result in
             if case .success(_) = result {

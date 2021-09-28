@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 struct RecepiesListViewModelActions {
     let showRecipeDetails: (String) -> Void
@@ -30,6 +31,7 @@ protocol RecepiesListViewModelInput {
     func refresh()
     func viewDisappear()
     func showApiError()
+    func setupActions(actions: RecepiesListViewModelActions?)
     
 }
 
@@ -53,11 +55,17 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate
     
     static let itemsPerPage = 10
     
-    private let favouriteRecepiesUseCase: RecipesListWithFavouritesUseCase
-    private let actions: RecepiesListViewModelActions?
-    private let setLikeInteractor: SetLikeInteractor?
-    private let removeLikeInteractor: RemoveLikeInteractor?
+    @Inject private var favouriteRecepiesUseCase: RecipesListWithFavouritesUseCase
+    private var actions: RecepiesListViewModelActions?
     private var timer: Timer?
+    
+    private lazy var setLikeInteractor: SetLikeInteractor = {
+        AppDelegate.container.resolve(SetLikeInteractor.self)!
+    }()
+    
+    private lazy var removeLikeInteractor: RemoveLikeInteractor = {
+        AppDelegate.container.resolve(RemoveLikeInteractor.self, name: "removeLikeInteractor")!
+    }()
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
@@ -83,12 +91,8 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate
     
     //MARK: Init
     
-    init(favouriteRecipesUseCase: RecipesListWithFavouritesUseCase,
-         actions: RecepiesListViewModelActions? = nil, setLikeInteractor: SetLikeInteractor, removeLikeInteractor: RemoveLikeInteractor) {
-        self.favouriteRecepiesUseCase = favouriteRecipesUseCase
+    func setupActions(actions: RecepiesListViewModelActions? = nil) {
         self.actions = actions
-        self.setLikeInteractor = setLikeInteractor
-        self.removeLikeInteractor = removeLikeInteractor
     }
     
     //MARK: - Private
@@ -188,7 +192,7 @@ extension DefaultRecipesListViewModel {
 extension DefaultRecipesListViewModel {
     func setLike(id: String) {
         
-        setLikeInteractor?.setLike(id: id, completion: {
+        setLikeInteractor.setLike(id: id, completion: {
             self.items = self.items.map({
                 
                 $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: true) : $0
@@ -201,8 +205,7 @@ extension DefaultRecipesListViewModel {
     }
     
     func removeLike(id: String) {
-        
-        removeLikeInteractor?.removeLike(id: id, completion: {
+        AppDelegate.container.resolve(RemoveLikeInteractor.self)!.removeLike(id: id, completion: {
             self.items = self.items.map({
                 $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: false) : $0
             })

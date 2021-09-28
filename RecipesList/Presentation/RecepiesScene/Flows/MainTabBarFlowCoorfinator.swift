@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwinjectStoryboard
+import InjectPropertyWrapper
 
 protocol MainTabBarFlowCoordinatorDependencies  {
     func makeMainTabBarViewController(views: [UINavigationController]) -> MainTabBarController
@@ -15,15 +17,10 @@ protocol MainTabBarFlowCoordinatorDependencies  {
 final class MainTabBarFlowCoordinator {
 
     private weak var window: UIWindow?
-    private let dependencies: MainTabBarFlowCoordinatorDependencies
-    private let recepiesSceneDIContainer: RecipesSceneDIContainer
+    @Inject private var recepiesSceneDIContainer: RecipesSceneDIContainer
     
-    init(window: UIWindow,
-         dependencies: MainTabBarFlowCoordinatorDependencies,
-         recepiesSceneDIContainer: RecipesSceneDIContainer) {
+    init(window: UIWindow) {
         self.window = window
-        self.dependencies = dependencies
-        self.recepiesSceneDIContainer = recepiesSceneDIContainer
     }
     
     func start() {
@@ -31,12 +28,14 @@ final class MainTabBarFlowCoordinator {
         let mainListNavigationController = UINavigationController()
         let favouriteListNavigationController = UINavigationController()
         
-        let appDIContainer = AppDIContainer()
-        let appFlowCoordinator = AppFlowCoordinator(recepiesDIContainer: recepiesSceneDIContainer, appDIContainer: appDIContainer)
+        let appFlowCoordinator = AppFlowCoordinator()
         
         appFlowCoordinator.startRecipesList(navigationController: mainListNavigationController)
         appFlowCoordinator.startFavouriteList(navigationController: favouriteListNavigationController)
         
-        window?.rootViewController = dependencies.makeMainTabBarViewController(views: [mainListNavigationController, favouriteListNavigationController])
+        let storyboard = SwinjectStoryboard.create(name: "MainTabBarController", bundle: nil, container: AppDelegate.container)
+        let vc = storyboard.instantiateInitialViewController()! as! MainTabBarController
+        vc.setupViews(views: [mainListNavigationController, favouriteListNavigationController])
+        window?.rootViewController = vc
     }
 }

@@ -6,40 +6,34 @@
 //
 
 import UIKit
+import InjectPropertyWrapper
 
 final class AppFlowCoordinator {
 
     var navigationController: UINavigationController?
     private var window: UIWindow?
-    private var recepiesDIContainer: RecipesSceneDIContainer?
-    private let appDIContainer: AppDIContainer
+    @Inject private var appDIContainer: RecipesSceneDIContainer
     
-    init(recepiesDIContainer: RecipesSceneDIContainer,
-             appDIContainer: AppDIContainer) {
-            self.recepiesDIContainer = recepiesDIContainer
-            self.appDIContainer = appDIContainer
-        }
+    init() {}
 
 
-    init(window: UIWindow,
-         appDIContainer: AppDIContainer) {
+    init(window: UIWindow) {
         self.window = window
-        self.appDIContainer = appDIContainer
     }
 
     func start() {
-        let recepiesSceneDIContainer = appDIContainer.makeRecepiesSceneDIContainer()
+        let recepiesSceneDIContainer = appDIContainer
         let flow = recepiesSceneDIContainer.makeMainTabBarFlowCoordinator(window: window!, recepiesSceneDIContainer: recepiesSceneDIContainer)
         flow.start()
     }
 
     func startRecipesList(navigationController: UINavigationController) {
-        let flow = recepiesDIContainer!.makeRecepiesSearchFlowCoordinator(navigationController: navigationController)
+        let flow = appDIContainer.makeRecepiesSearchFlowCoordinator(navigationController: navigationController)
         flow.start()
     }
     
     func startFavouriteList(navigationController: UINavigationController) {
-        let flow = recepiesDIContainer!.makeFavouriteRecipesFlowCoordinator(navigationController: navigationController)
+        let flow = appDIContainer.makeFavouriteRecipesFlowCoordinator(navigationController: navigationController)
         flow.start()
     }
 }

@@ -9,11 +9,9 @@ import Foundation
 
 final class DefaultDishImagesRepository {
     
-    private let dataTransferService: DataTransferService
-
-    init(dataTransferService: DataTransferService) {
-        self.dataTransferService = dataTransferService
-    }
+    private lazy var dataTransferService: DataTransferService = {
+        AppDelegate.container.resolve(DataTransferService.self, name: "imageDataTransferService")!
+    }()
 }
 
 extension DefaultDishImagesRepository: DishImagesRepository {

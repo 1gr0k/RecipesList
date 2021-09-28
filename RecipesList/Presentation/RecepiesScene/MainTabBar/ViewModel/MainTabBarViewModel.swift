@@ -10,6 +10,7 @@ import UIKit
 
 protocol MainTabBarViewModelInput {
     func viewDidLoad()
+    func setupViews(views: [UINavigationController])
 }
 
 protocol MainTabBarViewModelOutput {
@@ -20,7 +21,7 @@ protocol MainTabBarViewModel: MainTabBarViewModelInput, MainTabBarViewModelOutpu
 
 class DefaultMainTabBarViewModel: MainTabBarViewModel {
     
-    init(views: [UINavigationController]) {
+    func setupViews(views: [UINavigationController]) {
         for view in views {
             if let viewVC = view.viewControllers.first {
                 switch viewVC {
@@ -38,6 +39,5 @@ class DefaultMainTabBarViewModel: MainTabBarViewModel {
     }
     
     func viewDidLoad() {
-//        print("didLoad")
     }
 }

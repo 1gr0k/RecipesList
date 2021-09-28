@@ -7,20 +7,23 @@
 
 import UIKit
 import SwiftUI
+import InjectPropertyWrapper
 
 private let imageRatio: Float = 370 / 556
 
 class RecipeDetailsViewController: UIViewController, StoryboardInstantiable {
     
     @IBOutlet weak var detailsCollectionView: UICollectionView!
-    private var viewModel: RecipeDetailsViewModel!
-    private var dishImageRepository: DishImagesRepository!
+    @Inject private var viewModel: RecipeDetailsViewModel
+    @Inject private var dishImageRepository: DishImagesRepository
     
-    static func create(with viewModel: RecipeDetailsViewModel, dishImagesRepository: DishImagesRepository) -> RecipeDetailsViewController {
+    static func create() -> RecipeDetailsViewController {
         let view = RecipeDetailsViewController.instantiateViewController()
-        view.viewModel = viewModel
-        view.dishImageRepository = dishImagesRepository
         return view
+    }
+    
+    func setupId(id: String) {
+        viewModel.setupId(id: id)
     }
     
     override func viewDidLoad() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A204FF326FDEBA3002BA09A /* SWinjectContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */; };
 		1A233FD326F0D74300FF0101 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */; };
 		1A233FD426F0D74300FF0101 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FD126F0D74300FF0101 /* MainTabBarController.swift */; };
 		1A233FD526F0D74300FF0101 /* MainTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */; };
@@ -124,6 +125,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWinjectContainer.swift; sourceTree = "<group>"; };
 		1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		1A233FD126F0D74300FF0101 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTabBarController.storyboard; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				1A61E9CA26A1BC0E007AF003 /* AppConfigurations.swift */,
 				1A61E9CE26A1BE3B007AF003 /* AppFlowCoordinator.swift */,
 				1A61E98226A03071007AF003 /* DIContainer */,
+				1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				1AA694B926CBBFBB00E949CC /* RecipeDetailsHeaderViewCell.swift in Sources */,
 				1A61E9A226A04894007AF003 /* RecipesResponseStorage.swift in Sources */,
 				1A233FDC26F0E05D00FF0101 /* ApiErrorViewController.swift in Sources */,
+				1A204FF326FDEBA3002BA09A /* SWinjectContainer.swift in Sources */,
 				1AB8B38226AAC9E2000A0115 /* DetailRecipe.swift in Sources */,
 				1A61E9CF26A1BE3B007AF003 /* AppFlowCoordinator.swift in Sources */,
 				1A684BA726BAC55B00CEFA28 /* RecipesListTableManager.swift in Sources */,
@@ -1198,7 +1202,7 @@
 			baseConfigurationReference = 20B655F1D1BAF556439DE59B /* Pods-RecipesList.debug.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = c7c0e59913b348b9817373d009fbc9;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1221,7 +1225,7 @@
 			baseConfigurationReference = 502032A5727CDB6FB16FA8AA /* Pods-RecipesList.release.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = c7c0e59913b348b9817373d009fbc9;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

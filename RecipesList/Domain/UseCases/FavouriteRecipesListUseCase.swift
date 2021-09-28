@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 enum FavouritesErros: Error {
     case EmptyList
@@ -17,16 +18,13 @@ protocol FavouriteRecipesListUseCase {
 
 final class DefaultFavouriteRecipesListUseCase: FavouriteRecipesListUseCase {
     
-    
-    private let getAllLikesInteractor: GetAllLikesInteractor
-    private let recipesRepository: RecepiesRepository
+    @Inject private var recipesRepository: RecepiesRepository
     private var result: FavouriteRecipes?
     private var requestValue: FavouriteRecipesQuery?
     
-    init(getAllLikesInteractor: GetAllLikesInteractor, recepiesRepository: RecepiesRepository) {
-        self.getAllLikesInteractor = getAllLikesInteractor
-        self.recipesRepository = recepiesRepository
-    }
+    private lazy var getAllLikesInteractor: GetAllLikesInteractor = {
+        AppDelegate.container.resolve(GetAllLikesInteractor.self)!
+    }()
     
     func execute(completion: @escaping (Result<FavouriteRecipes, Error>) -> Void) {
         let queue = DispatchQueue(label: "getingFavouritesListQueue", attributes: .concurrent)
