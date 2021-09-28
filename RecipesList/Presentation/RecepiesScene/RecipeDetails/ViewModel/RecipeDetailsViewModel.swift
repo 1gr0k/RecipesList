@@ -33,7 +33,6 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
     
     @Inject private var recepiesRepository: RecepiesRepository
     private var detailLoadTask: Cancellable? { willSet { detailLoadTask?.cancel() } }
-    @Inject private var dependencies: RecipesSceneDIContainer
     
     var id: String? = "661640"
     var imagePath: String? = "Stilton-Balsamic-Pizza"

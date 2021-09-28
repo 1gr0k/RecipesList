@@ -20,14 +20,15 @@ extension Container: InjectPropertyWrapper.Resolver {
         registerConfigurations()
         registerRepositories()
         registerUseCases()
-        registerContainer()
         registerWindow()
+        registerFlowCoordinators()
         
         registerRecipeDetais()
         registerRecipesList()
         registerFavouriteRecipesList()
         registerApiError()
         registerTabBar()
+        
     }
     
     func registerInteractors() {
@@ -115,12 +116,6 @@ extension Container: InjectPropertyWrapper.Resolver {
         }
     }
     
-    func registerContainer() {
-        self.register(RecipesSceneDIContainer.self) { _ in
-            RecipesSceneDIContainer()
-        }
-    }
-    
     func registerWindow() {
         self.register(UIWindow.self, name: "mainWindow") { _ in
             UIWindow(frame: UIScreen.main.bounds)
@@ -175,5 +170,22 @@ extension Container: InjectPropertyWrapper.Resolver {
         self.register(MainTabBarViewModel.self) { _ in
             DefaultMainTabBarViewModel()
         }
+    }
+    
+    func registerFlowCoordinators() {
+        
+        self.register(MainTabBarFlowCoordinator.self) { r, window in
+            return MainTabBarFlowCoordinator(window: window)
+        }
+        
+        self.register(RecipesSearchFlowCoordinator.self) { _, navigationController in
+            RecipesSearchFlowCoordinator(navigationController: navigationController)
+        }
+        
+        self.register(FavouriteRecipesListFlowCoordinator.self) { _, navigationController in
+            FavouriteRecipesListFlowCoordinator(navigationController: navigationController)
+        }
+        
+        
     }
 }

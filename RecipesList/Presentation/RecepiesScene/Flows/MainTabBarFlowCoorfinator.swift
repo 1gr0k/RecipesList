@@ -17,7 +17,6 @@ protocol MainTabBarFlowCoordinatorDependencies  {
 final class MainTabBarFlowCoordinator {
 
     private weak var window: UIWindow?
-    @Inject private var recepiesSceneDIContainer: RecipesSceneDIContainer
     
     init(window: UIWindow) {
         self.window = window

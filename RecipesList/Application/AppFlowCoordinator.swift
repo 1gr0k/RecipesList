@@ -12,7 +12,6 @@ final class AppFlowCoordinator {
 
     var navigationController: UINavigationController?
     private var window: UIWindow?
-    @Inject private var appDIContainer: RecipesSceneDIContainer
     
     init() {}
 
@@ -22,18 +21,17 @@ final class AppFlowCoordinator {
     }
 
     func start() {
-        let recepiesSceneDIContainer = appDIContainer
-        let flow = recepiesSceneDIContainer.makeMainTabBarFlowCoordinator(window: window!, recepiesSceneDIContainer: recepiesSceneDIContainer)
+        let flow = AppDelegate.container.resolve(MainTabBarFlowCoordinator.self, argument: window!)!
         flow.start()
     }
 
     func startRecipesList(navigationController: UINavigationController) {
-        let flow = appDIContainer.makeRecepiesSearchFlowCoordinator(navigationController: navigationController)
+        let flow = AppDelegate.container.resolve(RecipesSearchFlowCoordinator.self, argument: navigationController)!
         flow.start()
     }
     
     func startFavouriteList(navigationController: UINavigationController) {
-        let flow = appDIContainer.makeFavouriteRecipesFlowCoordinator(navigationController: navigationController)
+        let flow = AppDelegate.container.resolve(FavouriteRecipesListFlowCoordinator.self, argument: navigationController)!
         flow.start()
     }
 }
