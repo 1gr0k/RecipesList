@@ -59,13 +59,8 @@ final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate
     private var actions: RecepiesListViewModelActions?
     private var timer: Timer?
     
-    private lazy var setLikeInteractor: SetLikeInteractor = {
-        AppDelegate.container.resolve(SetLikeInteractor.self)!
-    }()
-    
-    private lazy var removeLikeInteractor: RemoveLikeInteractor = {
-        AppDelegate.container.resolve(RemoveLikeInteractor.self, name: "removeLikeInteractor")!
-    }()
+    @Inject private var setLikeInteractor: SetLikeInteractor
+    @Inject private var removeLikeInteractor: RemoveLikeInteractor
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
@@ -205,7 +200,7 @@ extension DefaultRecipesListViewModel {
     }
     
     func removeLike(id: String) {
-        AppDelegate.container.resolve(RemoveLikeInteractor.self)!.removeLike(id: id, completion: {
+        removeLikeInteractor.removeLike(id: id, completion: {
             self.items = self.items.map({
                 $0.id == id ? .init(id: $0.id, title: $0.title, image: $0.image, favourite: false) : $0
             })

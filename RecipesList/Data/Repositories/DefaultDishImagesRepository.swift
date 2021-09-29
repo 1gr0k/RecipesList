@@ -6,12 +6,11 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 final class DefaultDishImagesRepository {
     
-    private lazy var dataTransferService: DataTransferService = {
-        AppDelegate.container.resolve(DataTransferService.self, name: "imageDataTransferService")!
-    }()
+    @Inject(name: "imageDataTransferService") private var dataTransferService: DataTransferService
 }
 
 extension DefaultDishImagesRepository: DishImagesRepository {

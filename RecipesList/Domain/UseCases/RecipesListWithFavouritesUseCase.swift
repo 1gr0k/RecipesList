@@ -19,9 +19,7 @@ final class DefaultFavoritesRecipesUseCase: RecipesListWithFavouritesUseCase {
     @Inject private var recipiesRepository: RecepiesRepository
     @Inject private var recepiesQueriesRepository: RecepiesQueriesRepository
     
-    private lazy var getAllLikesInteractor : GetAllLikesInteractor = {
-        AppDelegate.container.resolve(GetAllLikesInteractor.self)!
-    }()
+    @Inject private var getAllLikesInteractor : GetAllLikesInteractor
     
     private var favourites: FavouriteRecipes?
     

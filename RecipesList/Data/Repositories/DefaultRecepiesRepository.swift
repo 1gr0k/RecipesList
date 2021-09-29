@@ -6,14 +6,11 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 final class DefaultRecepiesRepository {
-    private lazy var dataTransferService: DataTransferService = {
-        AppDelegate.container.resolve(DataTransferService.self, name: "apiDataTransferService")!
-    }()
-    private lazy var cache: RecipesResponseStorage = {
-        AppDelegate.container.resolve(RecipesResponseStorage.self)!
-    }()
+    @Inject(name: "apiDataTransferService") private var dataTransferService: DataTransferService
+    @Inject private var cache: RecipesResponseStorage
 
 }
 

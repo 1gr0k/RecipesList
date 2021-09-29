@@ -31,6 +31,7 @@ class DefaultFavouriteRecipesViewModel: FavouriteRecipesViewModel {
     @Inject private var favouriteRecipesListUseCase: FavouriteRecipesListUseCase
     private var actions: RecepiesListViewModelActions?
     private var timer: Timer?
+    @Inject private var removeLikeInteractor: RemoveLikeInteractor
     
     private var recepiesLoadTask: Cancellable? { willSet {recepiesLoadTask?.cancel() } }
     
@@ -68,7 +69,7 @@ extension DefaultFavouriteRecipesViewModel {
 extension DefaultFavouriteRecipesViewModel {
     func removeLike(id: String, title: String) {
         let index = self.items.value.firstIndex { $0.id == id }
-        AppDelegate.container.resolve(RemoveLikeInteractor.self)!.removeLike(id: id, completion: {
+        removeLikeInteractor.removeLike(id: id, completion: {
                 self.items.value.remove(at: index!)
                 DispatchQueue.main.async {
                     self.timer?.invalidate()

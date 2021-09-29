@@ -6,15 +6,12 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 final class DefaultRecepiesQueriesRepository {
     
-    private lazy var dataTransferService: DataTransferService = {
-        AppDelegate.container.resolve(DataTransferService.self, name: "apiDataTransferService")!
-    }()
-    private lazy var recepiesQueriesPersistentStorage: RecepiesQueriesStorage = {
-        AppDelegate.container.resolve(RecepiesQueriesStorage.self, name: "recepiesQueriesStorage")!
-    }()
+    @Inject(name: "apiDataTransferService") private var dataTransferService: DataTransferService
+    @Inject(name: "recepiesQueriesStorage") private var recepiesQueriesPersistentStorage: RecepiesQueriesStorage
 }
 
 extension DefaultRecepiesQueriesRepository: RecepiesQueriesRepository {

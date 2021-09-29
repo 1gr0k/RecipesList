@@ -22,9 +22,7 @@ final class DefaultFavouriteRecipesListUseCase: FavouriteRecipesListUseCase {
     private var result: FavouriteRecipes?
     private var requestValue: FavouriteRecipesQuery?
     
-    private lazy var getAllLikesInteractor: GetAllLikesInteractor = {
-        AppDelegate.container.resolve(GetAllLikesInteractor.self)!
-    }()
+    @Inject private var getAllLikesInteractor: GetAllLikesInteractor
     
     func execute(completion: @escaping (Result<FavouriteRecipes, Error>) -> Void) {
         let queue = DispatchQueue(label: "getingFavouritesListQueue", attributes: .concurrent)
