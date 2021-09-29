@@ -11,7 +11,7 @@ import InjectPropertyWrapper
 final class DefaultRecepiesQueriesRepository {
     
     @Inject(name: "apiDataTransferService") private var dataTransferService: DataTransferService
-    @Inject(name: "recepiesQueriesStorage") private var recepiesQueriesPersistentStorage: RecepiesQueriesStorage
+    @Inject private var recepiesQueriesPersistentStorage: RecepiesQueriesStorage
 }
 
 extension DefaultRecepiesQueriesRepository: RecepiesQueriesRepository {
