@@ -18,8 +18,7 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
     static let reuseIdentifier = String(describing: FavouriteRecipesTableViewCell.self)
     
     private var viewModel: RecepiesListItemViewModel!
-    private var imageRepository: DishImagesRepository?
-    private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
+//    private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
     private lazy var dishImageView: UIImageView = {
         let dishImageView = UIImageView()
@@ -79,9 +78,8 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
         externalStack.removeFromSuperview()
     }
     
-    func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
+    func fill(with viewModel: RecepiesListItemViewModel) {
         self.viewModel = viewModel
-        self.imageRepository = dishImageRepository
         setupViews()
         updateDishImage()
     }

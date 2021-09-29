@@ -12,12 +12,10 @@ import Kingfisher
 class RecipeDetailsHeaderViewCell: UICollectionViewCell {
     
     private var imageSource: String?
-    private var imageRepository: DishImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
-    func fill(with imageSource: String, dishImageRepository: DishImagesRepository?) {
+    func fill(with imageSource: String) {
         self.imageSource = imageSource
-        self.imageRepository = dishImageRepository
         setupImage()
     }
     

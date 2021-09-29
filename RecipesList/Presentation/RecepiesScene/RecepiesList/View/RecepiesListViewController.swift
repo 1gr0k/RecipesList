@@ -18,7 +18,6 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
     @IBOutlet private(set) var suggestionsListContainer: UIView!
     
     @Inject private var viewModel: RecepiesListViewModel!
-    @Inject private var dishImagesRepository: DishImagesRepository
     
     private var recepiesTabelViewController: RecepiesListTableViewController?
     private var searchController = UISearchController(searchResultsController: nil)
@@ -61,7 +60,6 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
             let destinationVC = segue.destination as? RecepiesListTableViewController {
             recepiesTabelViewController = destinationVC
             recepiesTabelViewController?.viewModel = viewModel
-            recepiesTabelViewController?.dishImageRepository = dishImagesRepository
         }
     }
     

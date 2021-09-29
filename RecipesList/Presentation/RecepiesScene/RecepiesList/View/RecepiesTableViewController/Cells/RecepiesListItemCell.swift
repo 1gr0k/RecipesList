@@ -40,16 +40,14 @@ final class RecepiesListItemCell: UITableViewCell {
     static let height = CGFloat(300)
     
     private var viewModel: RecepiesListItemViewModel!
-    private var imageRepository: DishImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
     override func prepareForReuse() {
         externalStack!.removeFromSuperview()
     }
     
-    func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
+    func fill(with viewModel: RecepiesListItemViewModel) {
         self.viewModel = viewModel
-        self.imageRepository = dishImageRepository
         setupViews()
         updateDishImage()
         

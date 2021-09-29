@@ -15,13 +15,13 @@ struct APIEndpoints {
                         queryParametersEncodable: recepiesRequestDTO)
     }
     
-    static func getRecipeImage(path: String, imageSize: RecipeImageSizes) -> Endpoint<Data> {
-        
-        return Endpoint(path: "recipeImages/\(path)-\(imageSize.rawValue).jpg",
-                        method: .get,
-                        responseDecoder: RawDataResponseDecoder())
-            
-    }
+//    static func getRecipeImage(path: String, imageSize: RecipeImageSizes) -> Endpoint<Data> {
+//        
+//        return Endpoint(path: "recipeImages/\(path)-\(imageSize.rawValue).jpg",
+//                        method: .get,
+//                        responseDecoder: RawDataResponseDecoder())
+//            
+//    }
     
     
     static func getRecipeDetails(with recipeDetailsRequestDTO: RecipeDetailsRequestDTO) -> Endpoint<RecipeDetailsResponseDTO> {
@@ -33,12 +33,12 @@ struct APIEndpoints {
     }
     
    
-    static func  getIngredientImage(path: String) -> Endpoint<Data> {
-        return Endpoint(path: "cdn/ingredients_250x250/\(path).jpg",
-                        method: .get,
-                        responseDecoder: RawDataResponseDecoder())
-            
-    }
+//    static func  getIngredientImage(path: String) -> Endpoint<Data> {
+//        return Endpoint(path: "cdn/ingredients_250x250/\(path).jpg",
+//                        method: .get,
+//                        responseDecoder: RawDataResponseDecoder())
+//
+//    }
     
     static func getRecipesListByIds(with favouriteRecipesRequestDTO: FavouriteRecipesRequestDTO) -> Endpoint<[FavouriteRecipesResponseDTO.FavouriteReceptDTO]>{
         return Endpoint(path: "recipes/informationBulk",

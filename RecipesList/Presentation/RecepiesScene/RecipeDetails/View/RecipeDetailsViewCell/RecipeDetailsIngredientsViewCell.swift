@@ -10,7 +10,6 @@ import UIKit
 class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
     
     private var viewModel: RecipesList.ExtendedIngredient!
-    private var imageRepository: DishImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     private var imagePic: UIImage?
     private var stackLink: UIStackView?
@@ -20,10 +19,9 @@ class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
         stackLink?.removeFromSuperview()
     }
     
-    func fill(with viewModel: RecipesList.ExtendedIngredient, dishImageRepository: DishImagesRepository?) {
+    func fill(with viewModel: RecipesList.ExtendedIngredient) {
         
         self.viewModel = viewModel
-        self.imageRepository = dishImageRepository
         setupStack()
     }
     
