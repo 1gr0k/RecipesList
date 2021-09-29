@@ -7,17 +7,17 @@
 
 import Foundation
 import UIKit
+import InjectPropertyWrapper
 
 final class RecipesListTableManager: NSObject {
 
     private unowned var tableView: UITableView!
     private var dataSource: [Any]
-    private var dishImageRepository: DishImagesRepository
+    @Inject private var dishImageRepository: DishImagesRepository
     private var viewModel: FavouriteRecipesViewModel?
 
-    init(tableView: UITableView, data: [Any], dishImageRepository: DishImagesRepository, viewModel: FavouriteRecipesViewModel) {
+    init(tableView: UITableView, data: [Any], viewModel: FavouriteRecipesViewModel) {
         self.tableView = tableView
-        self.dishImageRepository = dishImageRepository
         dataSource = data
         super.init()
         setupTableView()
@@ -30,9 +30,7 @@ final class RecipesListTableManager: NSObject {
         UIView.transition(with: tableView,
                           duration: 0.35,
                           options: .transitionCrossDissolve,
-//                          options: .showHideTransitionViews,
                           animations: { self.tableView.reloadData() })
-//        tableView.reloadData()
     }
 
     private func setupTableView() {
@@ -46,10 +44,7 @@ final class RecipesListTableManager: NSObject {
     }
     
     func updateLoading(_ loading: RecepiesListViewModelLoading?) {
-//        switch loading {
-//        case .fullScreen, .none:
             tableView.tableFooterView = nil
-//        }
     }
 }
 

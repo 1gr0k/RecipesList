@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import InjectPropertyWrapper
 
 class FavouriteRecipesTableViewController: UITableViewController, StoryboardInstantiable {
     
-    private var viewModel: FavouriteRecipesViewModel!
+    @Inject private var viewModel: FavouriteRecipesViewModel
     private var tableViewManager: RecipesListTableManager?
     
-    var dishImagesRepository: DishImagesRepository?
+    @Inject var dishImagesRepository: DishImagesRepository
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +31,19 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
         NotificationCenter.default.removeObserver(self)
     }
     
-    static func create(viewModel: FavouriteRecipesViewModel, dishImagesRepository: DishImagesRepository?) -> FavouriteRecipesTableViewController {
+    static func create() -> FavouriteRecipesTableViewController {
         let view = FavouriteRecipesTableViewController.instantiateViewController()
-        view.viewModel = viewModel
-        view.dishImagesRepository = dishImagesRepository
         
         NotificationCenter.default.addObserver(view, selector: #selector(notificationUpdateItems), name: NSNotification.Name(rawValue: "FavouriteListChanged"), object: nil)
         return view
     }
+    
+    func setupActions(actions: RecepiesListViewModelActions) {
+        viewModel.setupActions(actions: actions)
+    }
 
     func setupUI(){
-        tableViewManager = RecipesListTableManager(tableView: tableView, data: viewModel.items.value, dishImageRepository: dishImagesRepository!, viewModel: viewModel)
+        tableViewManager = RecipesListTableManager(tableView: tableView, data: viewModel.items.value, viewModel: viewModel)
         self.view.backgroundColor = .systemGray5
     }
     

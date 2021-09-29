@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 protocol SearchRecepiesUseCase {
     func execute(requestValue: SearchRecepiesUseCaseRequestValue,
@@ -15,15 +16,8 @@ protocol SearchRecepiesUseCase {
 
 final class DefaultSearchRecepiesUseCase: SearchRecepiesUseCase {
     
-    private let recipiesRepository: RecepiesRepository
-    private let recepiesQueriesRepository: RecepiesQueriesRepository
-    
-    init(recepiesRepository: RecepiesRepository,
-         recepiesQueriesRepository: RecepiesQueriesRepository) {
-        
-        self.recipiesRepository = recepiesRepository
-        self.recepiesQueriesRepository = recepiesQueriesRepository
-    }
+    @Inject private var recipiesRepository: RecepiesRepository
+    @Inject private var recepiesQueriesRepository: RecepiesQueriesRepository
     
     func execute(requestValue: SearchRecepiesUseCaseRequestValue,
                  cached: @escaping (RecepiesPage) -> Void,

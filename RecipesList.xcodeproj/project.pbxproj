@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A204FF326FDEBA3002BA09A /* SWinjectContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */; };
 		1A233FD326F0D74300FF0101 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */; };
 		1A233FD426F0D74300FF0101 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FD126F0D74300FF0101 /* MainTabBarController.swift */; };
 		1A233FD526F0D74300FF0101 /* MainTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */; };
@@ -23,7 +24,6 @@
 		1A61E97826A01F0B007AF003 /* RecepiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E97726A01F0B007AF003 /* RecepiesListViewModel.swift */; };
 		1A61E97B26A01F9B007AF003 /* RecepiesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E97A26A01F9B007AF003 /* RecepiesListTableViewController.swift */; };
 		1A61E98126A02E23007AF003 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */; };
-		1A61E98426A0309A007AF003 /* RecipesSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98326A0309A007AF003 /* RecipesSceneDIContainer.swift */; };
 		1A61E98726A03414007AF003 /* SearchRecepiesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */; };
 		1A61E98D26A038C9007AF003 /* RecepiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */; };
 		1A61E98F26A039AE007AF003 /* RecipeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E98E26A039AE007AF003 /* RecipeQuery.swift */; };
@@ -46,7 +46,6 @@
 		1A61E9C026A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9BF26A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift */; };
 		1A61E9C226A06B23007AF003 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9C126A06B23007AF003 /* APIEndpoints.swift */; };
 		1A61E9C526A07041007AF003 /* RecepiesResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9C426A07041007AF003 /* RecepiesResponseEntity+Mapping.swift */; };
-		1A61E9C926A1BBD3007AF003 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9C826A1BBD3007AF003 /* AppDIContainer.swift */; };
 		1A61E9CB26A1BC0E007AF003 /* AppConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9CA26A1BC0E007AF003 /* AppConfigurations.swift */; };
 		1A61E9CD26A1BD93007AF003 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9CC26A1BD92007AF003 /* AppAppearance.swift */; };
 		1A61E9CF26A1BE3B007AF003 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61E9CE26A1BE3B007AF003 /* AppFlowCoordinator.swift */; };
@@ -124,6 +123,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWinjectContainer.swift; sourceTree = "<group>"; };
 		1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		1A233FD126F0D74300FF0101 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1A233FD226F0D74300FF0101 /* MainTabBarController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTabBarController.storyboard; sourceTree = "<group>"; };
@@ -142,7 +142,6 @@
 		1A61E97726A01F0B007AF003 /* RecepiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListViewModel.swift; sourceTree = "<group>"; };
 		1A61E97A26A01F9B007AF003 /* RecepiesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesListTableViewController.swift; sourceTree = "<group>"; };
 		1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
-		1A61E98326A0309A007AF003 /* RecipesSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSceneDIContainer.swift; sourceTree = "<group>"; };
 		1A61E98626A03414007AF003 /* SearchRecepiesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecepiesUseCase.swift; sourceTree = "<group>"; };
 		1A61E98C26A038C9007AF003 /* RecepiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecepiesRepository.swift; sourceTree = "<group>"; };
 		1A61E98E26A039AE007AF003 /* RecipeQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeQuery.swift; sourceTree = "<group>"; };
@@ -165,7 +164,6 @@
 		1A61E9BF26A0681C007AF003 /* CoreDataRecepiesResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRecepiesResponseStorage.swift; sourceTree = "<group>"; };
 		1A61E9C126A06B23007AF003 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		1A61E9C426A07041007AF003 /* RecepiesResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecepiesResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
-		1A61E9C826A1BBD3007AF003 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		1A61E9CA26A1BC0E007AF003 /* AppConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurations.swift; sourceTree = "<group>"; };
 		1A61E9CC26A1BD92007AF003 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 		1A61E9CE26A1BE3B007AF003 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -476,8 +474,7 @@
 		1A61E98226A03071007AF003 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
-				1A61E9C826A1BBD3007AF003 /* AppDIContainer.swift */,
-				1A61E98326A0309A007AF003 /* RecipesSceneDIContainer.swift */,
+				1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -960,7 +957,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A61E9C926A1BBD3007AF003 /* AppDIContainer.swift in Sources */,
 				1AA694BA26CBBFBB00E949CC /* RecipeDetailsViewController.swift in Sources */,
 				1ACEA58726A8298800D6C35E /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
 				1A61E9B226A051FF007AF003 /* RecepiesResponseDTO + Mapping.swift in Sources */,
@@ -1008,6 +1004,7 @@
 				1AA694B926CBBFBB00E949CC /* RecipeDetailsHeaderViewCell.swift in Sources */,
 				1A61E9A226A04894007AF003 /* RecipesResponseStorage.swift in Sources */,
 				1A233FDC26F0E05D00FF0101 /* ApiErrorViewController.swift in Sources */,
+				1A204FF326FDEBA3002BA09A /* SWinjectContainer.swift in Sources */,
 				1AB8B38226AAC9E2000A0115 /* DetailRecipe.swift in Sources */,
 				1A61E9CF26A1BE3B007AF003 /* AppFlowCoordinator.swift in Sources */,
 				1A684BA726BAC55B00CEFA28 /* RecipesListTableManager.swift in Sources */,
@@ -1051,7 +1048,6 @@
 				1ACEA57F26A5A18600D6C35E /* UIViewController+ActivityIndicator.swift in Sources */,
 				1A61E9A526A04907007AF003 /* RecepiesQueriesStorage.swift in Sources */,
 				1A61E9DD26A56A48007AF003 /* RecepiesListItemViewModel.swift in Sources */,
-				1A61E98426A0309A007AF003 /* RecipesSceneDIContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,7 +1194,7 @@
 			baseConfigurationReference = 20B655F1D1BAF556439DE59B /* Pods-RecipesList.debug.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = c7c0e59913b348b9817373d009fbc9;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1221,7 +1217,7 @@
 			baseConfigurationReference = 502032A5727CDB6FB16FA8AA /* Pods-RecipesList.release.xcconfig */;
 			buildSettings = {
 				API_BASE_URL = "https://api.spoonacular.com/";
-				API_KEY = c7c0e59913b348b9817373d009fbc9;
+				API_KEY = c7c0e59913b348b9817373d009fbc9b5;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

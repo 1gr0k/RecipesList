@@ -6,17 +6,12 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 final class DefaultRecepiesQueriesRepository {
     
-    private let dataTransferService: DataTransferService
-    private var recepiesQueriesPersistentStorage: RecepiesQueriesStorage
-    
-    init(dataTransferService: DataTransferService,
-         recepiesQueriesPersistentStorage: RecepiesQueriesStorage) {
-        self.dataTransferService = dataTransferService
-        self.recepiesQueriesPersistentStorage = recepiesQueriesPersistentStorage
-    }
+    @Inject(name: "apiDataTransferService") private var dataTransferService: DataTransferService
+    @Inject(name: "recepiesQueriesStorage") private var recepiesQueriesPersistentStorage: RecepiesQueriesStorage
 }
 
 extension DefaultRecepiesQueriesRepository: RecepiesQueriesRepository {

@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import InjectPropertyWrapper
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate, StoryboardInstantiable {
     
-    private var viewModel: MainTabBarViewModel!
-    private var views: [UIViewController]?
+    @Inject private var viewModel: MainTabBarViewModel
+    private var views: [UINavigationController]?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -18,20 +19,17 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate, Stor
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
-        
         viewModel.viewDidLoad()
     }
     
-    func setupViews() {
-        self.viewControllers = views
+    func setupViews(views: [UINavigationController]) {
+        self.views = views
+        viewModel.setupViews(views: self.views!)
+        self.viewControllers = self.views
     }
     
-    static func create(viewModel: MainTabBarViewModel, views: [UIViewController]) -> MainTabBarController {
+    static func create() -> MainTabBarController {
         let view = MainTabBarController.instantiateViewController()
-        view.viewModel = viewModel
-        view.views = views
-    
         return view
     }
     

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 protocol RecipesListWithFavouritesUseCase {
     func execute(requestValue: FavoritesRecipesUseCaseRequestValue,
@@ -15,19 +16,12 @@ protocol RecipesListWithFavouritesUseCase {
 
 final class DefaultFavoritesRecipesUseCase: RecipesListWithFavouritesUseCase {
     
-    private let getAllLikesInteractor: GetAllLikesInteractor
-    private let recipiesRepository: RecepiesRepository
-    private let recepiesQueriesRepository: RecepiesQueriesRepository
+    @Inject private var recipiesRepository: RecepiesRepository
+    @Inject private var recepiesQueriesRepository: RecepiesQueriesRepository
+    
+    @Inject private var getAllLikesInteractor : GetAllLikesInteractor
     
     private var favourites: FavouriteRecipes?
-    
-    init(getFavouriteRecipesInteractor: GetAllLikesInteractor,
-         recepiesRepository: RecepiesRepository,
-         recepiesQueriesRepository: RecepiesQueriesRepository) {
-        self.getAllLikesInteractor = getFavouriteRecipesInteractor
-        self.recipiesRepository = recepiesRepository
-        self.recepiesQueriesRepository = recepiesQueriesRepository
-    }
     
     func execute(requestValue: FavoritesRecipesUseCaseRequestValue,
                  cached: @escaping (RecepiesPage) -> Void,

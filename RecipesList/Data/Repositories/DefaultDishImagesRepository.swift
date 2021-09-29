@@ -6,14 +6,11 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 final class DefaultDishImagesRepository {
     
-    private let dataTransferService: DataTransferService
-
-    init(dataTransferService: DataTransferService) {
-        self.dataTransferService = dataTransferService
-    }
+    @Inject(name: "imageDataTransferService") private var dataTransferService: DataTransferService
 }
 
 extension DefaultDishImagesRepository: DishImagesRepository {

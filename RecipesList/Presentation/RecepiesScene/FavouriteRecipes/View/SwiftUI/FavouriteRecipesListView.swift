@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import InjectPropertyWrapper
 
 struct FavouriteRecipesListView: View {
     
@@ -31,7 +32,7 @@ struct FavouriteRecipesListView: View {
                     }
                     .scaledToFit()
                     Spacer()
-                    AsyncImage(url: recept.id, dishImagesRepository: dishImagesRepository!, placeholder: {
+                    AsyncImage(url: recept.id, placeholder: {
                         ProgressView()
                         
                     }).aspectRatio(contentMode: .fit)
@@ -64,12 +65,11 @@ struct FavouriteRecipesListView: View {
 class ImageLoader: ObservableObject {
     @Published var image: UIImage?
     private let url: String
-    private let dishImagesRepository: DishImagesRepository
+    @Inject private var dishImagesRepository: DishImagesRepository
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
-    init(url: String, dishImagesRepository: DishImagesRepository) {
+    init(url: String) {
         self.url = url
-        self.dishImagesRepository = dishImagesRepository
     }
     
     deinit {
@@ -97,12 +97,11 @@ class ImageLoader: ObservableObject {
 struct AsyncImage<Placeholder: View>: View {
     @StateObject private var loader: ImageLoader
     private let placeholder: Placeholder
-    private let dishImagesRepository: DishImagesRepository
+    @Inject private var dishImagesRepository: DishImagesRepository
     
-    init(url: String, dishImagesRepository: DishImagesRepository, @ViewBuilder placeholder: () -> Placeholder) {
+    init(url: String, @ViewBuilder placeholder: () -> Placeholder) {
         self.placeholder = placeholder()
-        self.dishImagesRepository = dishImagesRepository
-        _loader = StateObject(wrappedValue: ImageLoader(url: url, dishImagesRepository: dishImagesRepository))
+        _loader = StateObject(wrappedValue: ImageLoader(url: url))
     }
     
     var body: some View {

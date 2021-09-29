@@ -6,13 +6,12 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 class SetLikeInteractor {
-    private let favouriteRecipesStorage: FavouriteRecipesStorage
     
-    init(favouriteRecipesStorage: FavouriteRecipesStorage) {
-        self.favouriteRecipesStorage = favouriteRecipesStorage
-    }
+    @Inject private var favouriteRecipesStorage: FavouriteRecipesStorage
+    
     func setLike(id: String, completion: @escaping () ->Void) {
         favouriteRecipesStorage.save(for: FavouriteRecipesDTO(id: id)) {
             completion()

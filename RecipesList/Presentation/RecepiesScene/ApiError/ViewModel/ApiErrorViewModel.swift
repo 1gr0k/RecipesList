@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 protocol ApiErrorViewModelInput {
     func setApi(api: String)
@@ -17,11 +18,8 @@ protocol ApiErrorViewModel: ApiErrorViewModelInput {
 
 class DefaultApiErrorViewModel: ApiErrorViewModel {
     
-    private let setApiKeyInteractor: SetApiKeyInteractor
+    @Inject private var setApiKeyInteractor: SetApiKeyInteractor
     
-    init(setApiKeyInteractor: SetApiKeyInteractor) {
-        self.setApiKeyInteractor = setApiKeyInteractor
-    }
     
     func setApi(api: String) {
         setApiKeyInteractor.setApiKey(api: api)

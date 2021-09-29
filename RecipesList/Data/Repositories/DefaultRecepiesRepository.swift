@@ -6,15 +6,12 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 final class DefaultRecepiesRepository {
-    private let dataTransferService: DataTransferService
-    private let cache: RecipesResponseStorage
-    
-    init(dataTransferService: DataTransferService, cache: RecipesResponseStorage) {
-        self.dataTransferService = dataTransferService
-        self.cache = cache
-    }
+    @Inject(name: "apiDataTransferService") private var dataTransferService: DataTransferService
+    @Inject private var cache: RecipesResponseStorage
+
 }
 
 extension DefaultRecepiesRepository: RecepiesRepository {

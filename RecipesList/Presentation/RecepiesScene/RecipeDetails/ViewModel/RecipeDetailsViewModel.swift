@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 enum SectionType: Int, CaseIterable {
     case header
@@ -16,11 +17,12 @@ enum SectionType: Int, CaseIterable {
 protocol RecipeDetailsViewModelInput {
     func viewDidLoad()
     func createApiErrorController() -> ApiErrorViewController
+    func setupId(id: String)
 }
 
 protocol RecipeDetailsViewModelOutput {
-    var id: String { get }
-    var imagePath: String { get }
+    var id: String? { get set }
+    var imagePath: String? { get set }
     var dataSource : Observable<[SectionType: [RecipeDetailCellViewModel]]?> { get }
     var error: Observable<String> { get }
 }
@@ -29,12 +31,11 @@ protocol RecipeDetailsViewModel: RecipeDetailsViewModelInput, RecipeDetailsViewM
 
 final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDelegate {
     
-    private let recepiesRepository: RecepiesRepository
+    @Inject private var recepiesRepository: RecepiesRepository
     private var detailLoadTask: Cancellable? { willSet { detailLoadTask?.cancel() } }
-    private let dependencies: RecipesSearchFlowCoordinatorDependencies
     
-    let id: String
-    let imagePath: String
+    var id: String? = "661640"
+    var imagePath: String? = "Stilton-Balsamic-Pizza"
     var dataSource : Observable<[SectionType: [RecipeDetailCellViewModel]]?> = Observable(nil)
     let error: Observable<String> = Observable("")
     
@@ -42,20 +43,18 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
         getDetails()
     }
 
-    init(id: String, recepiesRepository: RecepiesRepository, dependencies: RecipesSearchFlowCoordinatorDependencies) {
+    func setupId(id: String) {
         self.id = id
-        self.recepiesRepository = recepiesRepository
         self.imagePath = id.replacingOccurrences(of: " ", with: "-")
-        self.dependencies = dependencies
     }
     
     private func getDetails() {
    
-        detailLoadTask = recepiesRepository.fetchRecipeDetails(query: DetailRecipeQuery(query: id)) { result  in
+        detailLoadTask = recepiesRepository.fetchRecipeDetails(query: DetailRecipeQuery(query: id!)) { result  in
             switch result {
             case .success(let data):
                 var tempArray = [SectionType: [RecipeDetailCellViewModel]]()
-                let headerModel = HeaderRecipeDeatilsCellViewModel(title: data.title, image: self.imagePath)
+                let headerModel = HeaderRecipeDeatilsCellViewModel(title: data.title, image: self.imagePath!)
                 let dishTypesModel = DishTypesRecipeDetailsCellViewModel(dishTypes: data.dishTypes)
                 let ingredientsModels = data.extendedIngredients.map( {ExtendedIngredientsRecipeDetailsCellViewModel(id: $0.id, name: $0.name)} )
                 tempArray[.header] = [headerModel]
@@ -70,7 +69,9 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
     }
     
     func createApiErrorController() -> ApiErrorViewController {
-        return dependencies.makeApiErrorViewController(delegate: self)
+        let delegate: ApiErrorDelegate = self
+        let vc = AppDelegate.container.resolve(ApiErrorViewController.self, argument: delegate)!
+        return vc
     }
     
     func update() {
