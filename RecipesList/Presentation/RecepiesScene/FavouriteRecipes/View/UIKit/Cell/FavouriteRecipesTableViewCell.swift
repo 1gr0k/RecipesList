@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FavouriteRecipesTableViewCell: UITableViewCell {
     
@@ -87,16 +88,8 @@ class FavouriteRecipesTableViewCell: UITableViewCell {
     
     private func updateDishImage() {
         dishImageView.image = nil
-        guard let imagePath = viewModel.id else { return }
-        
-        imageLoadTask = imageRepository?.fetchImage(with: imagePath) { [weak self] result in
-            guard let self = self else { return }
-            guard self.viewModel.id == imagePath else { return }
-            if case let .success(data) = result {
-                self.dishImageView.image = UIImage(data: data)
-            }
-            self.imageLoadTask = nil
-        }
+        let url = URL(string: viewModel.image!)
+        dishImageView.kf.setImage(with: url, placeholder: UIImage(named: "Placeholder"), options: [.transition(.fade(0.3))])
     }
     
     func setupViews() {

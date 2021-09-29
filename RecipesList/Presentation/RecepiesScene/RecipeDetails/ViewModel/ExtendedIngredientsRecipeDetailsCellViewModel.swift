@@ -10,9 +10,11 @@ import Foundation
 class ExtendedIngredientsRecipeDetailsCellViewModel: RecipeDetailCellViewModel {
     let id: Int
     let name: String
+    let image: URL
     
-    init(id: Int, name: String) {
+    init(id: Int, name: String, image: URL) {
         self.id = id
         self.name = name
+        self.image = image
     }
 }

@@ -20,14 +20,17 @@ struct DetailRecipe: Equatable, Identifiable {
 struct ExtendedIngredient: Equatable, Identifiable {
     let id: Int
     let name: String
+    let image: URL?
     
     init(model: ExtendedIngredientsRecipeDetailsCellViewModel) {
         self.id = model.id
         self.name = model.name
+        self.image = model.image
     }
     
     init(id: Int, name: String) {
         self.id = id
         self.name = name
+        self.image = nil
     }
 }

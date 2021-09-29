@@ -22,7 +22,7 @@ protocol RecipeDetailsViewModelInput {
 
 protocol RecipeDetailsViewModelOutput {
     var id: String? { get set }
-    var imagePath: String? { get set }
+//    var imagePath: String? { get set }
     var dataSource : Observable<[SectionType: [RecipeDetailCellViewModel]]?> { get }
     var error: Observable<String> { get }
 }
@@ -32,10 +32,11 @@ protocol RecipeDetailsViewModel: RecipeDetailsViewModelInput, RecipeDetailsViewM
 final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDelegate {
     
     @Inject private var recepiesRepository: RecepiesRepository
+    @Inject private var config: AppConfiguration
     private var detailLoadTask: Cancellable? { willSet { detailLoadTask?.cancel() } }
     
-    var id: String? = "661640"
-    var imagePath: String? = "Stilton-Balsamic-Pizza"
+    var id: String?
+//    var imagePath: String?
     var dataSource : Observable<[SectionType: [RecipeDetailCellViewModel]]?> = Observable(nil)
     let error: Observable<String> = Observable("")
     
@@ -45,7 +46,7 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
 
     func setupId(id: String) {
         self.id = id
-        self.imagePath = id.replacingOccurrences(of: " ", with: "-")
+//        self.imagePath = id.replacingOccurrences(of: " ", with: "-")
     }
     
     private func getDetails() {
@@ -54,9 +55,9 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
             switch result {
             case .success(let data):
                 var tempArray = [SectionType: [RecipeDetailCellViewModel]]()
-                let headerModel = HeaderRecipeDeatilsCellViewModel(title: data.title, image: self.imagePath!)
+                let headerModel = HeaderRecipeDeatilsCellViewModel(title: data.title, image: data.image)
                 let dishTypesModel = DishTypesRecipeDetailsCellViewModel(dishTypes: data.dishTypes)
-                let ingredientsModels = data.extendedIngredients.map( {ExtendedIngredientsRecipeDetailsCellViewModel(id: $0.id, name: $0.name)} )
+                let ingredientsModels = data.extendedIngredients.map( {ExtendedIngredientsRecipeDetailsCellViewModel(id: $0.id, name: $0.name, image: self.makeImageURLString(name: $0.name))} )
                 tempArray[.header] = [headerModel]
                 tempArray[.dishTypes] = [dishTypesModel]
                 tempArray[.ingredientsModels] = ingredientsModels
@@ -76,6 +77,12 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
     
     func update() {
         self.getDetails()
+    }
+    
+    func makeImageURLString(name: String) -> URL {
+        let baseURL = config.imagesBaseURL
+        let name = name.replacingOccurrences(of: " ", with: "-")
+        return URL(string: "\(baseURL)cdn/ingredients_250x250/\(name).jpg")!
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import InjectPropertyWrapper
 
 struct RecepiesListItemViewModel: Equatable {
     let id: String?
@@ -18,7 +19,7 @@ extension RecepiesListItemViewModel {
     
     init(recept: Recipe) {
         self.title = recept.title ?? ""
-        self.image = recept.id
+        self.image = recept.image
         self.id = recept.id
         self.favourite = recept.favourite ?? false
     }

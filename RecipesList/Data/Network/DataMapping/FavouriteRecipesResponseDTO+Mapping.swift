@@ -19,13 +19,14 @@ extension FavouriteRecipesResponseDTO {
     struct FavouriteReceptDTO: Decodable {
         let id: Int
         let title: String?
+        let image: String?
     }
 }
 
 extension Array where Element == FavouriteRecipesResponseDTO.FavouriteReceptDTO {
     func toDomain() -> FavouriteRecipes {
         .init(recepies: self.map {
-                FavouriteRecept(id: String($0.id), title: $0.title)
+            FavouriteRecept(id: String($0.id), title: $0.title, image: $0.image)
         })
     }
 }

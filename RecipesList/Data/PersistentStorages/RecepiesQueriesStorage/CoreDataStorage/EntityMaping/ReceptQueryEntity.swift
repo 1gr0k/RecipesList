@@ -28,6 +28,7 @@ extension RecipesResponseDTO.ReceptDTO {
         let entity: ReceptResponseEntity = .init(context: context)
         entity.id = Int64(id)
         entity.title = title
+        entity.image = image
         return entity
     }
 }

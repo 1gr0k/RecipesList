@@ -59,7 +59,7 @@ extension RecipesListTableManager: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let model = dataSource[indexPath.row] as! FavouriteRecept
-        cell.fill(with: RecepiesListItemViewModel(id: model.id, title: model.title!, image: model.id, favourite: true), dishImageRepository: dishImageRepository)
+        cell.fill(with: RecepiesListItemViewModel(id: model.id, title: model.title!, image: model.image, favourite: true), dishImageRepository: dishImageRepository)
         cell.didSelectItem = {
             self.viewModel?.didSelectItem(at: indexPath.row)
         }

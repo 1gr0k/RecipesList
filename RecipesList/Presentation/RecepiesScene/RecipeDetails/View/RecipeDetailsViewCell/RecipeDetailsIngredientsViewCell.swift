@@ -16,11 +16,6 @@ class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
     private var stackLink: UIStackView?
     
     
-//    override func updateConfiguration(using state: UICellConfigurationState) {
-//        super.updateConfiguration(using: state)
-//        stackLink?.removeFromSuperview()
-//    }
-    
     override func prepareForReuse() {
         stackLink?.removeFromSuperview()
     }
@@ -29,10 +24,10 @@ class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
         
         self.viewModel = viewModel
         self.imageRepository = dishImageRepository
-        updateDishImage()
+        setupStack()
     }
     
-    private func setupStack(imagePic: UIImage) {
+    private func setupStack() {
         
         let stack = UIStackView()
         stackLink = stack
@@ -44,11 +39,14 @@ class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
         self.addSubview(stack)
         
         image.contentMode = UIView.ContentMode.scaleAspectFit
-        image.image = imagePic
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.widthAnchor.constraint(equalToConstant: self.frame.width * 0.8).isActive = true
         image.heightAnchor.constraint(equalToConstant: self.frame.height * 0.8).isActive = true
+        image.kf.setImage(with: viewModel.image, placeholder: UIImage(named: "Placeholder"), options: [.transition(.fade(0.3))])
         
         label.text = viewModel.name
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         stack.axis  = NSLayoutConstraint.Axis.vertical
         stack.alignment = UIStackView.Alignment.center
@@ -60,16 +58,5 @@ class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
         stack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
         stack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 8).isActive = true
         stack.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 8).isActive = true
-    }
-    
-    private func updateDishImage() {
-        let imagePath = viewModel.name.replacingOccurrences(of: " ", with: "-")
-        imageLoadTask = imageRepository?.fetchIngredientImage(with: imagePath) { [weak self] result in
-            guard let self = self else { return }
-            if case let .success(data) = result {
-                self.setupStack(imagePic: UIImage(data: data)!)
-            }
-            self.imageLoadTask = nil
-        }
     }
 }
