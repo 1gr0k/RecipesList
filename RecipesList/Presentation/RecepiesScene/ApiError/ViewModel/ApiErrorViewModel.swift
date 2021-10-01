@@ -24,4 +24,5 @@ class DefaultApiErrorViewModel: ApiErrorViewModel {
     func setApi(api: String) {
         setApiKeyInteractor.setApiKey(api: api)
     }
+    
 }

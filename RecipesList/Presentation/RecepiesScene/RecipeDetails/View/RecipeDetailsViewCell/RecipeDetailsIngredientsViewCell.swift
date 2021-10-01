@@ -15,12 +15,6 @@ class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
     private var imagePic: UIImage?
     private var stackLink: UIStackView?
     
-    
-//    override func updateConfiguration(using state: UICellConfigurationState) {
-//        super.updateConfiguration(using: state)
-//        stackLink?.removeFromSuperview()
-//    }
-    
     override func prepareForReuse() {
         stackLink?.removeFromSuperview()
     }
@@ -49,6 +43,7 @@ class RecipeDetailsIngredientsViewCell: UICollectionViewCell {
         image.heightAnchor.constraint(equalToConstant: self.frame.height * 0.8).isActive = true
         
         label.text = viewModel.name
+        label.textColor = .black
         
         stack.axis  = NSLayoutConstraint.Axis.vertical
         stack.alignment = UIStackView.Alignment.center

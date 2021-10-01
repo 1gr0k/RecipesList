@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1AE4372704935A008AA68C /* QRScanerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE4362704935A008AA68C /* QRScanerViewController.swift */; };
+		1A1AE43927049368008AA68C /* QRScanerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE43827049368008AA68C /* QRScanerViewModel.swift */; };
+		1A1AE43B2705D95B008AA68C /* QRScanerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE43A2705D95B008AA68C /* QRScanerDelegate.swift */; };
+		1A1AE43D2705F327008AA68C /* ApiErrorGoBackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE43C2705F327008AA68C /* ApiErrorGoBackDelegate.swift */; };
+		1A1AE44127063AAB008AA68C /* ManualEnterRecipeIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE44027063AAB008AA68C /* ManualEnterRecipeIdViewController.swift */; };
+		1A1AE44427063ABD008AA68C /* ManualEnterRecipeIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE44327063ABD008AA68C /* ManualEnterRecipeIdViewModel.swift */; };
 		1A204FF326FDEBA3002BA09A /* SWinjectContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */; };
 		1A233FD326F0D74300FF0101 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */; };
 		1A233FD426F0D74300FF0101 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A233FD126F0D74300FF0101 /* MainTabBarController.swift */; };
@@ -111,18 +117,24 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		1AD9184526FDD44E00D79468 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
 				1AD9184426FDD44E00D79468 /* Pods_RecipesList.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A1AE4362704935A008AA68C /* QRScanerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanerViewController.swift; sourceTree = "<group>"; };
+		1A1AE43827049368008AA68C /* QRScanerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanerViewModel.swift; sourceTree = "<group>"; };
+		1A1AE43A2705D95B008AA68C /* QRScanerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanerDelegate.swift; sourceTree = "<group>"; };
+		1A1AE43C2705F327008AA68C /* ApiErrorGoBackDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorGoBackDelegate.swift; sourceTree = "<group>"; };
+		1A1AE44027063AAB008AA68C /* ManualEnterRecipeIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEnterRecipeIdViewController.swift; sourceTree = "<group>"; };
+		1A1AE44327063ABD008AA68C /* ManualEnterRecipeIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEnterRecipeIdViewModel.swift; sourceTree = "<group>"; };
 		1A204FF226FDEBA3002BA09A /* SWinjectContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWinjectContainer.swift; sourceTree = "<group>"; };
 		1A233FCF26F0D74300FF0101 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		1A233FD126F0D74300FF0101 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -245,6 +257,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A1AE43327049325008AA68C /* QRScaner */ = {
+			isa = PBXGroup;
+			children = (
+				1A1AE43527049336008AA68C /* ViewModel */,
+				1A1AE43427049332008AA68C /* View */,
+			);
+			path = QRScaner;
+			sourceTree = "<group>";
+		};
+		1A1AE43427049332008AA68C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A1AE4362704935A008AA68C /* QRScanerViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1A1AE43527049336008AA68C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1A1AE43827049368008AA68C /* QRScanerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1A1AE43E27063A4B008AA68C /* ManualEnterRecipeId */ = {
+			isa = PBXGroup;
+			children = (
+				1A1AE44227063AAF008AA68C /* ViewModel */,
+				1A1AE43F27063A9D008AA68C /* View */,
+			);
+			path = ManualEnterRecipeId;
+			sourceTree = "<group>";
+		};
+		1A1AE43F27063A9D008AA68C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A1AE44027063AAB008AA68C /* ManualEnterRecipeIdViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1A1AE44227063AAF008AA68C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1A1AE44327063ABD008AA68C /* ManualEnterRecipeIdViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		1A233FCD26F0D74300FF0101 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +463,8 @@
 		1A61E97326A00D13007AF003 /* RecepiesScene */ = {
 			isa = PBXGroup;
 			children = (
+				1A1AE43E27063A4B008AA68C /* ManualEnterRecipeId */,
+				1A1AE43327049325008AA68C /* QRScaner */,
 				1A233FDD26F1EFF700FF0101 /* ApiError */,
 				1A233FCD26F0D74300FF0101 /* MainTabBar */,
 				1A684BA526BAC54300CEFA28 /* TableManager */,
@@ -467,6 +531,8 @@
 				1A61E98026A02E23007AF003 /* StoryboardInstantiable.swift */,
 				1A61E9E526A579EA007AF003 /* Alertable.swift */,
 				1AD9184126F9D9CC00D79468 /* APiErrorDelegate.swift */,
+				1A1AE43A2705D95B008AA68C /* QRScanerDelegate.swift */,
+				1A1AE43C2705F327008AA68C /* ApiErrorGoBackDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -972,6 +1038,7 @@
 				1A61E9E426A57761007AF003 /* LoadingView.swift in Sources */,
 				1A61E9D226A1BF3C007AF003 /* RecipesSearchFlowCoordinator.swift in Sources */,
 				1A684B9026B917ED00CEFA28 /* FavouriteRecipesStorage.swift in Sources */,
+				1A1AE43B2705D95B008AA68C /* QRScanerDelegate.swift in Sources */,
 				1A233FE326F2052F00FF0101 /* SetApiKeyInteractor.swift in Sources */,
 				1A684BB026BC20B100CEFA28 /* FavouriteRecipesQuery.swift in Sources */,
 				1A61E95A26A00B80007AF003 /* RecepiesListViewController.swift in Sources */,
@@ -994,10 +1061,13 @@
 				1A61E9DF26A56A86007AF003 /* Observable.swift in Sources */,
 				1A61E9D826A5687D007AF003 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */,
 				1A61E9DB26A568DC007AF003 /* BlackStyleNavigationBarBehavior.swift in Sources */,
+				1A1AE43D2705F327008AA68C /* ApiErrorGoBackDelegate.swift in Sources */,
 				1AB8B38626AAD7EA000A0115 /* RecipeDetailResponseEntity+Mapping.swift in Sources */,
 				1A684B9426B91E4200CEFA28 /* CoreDataFavouriteRecipesStorage.swift in Sources */,
 				1A61E9A826A04B06007AF003 /* RepositoryTask.swift in Sources */,
 				1A61E9AC26A04F23007AF003 /* Endpoint.swift in Sources */,
+				1A1AE4372704935A008AA68C /* QRScanerViewController.swift in Sources */,
+				1A1AE44427063ABD008AA68C /* ManualEnterRecipeIdViewModel.swift in Sources */,
 				1AB8B38026AAC6B3000A0115 /* DetailRecipeQuery.swift in Sources */,
 				1ABD0EF426C3E38F00FE01D9 /* FavouriteRecipesListView.swift in Sources */,
 				1ACEA58926A829D200D6C35E /* CGSize+ScaledSize.swift in Sources */,
@@ -1018,7 +1088,9 @@
 				1A233FD326F0D74300FF0101 /* MainTabBarViewModel.swift in Sources */,
 				1A61E9C226A06B23007AF003 /* APIEndpoints.swift in Sources */,
 				1A684B9226B91D6F00CEFA28 /* FavouriteRecipesDTO+Mapping.swift in Sources */,
+				1A1AE43927049368008AA68C /* QRScanerViewModel.swift in Sources */,
 				1A684BAE26BC028F00CEFA28 /* FavouriteRecipesListUseCase.swift in Sources */,
+				1A1AE44127063AAB008AA68C /* ManualEnterRecipeIdViewController.swift in Sources */,
 				1AA694B126CBBFBB00E949CC /* DishTypesRecipeDetailsCellViewModel.swift in Sources */,
 				1A61E97B26A01F9B007AF003 /* RecepiesListTableViewController.swift in Sources */,
 				1A684BA426BAB28B00CEFA28 /* FavouriteRecipesListFlowCoordinator.swift in Sources */,

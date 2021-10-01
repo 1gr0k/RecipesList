@@ -29,7 +29,7 @@ protocol RecipeDetailsViewModelOutput {
 
 protocol RecipeDetailsViewModel: RecipeDetailsViewModelInput, RecipeDetailsViewModelOutput {  }
 
-final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDelegate {
+final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDelegate, ApiErrorGoBackDelegate {
     
     @Inject private var recepiesRepository: RecepiesRepository
     private var detailLoadTask: Cancellable? { willSet { detailLoadTask?.cancel() } }
@@ -77,39 +77,48 @@ final class DefaultRecipeDetailsViewModel: RecipeDetailsViewModel, ApiErrorDeleg
     func update() {
         self.getDetails()
     }
+    
+    func goBack() {
+        self.error.value = "goBack"
+    }
 }
 
 extension DefaultRecipeDetailsViewModel {
-    enum ErrorType {
-    case apiKey
-    case available
-    case connectionError
-    case defaultError
+        enum ErrorType {
+        case apiKey
+        case available
+        case connectionError
+        case wrongRecipe
+        case defaultError
 
-        var errorMessage: String {
-            switch self {
-            case .apiKey:
-                return "Некорректный ключ API"
-            case .available:
-                return "Достигнут дневной лимит запросов ключа"
-            case .connectionError:
-                return "Отсутствует интернет соединение"
-            default:
-                return "Что-то пошло не так"
+            var errorMessage: String {
+                switch self {
+                case .apiKey:
+                    return "Некорректный ключ API"
+                case .available:
+                    return "Достигнут дневной лимит запросов ключа"
+                case .connectionError:
+                    return "Отсутствует интернет соединение"
+                case .wrongRecipe:
+                    return "Данные о указанном рецепте отсутствуют"
+                default:
+                    return "Что-то пошло не так"
+                }
             }
-        }
-        
-        init(error: NetworkError) {
-            switch error {
-            case .unathorized:
-                self = .apiKey
-            case .requestLimit:
-                self = .available
-            case .notConnected:
-                self = .connectionError
-            default:
-                self = .defaultError
+            
+            init(error: NetworkError) {
+                switch error {
+                case .unathorized:
+                    self = .apiKey
+                case .requestLimit:
+                    self = .available
+                case .notConnected:
+                    self = .connectionError
+                case .wrongRecipe:
+                    self = .wrongRecipe
+                default:
+                    self = .defaultError
+                }
             }
         }
     }
-}

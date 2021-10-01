@@ -72,7 +72,7 @@ final class RecepiesListItemCell: UITableViewCell {
     
     private func setupViews() {
         
-        self.backgroundColor = .systemGray5
+        self.backgroundColor = .white
         
         
         
@@ -104,6 +104,7 @@ final class RecepiesListItemCell: UITableViewCell {
         idLabel.numberOfLines = 3
         idLabel.font = .boldSystemFont(ofSize: 18)
         idLabel.text = viewModel.title
+        idLabel.textColor = .black
         
         self.dishImageView = UIImageView()
         dishImageView.translatesAutoresizingMaskIntoConstraints = false

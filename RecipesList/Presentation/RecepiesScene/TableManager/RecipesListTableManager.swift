@@ -37,7 +37,6 @@ final class RecipesListTableManager: NSObject {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = true
-        tableView.backgroundColor = .systemGray5
         tableView.backgroundColor = .white
         tableView.separatorColor = .clear
 

@@ -32,7 +32,8 @@ protocol RecepiesListViewModelInput {
     func viewDisappear()
     func showApiError()
     func setupActions(actions: RecepiesListViewModelActions?)
-    
+    func createQRScanerController() -> QRScanerViewController
+    func showDetailRecipe(id: String)
 }
 
 protocol RecepiesListViewModelOutput {
@@ -49,7 +50,7 @@ protocol RecepiesListViewModelOutput {
 
 protocol RecepiesListViewModel: RecepiesListViewModelOutput, RecepiesListViewModelInput {}
 
-final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate{
+final class DefaultRecipesListViewModel: RecepiesListViewModel, ApiErrorDelegate, QRScanerDelegate{
     
     let onRefresh: Observable<Void> = Observable({}())
     
@@ -222,6 +223,16 @@ extension DefaultRecipesListViewModel {
             favouriteListChangedNotification()
         }
     }
+    
+    func createQRScanerController() -> QRScanerViewController {
+        let qrScaner = AppDelegate.container.resolve(QRScanerViewController.self, argument: self as! QRScanerDelegate)!
+        return qrScaner
+    }
+    
+    func showDetailRecipe(id: String) {
+        actions?.showRecipeDetails(id)
+    }
+    
 }
 
 //MARK: Private
@@ -235,6 +246,7 @@ extension DefaultRecipesListViewModel {
     case apiKey
     case available
     case connectionError
+    case wrongRecipe
     case defaultError
 
         var errorMessage: String {
@@ -245,6 +257,8 @@ extension DefaultRecipesListViewModel {
                 return "Достигнут дневной лимит запросов ключа"
             case .connectionError:
                 return "Отсутствует интернет соединение"
+            case .wrongRecipe:
+                return "Данные о данном рецепте отсутствуют"
             default:
                 return "Что-то пошло не так"
             }
@@ -258,6 +272,8 @@ extension DefaultRecipesListViewModel {
                 self = .available
             case .notConnected:
                 self = .connectionError
+            case .wrongRecipe:
+                self = .wrongRecipe
             default:
                 self = .defaultError
             }

@@ -42,6 +42,7 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         label.text = delegate?.error.value
         label.font = UIFont.systemFont(ofSize: 25)
         label.numberOfLines = 2
+        label.textColor = .black
         return label
     }()
     
@@ -106,7 +107,11 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
     }()
     
     override func viewDidLoad() {
-        setupViews()
+        if delegate?.error.value == "Данные о указанном рецепте отсутствуют" {
+            setupViewWithoutTextField()
+        } else {
+            setupViewswithTextField()
+        }
     }
     
     static func create(delegate: ApiErrorDelegate) -> ApiErrorViewController {
@@ -115,7 +120,24 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         return view
     }
     
-    private func setupViews() {
+    private func setupViewWithoutTextField() {
+        self.view.addSubview(blurView)
+        
+        blurView.contentView.addSubview(mainView)
+        setupMainViewConstrants()
+        
+        mainView.addSubview(okButton)
+        okButton.addSubview(okButtonLabel)
+        setupOkButtonConstraintsWithoutTextField()
+        addGestureOkButtonForCancel()
+        
+        mainView.addSubview(titleLabel)
+        setupTitleLabelConstraintsWithoutTextField()
+        
+        isOkButtonActive.toggle()
+    }
+    
+    private func setupViewswithTextField() {
         okButton.addSubview(okButtonLabel)
         mainView.addSubview(okButton)
         mainView.addSubview(titleLabel)
@@ -128,8 +150,15 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         setupConstraints()
     }
     
-    private func addGestureForOkButton() {
+    private func addGestureOkButtonForRefresh() {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(okButtonPressed(_:)))
+        gesture.minimumPressDuration = 0
+        okButton.addGestureRecognizer(gesture)
+        okButton.layer.insertSublayer(okButtonGradient, at: 0)
+    }
+    
+    private func addGestureOkButtonForCancel() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(okButtonPressedCancel(_:)))
         gesture.minimumPressDuration = 0
         okButton.addGestureRecognizer(gesture)
         okButton.layer.insertSublayer(okButtonGradient, at: 0)
@@ -145,6 +174,23 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
             viewModel.setApi(api: apiTextfield.text)
             self.dismiss(animated: true)
             self.delegate?.update()
+        case .failed, .cancelled:
+            okButton.layer.insertSublayer(okButtonGradient, at: 0)
+        @unknown default:
+            return
+        }
+    }
+    
+    @objc private func okButtonPressedCancel(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            okButton.layer.sublayers![0].removeFromSuperlayer()
+            okButton.backgroundColor = .systemGray5
+            apiTextfield.endEditing(false)
+        case .ended:
+            self.dismiss(animated: true)
+            let delegate = self.delegate as! ApiErrorGoBackDelegate
+            delegate.goBack()
         case .failed, .cancelled:
             okButton.layer.insertSublayer(okButtonGradient, at: 0)
         @unknown default:
@@ -181,6 +227,15 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         ])
     }
     
+    private func setupTitleLabelConstraintsWithoutTextField() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 64),
+            titleLabel.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: mainView.widthAnchor, constant: -64)
+        ])
+    }
+    
     private func setupApiKeyValueLabel() {
         currentUserApiKeyValueLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -196,6 +251,19 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
         NSLayoutConstraint.activate([
             okButton.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -32),
             okButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -32),
+            okButton.widthAnchor.constraint(equalToConstant: 75),
+            okButton.heightAnchor.constraint(equalToConstant: 75),
+            okButtonLabel.centerXAnchor.constraint(equalTo: okButton.centerXAnchor),
+            okButtonLabel.centerYAnchor.constraint(equalTo: okButton.centerYAnchor)
+        ])
+    }
+    
+    func setupOkButtonConstraintsWithoutTextField() {
+        okButton.translatesAutoresizingMaskIntoConstraints = false
+        okButtonLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            okButton.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -32),
+            okButton.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
             okButton.widthAnchor.constraint(equalToConstant: 75),
             okButton.heightAnchor.constraint(equalToConstant: 75),
             okButtonLabel.centerXAnchor.constraint(equalTo: okButton.centerXAnchor),
@@ -224,7 +292,7 @@ class ApiErrorViewController:UIViewController, UITextViewDelegate {
     }
     
     func makeOkButtonActive() {
-        addGestureForOkButton()
+        addGestureOkButtonForRefresh()
         isOkButtonActive.toggle()
     }
     

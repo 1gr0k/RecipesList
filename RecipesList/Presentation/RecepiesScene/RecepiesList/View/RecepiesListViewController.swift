@@ -38,10 +38,13 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
         super.viewDidLoad()
         setupViews()
         setupBehaviours()
+        setupQRScanerButton()
         bind(to: viewModel)
         viewModel.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(notificatoinUpdateItems), name: NSNotification.Name(rawValue: "removeRecipeFromFavourite"), object: nil)
     }
+    
+    
     
     private func bind(to viewModel: RecepiesListViewModel) {
         viewModel.onRefresh.observe(on: self) { [weak self] _ in self?.updateItems(with: viewModel.items) }
@@ -69,12 +72,16 @@ final class RecepiesListViewController: UIViewController, StoryboardInstantiable
     
     private func setupViews() {
         title = viewModel.screenTitle
+        view.backgroundColor = .white
         setupSearchController()
     }
     
     private func setupBehaviours() {
-        addBehaviors([BackButtonEmptyTitleNavigationBarBehavior(),
-                      BlackStyleNavigationBarBehavior()])
+        addBehaviors([BackButtonEmptyTitleNavigationBarBehavior()])
+    }
+    
+    private func setupQRScanerButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "qrcode.viewfinder"), style: .plain, target: self, action: #selector(qrScanerButtonTapped))
     }
 
     private func updateItems(with items: [RecepiesListItemViewModel]) {
@@ -122,7 +129,7 @@ extension RecepiesListViewController {
         searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.translatesAutoresizingMaskIntoConstraints = true
-        searchController.searchBar.barStyle = .black
+        searchController.searchBar.barStyle = .default
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.frame = searchBarContainer.bounds
         searchController.searchBar.autoresizingMask = [.flexibleWidth]
@@ -165,5 +172,13 @@ extension RecepiesListViewController {
     
     @objc private func notificationApiKeyChanged() {
         viewModel.refresh()
+    }
+}
+
+extension RecepiesListViewController {
+    @objc private func qrScanerButtonTapped() {
+        let vc = viewModel.createQRScanerController()
+        navigationController?.pushViewController(vc, animated: true)
+//        self.present(vc, animated: true)
     }
 }
