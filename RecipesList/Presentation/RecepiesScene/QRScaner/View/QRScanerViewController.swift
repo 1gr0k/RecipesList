@@ -321,15 +321,17 @@ extension QRScanerViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
     
     func found(code: String) {
-        viewModel.checkForInitString(string: code, completion: { result in
-            if case .success(let id) = result {
-                let vc = self.viewModel.creaateDetailViewController(id: id)
-                self.dismiss(animated: true)
-                self.delegate?.showDetailRecipe(id: id)
-            } else {
-                self.showQRAlert()
-            }
-        })
+        let resultId = RouteParser(route: code)
+        switch resultId {
+        case .recipe(let string):
+            let vc = self.viewModel.creaateDetailViewController(id: string)
+            navigationController?.navigationBar.isHidden = false
+            tabBarController?.tabBar.isHidden = false
+            self.dismiss(animated: true)
+            self.delegate?.showDetailRecipe(id: string)
+        case .error:
+            self.showQRAlert()
+        }
     }
     
     func showQRAlert() {
