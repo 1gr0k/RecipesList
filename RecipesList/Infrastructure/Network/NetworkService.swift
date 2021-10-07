@@ -15,6 +15,7 @@ public enum NetworkError: Error {
     case urlGeneration
     case unathorized
     case requestLimit
+    case wrongRecipe
     case serverError
     case clientError
     case any
@@ -88,7 +89,10 @@ public final class DefaultNetworkService {
                     case 402:
                         error = .requestLimit
                         completion(.failure(error))
-                    case 403...499:
+                    case 404:
+                        error = .wrongRecipe
+                        completion(.failure(error))
+                    case 403, 405...499:
                         error = .clientError
                         completion(.failure(error))
                     case 500...599:

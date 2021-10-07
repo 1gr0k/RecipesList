@@ -52,6 +52,8 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
     
     func setupViews() {
         
+        detailsCollectionView.backgroundColor = .white
+        
         let layout = UICollectionViewFlowLayout()
         
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -124,7 +126,11 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
     
     func showError(_ error: String) {
         guard !error.isEmpty else { return }
+        if error == "goBack" {
+            self.navigationController?.popToRootViewController(animated: true)
+        } else {
         let vc = viewModel.createApiErrorController()
         self.present(vc, animated: true)
+        }
     }
 }

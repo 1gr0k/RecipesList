@@ -18,14 +18,15 @@ final class MainTabBarFlowCoordinator {
 
     private weak var window: UIWindow?
     
+    let mainListNavigationController = UINavigationController()
+    let favouriteListNavigationController = UINavigationController()
+    
+    
     init(window: UIWindow) {
         self.window = window
     }
     
     func start() {
-        
-        let mainListNavigationController = UINavigationController()
-        let favouriteListNavigationController = UINavigationController()
         
         let appFlowCoordinator = AppFlowCoordinator()
         

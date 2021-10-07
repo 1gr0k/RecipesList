@@ -28,7 +28,8 @@ extension Container: InjectPropertyWrapper.Resolver {
         registerFavouriteRecipesList()
         registerApiError()
         registerTabBar()
-        
+        registerQRScaner()
+        registerManualEnterRecipeId()
     }
     
     func registerInteractors() {
@@ -185,7 +186,25 @@ extension Container: InjectPropertyWrapper.Resolver {
         self.register(FavouriteRecipesListFlowCoordinator.self) { _, navigationController in
             FavouriteRecipesListFlowCoordinator(navigationController: navigationController)
         }
+    }
+    
+    func registerQRScaner() {
+        register(QRScanerViewController.self) { _, delegate in
+            QRScanerViewController.create(delegate: delegate)
+        }
         
+        register(QRScanerViewModel.self) { _ in
+            DefaultQRScanerViewModel()
+        }
+    }
+    
+    func registerManualEnterRecipeId() {
+        register(ManualEnterRecipeIdViewController.self) { _, delegate in
+            ManualEnterRecipeIdViewController.create(delegate: delegate)
+        }
         
+        register(ManualEnterRecipeIdViewModel.self) { _ in
+            DefaulrManualEnterRecipeIdViewModel()
+        }
     }
 }
