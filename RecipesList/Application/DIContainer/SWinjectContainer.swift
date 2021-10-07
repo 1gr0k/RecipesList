@@ -72,10 +72,6 @@ extension Container: InjectPropertyWrapper.Resolver {
         self.register(RecepiesQueriesRepository.self) { _ in
             DefaultRecepiesQueriesRepository()
         }
-        
-        self.register(DishImagesRepository.self) { _ in
-            DefaultDishImagesRepository()
-        }
     }
     
     func registerTransferService() {

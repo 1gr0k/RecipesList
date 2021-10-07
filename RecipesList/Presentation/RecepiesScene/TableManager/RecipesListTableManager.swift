@@ -13,7 +13,6 @@ final class RecipesListTableManager: NSObject {
 
     private unowned var tableView: UITableView!
     private var dataSource: [Any]
-    @Inject private var dishImageRepository: DishImagesRepository
     private var viewModel: FavouriteRecipesViewModel?
 
     init(tableView: UITableView, data: [Any], viewModel: FavouriteRecipesViewModel) {
@@ -59,7 +58,7 @@ extension RecipesListTableManager: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let model = dataSource[indexPath.row] as! FavouriteRecept
-        cell.fill(with: RecepiesListItemViewModel(id: model.id, title: model.title!, image: model.id, favourite: true), dishImageRepository: dishImageRepository)
+        cell.fill(with: RecepiesListItemViewModel(id: model.id, title: model.title!, image: model.image, favourite: true))
         cell.didSelectItem = {
             self.viewModel?.didSelectItem(at: indexPath.row)
         }

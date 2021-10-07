@@ -10,6 +10,7 @@ import Foundation
 struct FavouriteRecept: Identifiable, Equatable, Hashable {
     let id: String
     let title: String?
+    let image: String?
 }
 
 struct FavouriteRecipes {

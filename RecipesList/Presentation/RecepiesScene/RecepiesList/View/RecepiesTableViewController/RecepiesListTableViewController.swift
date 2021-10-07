@@ -12,7 +12,6 @@ class RecepiesListTableViewController: UITableViewController {
     
     var viewModel: RecepiesListViewModel!
     
-    var dishImageRepository: DishImagesRepository?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     override func viewDidLoad() {
@@ -59,7 +58,7 @@ extension RecepiesListTableViewController {
             return UITableViewCell()
         }
         
-        cell.fill(with: viewModel.items[indexPath.row], dishImageRepository: dishImageRepository)
+        cell.fill(with: viewModel.items[indexPath.row])
         cell.setLike = {
             self.viewModel.setLike(id: self.viewModel.items[indexPath.row].id!)
         }

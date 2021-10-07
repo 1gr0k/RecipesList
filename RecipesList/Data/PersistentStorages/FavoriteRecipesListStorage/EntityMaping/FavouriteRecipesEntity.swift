@@ -29,7 +29,7 @@ extension FavouriteRecipesDTO {
 extension Array where Element == FavouriteRecipesEntity {
     func toDomain() -> FavouriteRecipes {
         .init(recepies: self.map{
-                FavouriteRecept(id: $0.id!, title: nil)
+            FavouriteRecept(id: $0.id!, title: nil, image: nil)
         })
     }
 }

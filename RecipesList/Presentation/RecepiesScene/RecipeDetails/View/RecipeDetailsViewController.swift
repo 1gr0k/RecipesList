@@ -15,7 +15,6 @@ class RecipeDetailsViewController: UIViewController, StoryboardInstantiable {
     
     @IBOutlet weak var detailsCollectionView: UICollectionView!
     @Inject private var viewModel: RecipeDetailsViewModel
-    @Inject private var dishImageRepository: DishImagesRepository
     
     static func create() -> RecipeDetailsViewController {
         let view = RecipeDetailsViewController.instantiateViewController()
@@ -100,7 +99,7 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath) as? RecipeDetailsHeaderViewCell,
                   let viewModel = sectionModels[indexPath.row] as? HeaderRecipeDeatilsCellViewModel
             else { return UICollectionViewCell()}
-            cell.fill(with: viewModel.image, dishImageRepository: dishImageRepository)
+            cell.fill(with: viewModel.image)
             return cell
             
         case is DishTypesRecipeDetailsCellViewModel:
@@ -114,7 +113,7 @@ extension RecipeDetailsViewController: UICollectionViewDataSource, UICollectionV
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ingredientsCell", for: indexPath) as? RecipeDetailsIngredientsViewCell,
                   let viewModel = sectionModels[indexPath.row] as? ExtendedIngredientsRecipeDetailsCellViewModel
             else { return UICollectionViewCell()}
-            cell.fill(with: ExtendedIngredient(model: viewModel), dishImageRepository: dishImageRepository)
+            cell.fill(with: ExtendedIngredient(model: viewModel))
             return cell
             
         default:

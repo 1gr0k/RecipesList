@@ -12,8 +12,6 @@ class FavouriteRecipesTableViewController: UITableViewController, StoryboardInst
     
     @Inject private var viewModel: FavouriteRecipesViewModel
     private var tableViewManager: RecipesListTableManager?
-    
-    @Inject var dishImagesRepository: DishImagesRepository
 
     override func viewDidLoad() {
         super.viewDidLoad()

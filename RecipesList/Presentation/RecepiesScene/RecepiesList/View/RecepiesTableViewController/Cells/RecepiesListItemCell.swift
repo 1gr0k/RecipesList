@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Kingfisher
 
 final class RecepiesListItemCell: UITableViewCell {
     
@@ -39,16 +40,14 @@ final class RecepiesListItemCell: UITableViewCell {
     static let height = CGFloat(300)
     
     private var viewModel: RecepiesListItemViewModel!
-    private var imageRepository: DishImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     
     override func prepareForReuse() {
         externalStack!.removeFromSuperview()
     }
     
-    func fill(with viewModel: RecepiesListItemViewModel, dishImageRepository: DishImagesRepository?) {
+    func fill(with viewModel: RecepiesListItemViewModel) {
         self.viewModel = viewModel
-        self.imageRepository = dishImageRepository
         setupViews()
         updateDishImage()
         
@@ -58,16 +57,8 @@ final class RecepiesListItemCell: UITableViewCell {
     
     private func updateDishImage() {
         dishImageView.image = nil
-        guard let imagePath = viewModel.id else { return }
-        
-        imageLoadTask = imageRepository?.fetchImage(with: imagePath) { [weak self] result in
-            guard let self = self else { return }
-            guard self.viewModel.image == imagePath else { return }
-            if case let .success(data) = result {
-                self.dishImageView.image = UIImage(data: data)
-            }
-            self.imageLoadTask = nil
-        }
+        let url  = URL(string: viewModel.image!)
+        dishImageView.kf.setImage(with: url, placeholder: UIImage(named: "Placeholder"), options: [.transition(.fade(0.3))])
     }
     
     private func setupViews() {
